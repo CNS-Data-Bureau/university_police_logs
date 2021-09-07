@@ -1,0 +1,1 @@
+pipenv install pandas selenium requests beautifulsoup4 jupyterlab lxml fake-useragent
