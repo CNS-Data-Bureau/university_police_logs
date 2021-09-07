@@ -1,0 +1,78 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+
+```
+## Load and Clean Data
+
+```{r}
+
+umd_police_data_2021_09_07 <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_data_2021_09_07.csv")
+
+
+```
+
+## Clean
+
+```{r}
+
+# Change
+umd_police_data_2021_09_07 %>% 
+  select(-1) %>% 
+  mutate()
+  View()
+
+```
+
