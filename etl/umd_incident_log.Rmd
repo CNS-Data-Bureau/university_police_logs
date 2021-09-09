@@ -59,7 +59,9 @@ output_formatted_table = function(table, text){
 
 ```{r}
 
-umd_police_data_2021_09_07 <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_data_2021_09_07.csv")
+umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_08.csv")
+
+umd_police_incident_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_incident_data_2021_09_08.csv")
 
 
 ```
@@ -69,10 +71,73 @@ umd_police_data_2021_09_07 <- read_csv("~/Code/university_police_logs/data/handm
 ```{r}
 
 # Change
-umd_police_data_2021_09_07 %>% 
-  select(-1) %>% 
-  mutate()
+umd_police_arrest_data = umd_police_arrest_data %>% 
+  mutate(date = substr(arrested_date_time_charge,1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date))
+  
+umd_police_incident_data = umd_police_incident_data %>% 
+  mutate(date = substr(occured_date_time_location, 1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(occured_date_time_location, " ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date))
+
+
+```
+
+## Exploring
+```{r}
+
+
+umd_police_incident_data %>% 
+  group_by(umpd_case_number) %>% 
+  count() %>% 
   View()
+
+umd_police_arrest_data %>% 
+  group_by(umpd_case_number) %>% 
+  count() %>% 
+  View()
+
+umd_police_arrest_data %>% 
+  group_by(year, umpd_case_number) %>% 
+  count() %>% 
+  ungroup() %>% 
+  group_by(umpd_case_number) %>% 
+  summarise(num_across_years = n()) %>% 
+  View()
+
+umd_police_arrest_data %>% 
+  group_by(arrest_number) %>% 
+  count() %>% 
+  View()
+```
+
+In the incident data there are only one of each umpd case number 
+
+In the arrest data, there could be multiple umpd case numbers
+
+## Summarize arrest data
+
+```{r}
+
+umd_police_arrest_summarized = umd_police_arrest_data %>% 
+  group_by(umpd_case_number) %>% 
+  mutate(number_arrests = length(unique(arrest_number)))
+```
+
+
+
+
+## Combine
+
+```{r}
+
+umd_police <- left_join(umd_police_incident_data, umd_police_arrest_data, by = "umpd_case_number")
+
 
 ```
 
