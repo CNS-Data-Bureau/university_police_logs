@@ -59,7 +59,7 @@ output_formatted_table = function(table, text){
 
 ```{r}
 
-umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_08.csv")
+umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_09.csv")
 
 umd_police_incident_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_incident_data_2021_09_08.csv")
 
@@ -126,7 +126,10 @@ In the arrest data, there could be multiple umpd case numbers
 
 umd_police_arrest_summarized = umd_police_arrest_data %>% 
   group_by(umpd_case_number) %>% 
-  mutate(number_arrests = length(unique(arrest_number)))
+  mutate(number_arrests_or_citations = length(unique(arrest_number))) %>% 
+  mutate(number_case_number_occurences = n()) %>% 
+  pivot_wider(names_from = sex, values_from = sex)
+  
 ```
 
 
