@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="iem7"  lang="en" dir="ltr" xml:lang="en"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"  lang="en" dir="ltr" xml:lang="en"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"  lang="en" dir="ltr" xml:lang="en"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"  lang="en" dir="ltr" xml:lang="en"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html  lang="en" dir="ltr" xml:lang="en" prefix="og: http://ogp.me/ns# fb: http://www.facebook.com/2008/fbml content: http://purl.org/rss/1.0/modules/content/ dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ rdfs: http://www.w3.org/2000/01/rdf-schema# sioc: http://rdfs.org/sioc/ns# sioct: http://rdfs.org/sioc/types# skos: http://www.w3.org/2004/02/skos/core# xsd: http://www.w3.org/2001/XMLSchema# schema: http://schema.org/"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"a9d5e9ce84",applicationID:"369530932"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n){return function(){return o(t,[u.now()].concat(f(arguments)),e?null:this,n),e?void 0:this}}var o=t("handle"),a=t(8),f=t(9),c=t("ee").get("tracer"),u=t("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(t,e){s[e]=i(p+e,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),e.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(l+"tracer",[u.now(),t,n],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(l+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){function r(){return f.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,f=t(10);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],4:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],5:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?d("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&d("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||d("cls",[t])})}function a(t){if(t instanceof m&&!g){var e=Math.round(t.timeStamp),n={type:t.type};e<=p.now()?n.fid=p.now()-e:e>p.offset&&e<=Date.now()?(e-=p.offset,n.fid=p.now()-e):e=p.now(),g=!0,d("timing",["fi",e,n])}}function f(t){"hidden"===t&&d("pageHide",[p.now()])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var c,u,s,d=t("handle"),p=t("loader"),l=t(7),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){c=new PerformanceObserver(r);try{c.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,h=["click","keydown","mousedown","pointerdown","touchstart"];h.forEach(function(t){document.addEventListener(t,a,!1)})}l(f)}},{}],6:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}e.exports={agent:i,version:o,match:r}},{}],7:[function(t,e,n){function r(t){function e(){t(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,e,!1)}e.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],8:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],9:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],10:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,c,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var f=e(i),c=v(n),u=c.length,s=0;s<u;s++)c[s].apply(f,r);var p=d[w[n]];return p&&p.push([b,n,r,f]),f}}function o(t,e){y[t]=v(t).concat(e)}function m(t,e){var n=y[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function v(t){return y[t]||[]}function g(t){return p[t]=p[t]||i(n)}function h(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var y={},w={},b={on:o,addEventListener:o,removeEventListener:m,emit:n,get:g,listeners:v,context:e,buffer:h,abort:f,aborted:!1};return b}function o(t){return u(t,c,a)}function a(){return new r}function f(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var c="nr@context",u=t("gos"),s=t(8),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!R++){var t=M.info=NREUM.info,e=v.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();c(E,function(e,n){t[e]||(t[e]=n)});var n=a();f("mark",["onload",n+M.offset],null,"api"),f("timing",["load",n]);var r=v.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=l+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===v.readyState&&o()}function o(){f("mark",["domContent",a()+M.offset],null,"api")}var a=t(3),f=t("handle"),c=t(8),u=t("ee"),s=t(6),d=t(4),p=t(2),l=p.getConfiguration("ssl")===!1?"http":"https",m=window,v=m.document,g="addEventListener",h="attachEvent",y=m.XMLHttpRequest,w=y&&y.prototype,b=!d(m.location);NREUM.o={ST:setTimeout,SI:m.setImmediate,CT:clearTimeout,XHR:y,REQ:m.Request,EV:m.Event,PR:m.Promise,MO:m.MutationObserver};var x=""+location,E={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1210.min.js"},O=y&&w&&w[g]&&!/CriOS/.test(navigator.userAgent),M=e.exports={offset:a.getLastTimestamp(),now:a,origin:x,features:{},xhrWrappable:O,userAgent:s,disabled:b};if(!b){t(1),t(5),v[g]?(v[g]("DOMContentLoaded",o,!1),m[g]("load",r,!1)):(v[h]("onreadystatechange",i),m[h]("onload",r)),f("mark",["firstbyte",a.getLastTimestamp()],null,"api");var R=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,c],s],t)}f(n+"start",[o,a,c],s,u);try{return p=e.apply(a,o)}catch(m){throw f(n+"err",[o,a,m],s,u),m}finally{f(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var f,c,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)c=e[u],f=t[c],a(f)||(t[c]=n(f,s?c+r:r,i,c,o))}function f(n,r,o,a){if(!m||e){var f=m;m=!0;try{t.emit(n,r,o,e,a)}catch(c){i([c,n,r,o],t)}m=f}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function f(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function c(t,e,n){var r=t[e];t[e]=f(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(9),p="nr@original",l=Object.prototype.hasOwnProperty,m=!1;e.exports=r,e.exports.wrapFunction=f,e.exports.wrapInPlace=c,e.exports.argsToArray=u},{}]},{},["loader"]);</script>
+<link rel="shortcut icon" href="https://safety.gwu.edu/sites/all/themes/gwu_marketing/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="description" content="The crime and fire logs are the daily records of all crimes and fires that have been reported to the GW Police Department. They are organized chronologically and are updated on a daily basis. Paper copies of both the crime and the fire logs are available upon request. Requests can be made in person in Rome Hall, Suite 101 during normal business hours." />
+<meta name="keywords" content="George washington university, gwu, gw, gw university, george washington, dc universities, dc colleges, education, higher education" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="image_src" href="https://www.gwu.edu/sites/www.gwu.edu/files/image/gw-primary_90x90.jpg" />
+<link rel="canonical" href="https://safety.gwu.edu/daily-crime-and-fire-log" />
+<link rel="shortlink" href="https://safety.gwu.edu/node/22" />
+  <title>Daily Crime and Fire Log | Division of Safety & Security | The George Washington University</title>
+
+      <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width">
+    <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
+
+  <link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css_uJq4i_pXk1UmtbCovdeCsAhlfvrAFcmFexwn2c_hQDQ.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css_uLlk6-luaELIwtiZyu_3AvXoK3C7g0SZvm_shFA5KRU.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css_FM6LcRJMpDSHsat5jyDtvmGbwAQ3aK8nkuuvr_6p1zI.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css_66JxKhhqyy2DAvp8tKIEC7p_53kEiyXul66o5rFKPek.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/css/css__ShdOq0WPPlRQcEc2Hhz3t5v73X-KfAm51QmYFOQn4g.css" media="screen" />
+  <script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_ypadrG4kz9-JBpNOXmgjyVozLCJG_1RP3Ig-iqWR8n0.js"></script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_JkQzetqd1yff5abmiR2H8X20RFfzks3m6KxDNGiH_Vg.js"></script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_XuFgHR1X67cDofve4crM47xw750TjafMBoVq4KMQLjo.js"></script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_G7yUfEhHEtCfGRks8bW2b5tdouF_ZmV3eIN4sboD_gU.js"></script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_JtQk-fJ_ZO1dlWDeS-LwNwzthz0P_q2T9gqdASOdCwI.js"></script>
+<script>jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"gwu_marketing","theme_token":"YpSIOuhlcXP852mLCh2auEn_Lg_brYuJBCQydEfqM0c","js":{"sites\/all\/modules\/contrib\/flexslider\/assets\/js\/flexslider.load.js":1,"0":1,"1":1,"sites\/all\/modules\/custom\/gwustyle\/js\/gwustyle.js":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/js\/eu_cookie_compliance.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.core.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.widget.min.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/ui\/minified\/jquery.ui.tabs.min.js":1,"sites\/all\/modules\/custom\/gwustyle\/imagestyles.js":1,"sites\/all\/modules\/contrib\/fancybox\/fancybox.js":1,"sites\/all\/libraries\/fancybox\/source\/jquery.fancybox.pack.js":1,"sites\/all\/libraries\/fancybox\/lib\/jquery.mousewheel-3.0.6.pack.js":1,"sites\/all\/libraries\/fancybox\/source\/helpers\/jquery.fancybox-media.js":1,"sites\/all\/modules\/contrib\/lightbox2\/js\/lightbox.js":1,"sites\/all\/libraries\/flexslider\/jquery.flexslider-min.js":1,"sites\/all\/modules\/contrib\/responsive_menus\/styles\/meanMenu\/jquery.meanmenu.min.js":1,"sites\/all\/modules\/contrib\/responsive_menus\/styles\/meanMenu\/responsive_menus_mean_menu.min.js":1,"sites\/all\/themes\/gwu_marketing\/js\/script.js":1,"sites\/all\/themes\/gwu_capital\/js\/jquery.sticky.js":1,"sites\/all\/themes\/gwu_marketing\/js\/gwu.jquery.stickyNavbar.min.js":1,"sites\/all\/themes\/gwu_marketing\/js\/jquery-migrate-1.4.0.min.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.tabs.css":1,"modules\/aggregator\/aggregator.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"sites\/all\/modules\/custom\/searchblox\/theme\/searchblox.css":1,"sites\/all\/modules\/contrib\/siteimprove\/css\/siteimprove.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/video_filter\/video_filter.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/custom\/gwustyle\/css\/admin.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/libraries\/fancybox\/source\/jquery.fancybox.css":1,"sites\/all\/modules\/contrib\/lightbox2\/css\/lightbox.css":1,"sites\/all\/modules\/contrib\/panels\/css\/panels.css":1,"sites\/all\/themes\/gwu_marketing\/panels-layouts\/3_6_3_stacked\/..\/..\/css\/layouts\/3_6_3_stacked.css":1,"sites\/all\/modules\/contrib\/flexslider\/assets\/css\/flexslider_img.css":1,"sites\/all\/libraries\/flexslider\/flexslider.css":1,"sites\/all\/modules\/contrib\/nice_menus\/css\/nice_menus.css":1,"sites\/all\/themes\/gwu_marketing\/css\/gwu-proto-nice-menu.css":1,"sites\/all\/modules\/contrib\/eu_cookie_compliance\/css\/eu_cookie_compliance.bare.css":1,"sites\/all\/modules\/contrib\/responsive_menus\/styles\/sites\/all\/themes\/gwu_marketing\/css\/meanmenu.css":1,"sites\/all\/themes\/gwu_capital\/system.menus.css":1,"sites\/all\/themes\/gwu_capital\/system.messages.css":1,"sites\/all\/themes\/gwu_capital\/system.theme.css":1,"sites\/all\/themes\/gwu_marketing\/css\/styles.css":1,"sites\/all\/themes\/gwu_marketing\/css\/bootstrap.css":1,"sites\/all\/themes\/gwu_marketing\/css\/buttons.css":1,"sites\/all\/themes\/gwu_marketing\/css\/fat-footer.css":1,"sites\/all\/themes\/gwu_marketing\/css\/meanmenu.css":1,"sites\/all\/themes\/gwu_marketing\/css\/webform.css":1,"sites\/all\/themes\/gwu_marketing\/css\/programs.css":1,"sites\/all\/themes\/gwu_marketing\/css\/corcoran.override.css":1,"sites\/all\/themes\/gwu_marketing\/..\/..\/libraries\/font_awesome\/css\/font_awesome.css":1}},"fancybox":{"options":{"margin":120},"helpers":{"title":{"type":"inside"},"overlay":{"fixed":0},"thumbs":{"width":"","height":"","position":"top"},"media":[]},"selectors":["a.video\na.slider-video\n.slider-video a\n.heroHeroBtnVid a\n.testi-video\n.video-readmore a\na.video-force-small"]},"lightbox2":{"rtl":0,"file_path":"\/(\\w\\w\/)public:\/","default_image":"\/sites\/all\/modules\/contrib\/lightbox2\/images\/brokenimage.jpg","border_size":10,"font_color":"000","box_color":"fff","top_position":"","overlay_opacity":"0.8","overlay_color":"000","disable_close_click":true,"resize_sequence":0,"resize_speed":400,"fade_in_speed":400,"slide_down_speed":600,"use_alt_layout":false,"disable_resize":false,"disable_zoom":false,"force_show_nav":false,"show_caption":true,"loop_items":false,"node_link_text":"View Image Details","node_link_target":false,"image_count":"Image !current of !total","video_count":"Video !current of !total","page_count":"Page !current of !total","lite_press_x_close":"press \u003Ca href=\u0022#\u0022 onclick=\u0022hideLightbox(); return FALSE;\u0022\u003E\u003Ckbd\u003Ex\u003C\/kbd\u003E\u003C\/a\u003E to close","download_link_text":"","enable_login":false,"enable_contact":false,"keys_close":"c x 27","keys_previous":"p 37","keys_next":"n 39","keys_zoom":"z","keys_play_pause":"32","display_image_size":"original","image_node_sizes":"()","trigger_lightbox_classes":"","trigger_lightbox_group_classes":"","trigger_slideshow_classes":"","trigger_lightframe_classes":"","trigger_lightframe_group_classes":"","custom_class_handler":0,"custom_trigger_classes":"","disable_for_gallery_lists":true,"disable_for_acidfree_gallery_lists":true,"enable_acidfree_videos":true,"slideshow_interval":5000,"slideshow_automatic_start":true,"slideshow_automatic_exit":true,"show_play_pause":true,"pause_on_next_click":false,"pause_on_previous_click":true,"loop_slides":false,"iframe_width":600,"iframe_height":400,"iframe_border":1,"enable_video":false,"useragent":"Mozilla\/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/14.1.2 Mobile\/15E148 Safari\/604.1"},"video_filter":{"url":{"ckeditor":"\/video_filter\/dashboard\/ckeditor"},"instructions_url":"\/video_filter\/instructions","modulepath":"sites\/all\/modules\/contrib\/video_filter"},"better_exposed_filters":{"views":{"gw_repeating_sidebar":{"displays":{"panel_pane_1":{"filters":[]}}},"gw_news":{"displays":{"panel_pane_4":{"filters":[]},"panel_pane_7":{"filters":{"field_article_sub_type_tid":{"required":true}}},"panel_pane_3":{"filters":[]},"panel_pane_6":{"filters":{"field_article_sub_type_tid":{"required":true}}}}},"gw_events":{"displays":{"panel_pane_4":{"filters":{"tid":{"required":false}}},"panel_pane_3":{"filters":{"tid":{"required":false}}}}},"gw_list_sidebar":{"displays":{"panel_pane_3":{"filters":[]},"panel_pane_2":{"filters":[]}}},"gw_sidebars_no_article_type":{"displays":{"panel_pane_1":{"filters":{"type":{"required":true}}},"panel_pane_4":{"filters":{"type":{"required":true}}}}},"local_footer":{"displays":{"gwtoday_footer_panel_pane":{"filters":[]}}},"gw_rotating_sidebar":{"displays":{"panel_pane_3":{"filters":[]}}},"social_media_icons":{"displays":{"panel_pane_3":{"filters":[]}}},"main_header":{"displays":{"main_header_panel_pane":{"filters":[]}}}}},"urlIsAjaxTrusted":{"\/":true,"\/daily-crime-and-fire-log":true},"flexslider":{"optionsets":{"gw_editorial_rotating_sidebar":{"namespace":"flex-","selector":".slides \u003E li","easing":"swing","direction":"horizontal","reverse":false,"smoothHeight":false,"startAt":0,"animationSpeed":600,"initDelay":0,"useCSS":true,"touch":true,"video":false,"keyboard":true,"multipleKeyboard":false,"mousewheel":0,"controlsContainer":".flex-control-nav-container","sync":"","asNavFor":"","itemWidth":260,"itemMargin":0,"minItems":1,"maxItems":5,"move":0,"animation":"fade","slideshow":true,"slideshowSpeed":"7000","directionNav":false,"controlNav":true,"prevText":"Previous","nextText":"Next","pausePlay":false,"pauseText":"Pause","playText":"Play","randomize":false,"thumbCaptions":false,"thumbCaptionsBoth":false,"animationLoop":true,"pauseOnAction":true,"pauseOnHover":true,"manualControls":""}},"instances":{"flexslider-1":"gw_editorial_rotating_sidebar"}},"eu_cookie_compliance":{"popup_enabled":1,"popup_agreed_enabled":0,"popup_hide_agreed":0,"popup_clicking_confirmation":1,"popup_scrolling_confirmation":0,"popup_html_info":"\u003Cdiv\u003E\n  \u003Cdiv class =\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Cstyle type=\u0022text\/css\u0022\u003E    #sliding-popup {background-color: #0073AA;padding: 1em 0;width: 100%;}button.agree-button.eu-cookie-compliance-default-button {margin: 0 1em;}#sliding-popup button.eu-cookie-compliance-default-button{display: inline-block;border-color: #004065;width: auto;cursor: pointer;border: solid 2px;border-radius: 5px;text-decoration: none;padding: 5px 12px;                    -webkit-transition: all 0.2s ease 0s;transition: all 0.2s ease 0s;font-family: \u0022AvenirLTStd-Roman\u0022, Helvetica, Arial, sans-serif;font-weight: normal !important;color: #004065;background-color: #ffffff;background-image:none;}                    #sliding-popup .popup-content #popup-text {max-width: 80%; padding-top: 12px;}#sliding-popup .popup-content {margin: 0 auto;display: flex;width: 100%;justify-content: center;align-items: center;flex-wrap: wrap;}                    #sliding-popup button.eu-cookie-compliance-default-button:hover {background-color: #D9D0BB;border-color: #D9D0BB;color: #033C5A;text-decoration: none;}div#sliding-popup p span.marketing-text{color:#ffffff;}                                                                  div#sliding-popup p span.marketing-text a {color:#ffffff; border-bottom:1px solid #ffffff; padding: 3px 2px;}                                         div#sliding-popup p span.marketing-text a:hover,                    \t\t\t\t\t\tdiv#sliding-popup p span.marketing-text a:focus {text-decoration: none; border-bottom: 1px dashed #ffffff;}\u003C\/style\u003E\u003Cp\u003E\u003Cspan class=\u0022marketing-text\u0022\u003EGW uses cookies and other technology on our websites to improve your website experience and to better understand how you use our websites. Visit GW\u0026rsquo;s \u003Ca href=\u0022https:\/\/www.gwu.edu\/privacy-policy\u0022 target=\u0022_blank\u0022\u003EWebsite Privacy Notice\u003C\/a\u003E to learn more about how GW uses cookies and, if you should choose, how to disable them. I understand that by clicking \u003Cstrong\u003E\u0026ldquo;I consent\u0026rdquo;\u003C\/strong\u003E and continuing to use this website, I agree to GW\u0026rsquo;s use of cookies.\u003C\/span\u003E\u003C\/p\u003E          \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-default-button\u0022\u003EI consent.\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","use_mobile_message":false,"mobile_popup_html_info":"\u003Cdiv\u003E\n  \u003Cdiv class =\u0022popup-content info\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n                \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022agree-button eu-cookie-compliance-default-button\u0022\u003EI consent.\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E\n","mobile_breakpoint":"768","popup_html_agreed":"\u003Cdiv\u003E\n  \u003Cdiv class =\u0022popup-content agreed\u0022\u003E\n    \u003Cdiv id=\u0022popup-text\u0022\u003E\n      \u003Ch2\u003EThank you for accepting cookies\u003C\/h2\u003E\u003Cp\u003EYou can now hide this message or find out more about cookies.\u003C\/p\u003E    \u003C\/div\u003E\n    \u003Cdiv id=\u0022popup-buttons\u0022\u003E\n      \u003Cbutton type=\u0022button\u0022 class=\u0022hide-popup-button eu-cookie-compliance-hide-button\u0022\u003EHide\u003C\/button\u003E\n          \u003C\/div\u003E\n  \u003C\/div\u003E\n\u003C\/div\u003E","popup_use_bare_css":1,"popup_height":"auto","popup_width":0,"popup_delay":1000,"popup_link":"https:\/\/www.gwu.edu\/privacy-policy","popup_link_new_window":1,"popup_position":null,"popup_language":"en","store_consent":false,"better_support_for_screen_readers":1,"reload_page":0,"domain":"gwu.edu","popup_eu_only_js":0,"cookie_lifetime":"100","cookie_session":false,"disagree_do_not_show_popup":0,"method":"default","whitelisted_cookies":"","withdraw_markup":"\n","withdraw_enabled":1},"responsive_menus":[{"selectors":"#navigation","trigger_txt":"\u003Cspan \/\u003E\u003Cspan \/\u003E\u003Cspan \/\u003E","close_txt":"X","close_size":"18px","position":"right","media_size":"864","show_children":1,"expand_children":1,"expand_txt":"+","contract_txt":"-","remove_attrs":1,"responsive_menus_style":"mean_menu"}]});</script>
+<script type="text/javascript">
+/*<![CDATA[*/
+(function() {
+ var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+ sz.src = '//siteimproveanalytics.com/js/siteanalyze_67741177.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+})();
+/*]]>*/
+</script>
+      <!--[if lt IE 9]>
+    <script src="/sites/all/themes/zen/js/html5-respond.js"></script>
+    <![endif]-->
+    <!--[if !IE 7]><style type="text/css">.ubberwrapper {display:table;height:100%}</style><![endif]-->
+</head>
+<body class="gw-today html not-front not-logged-in no-sidebars page-node page-node- page-node-22 node-type-general-content section-daily-crime-and-fire-log page-panels" >
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSBRXQH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script type="text/javascript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0];var j=d.createElement(s);var dl=l!='dataLayer'?'&l='+l:'';j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;j.type='text/javascript';j.async=true;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PSBRXQH');</script>
+<!-- End Google Tag Manager -->
+  <a href="#main-content" class="element-invisible element-focusable skip-link">skip navigation</a>
+    
+
+<header class="header" id="header" role="banner">
+    <div class="view view-main-header view-id-main_header view-display-id-main_header_panel_pane view-dom-id-da143ebc79d3cc8bfb58663136840eda">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+    
+<div id="header-wrapper">
+  <div class="gwlogo">
+    <a href="https://safety.gwu.edu/" title="https://safety.gwu.edu/" target="_self"><div class="field field-name-field-logo field-type-image field-label-hidden"><div class="field-items"><div class="field-item even"><img typeof="foaf:Image" src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/image/Header_Masterbrand.jpg" width="500" height="90" alt="Division of Safety and Security" /></div></div></div></a>
+  </div>
+    <div class="call-to-action">
+    <a id="header-call-to-action" class="cap-button" href="https://safety.gwu.edu/clery" title="Clery CSA Reporting" target="_self">Clery CSA Reporting</a>  </div>
+  </div>
+
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>    <script>
+jQuery(document).ready(function($) {
+ $('#gwalert').load('/alert_data.php');
+});
+</script>
+</header>
+  <div class="region region-navigation clearfix">
+    
+<div id="nav-bar">
+  <div id="nav-bar-wrapper">
+        <div id="stickyLogo">
+      <a href="https://safety.gwu.edu/" title="https://safety.gwu.edu/" target="_self"><img id="monogramLogo" src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/image//gw_mono.png" alt="Division of Safety and Security" title=""></a>
+    </div>
+        <div class="nav-group">
+              <div id="smallBtn">
+          <a id="nav-call-to-action" class="cap-button" href="https://safety.gwu.edu/clery" title="Clery CSA Reporting" target="_self">Clery CSA Reporting</a>
+        </div>
+            <div id="navigation" role="navigation">
+        <nav id="main-nav">
+          <ul class="nice-menu nice-menu-down nice-menu-menu-division-menu" id="nice-menu-2"><li class="menu__item menu-740 menuparent  menu-path-node-14 active-trail first "><a href="/about-division" class="menu__link">About</a><ul><li class="menu__item menu-921 menu-path-node-256 first "><a href="/meet-us" class="menu__link">Meet Us</a></li>
+<li class="menu__item menu-747  menu-path-node-21 active-trail  "><a href="/reports-and-records" class="menu__link">Reports and Records</a></li>
+<li class="menu__item menu-751  menu-path-node-25  "><a href="/compliance" class="menu__link">Compliance</a></li>
+<li class="menu__item menu-761 menu-path-node-38  "><a href="/emergency-communications" class="menu__link">Emergency Communications</a></li>
+<li class="menu__item menu-772 menu-path-node-48  "><a href="/complaints-and-commendations" class="menu__link">Complaints and Commendations</a></li>
+<li class="menu__item menu-926 menu-path-node-161  last"><a href="/student-advisory-board" class="menu__link">Student Advisory Board</a></li>
+</ul></li>
+<li class="menu__item menu-743 menuparent  menu-path-node-17  "><a href="/residence-hall-safety-security" class="menu__link">Residence Hall Safety &amp; Security</a><ul><li class="menu__item menu-763 menu-path-node-39 first last"><a href="/prohibited-items-list" class="menu__link">Prohibited Items List</a></li>
+</ul></li>
+<li class="menu__item menu-757 menuparent  menu-path-node-33  "><a href="/health-emergency-management-safety" class="menu__link">Environmental Health &amp; Safety</a><ul><li class="menu__item menu-775 menu-path-node-52 first "><a href="/meet-health-safety-and-emergency-management" class="menu__link">Meet Us</a></li>
+<li class="menu__item menu-742 menu-path-node-16  "><a href="/workplace-safety" class="menu__link">Workplace Safety</a></li>
+<li class="menu__item menu-759  menu-path-node-36  "><a href="/laboratory-safety" class="menu__link">Laboratory Safety</a></li>
+<li class="menu__item menu-1331 menu-path-node-571  "><a href="/respirator-fit-testing-0" class="menu__link">Respirator Fit Testing</a></li>
+<li class="menu__item menu-773  menu-path-node-50  last"><a href="/emergency-response-handbook" class="menu__link">Emergency Response Handbook</a></li>
+</ul></li>
+<li class="menu__item menu-1286 menuparent  menu-path-ssafetygwuedu-emergency-management  "><a href="https://safety.gwu.edu/emergency-management" title="" class="menu__link">Emergency Management </a><ul><li class="menu__item menu-1141 menu-path-node-416 first "><a href="/gw-guardian-app" class="menu__link">GW Guardian</a></li>
+<li class="menu__item menu-1296 menu-path-gwemergcom-  "><a href="http://www.gwemerg.com/" title="" class="menu__link">EMeRG</a></li>
+<li class="menu__item menu-760  menu-path-node-37  "><a href="/ready-gw" class="menu__link">Ready GW</a></li>
+<li class="menu__item menu-1291 menu-path-node-50  last"><a href="/emergency-response-handbook" title="" class="menu__link">Emergency Response Handbook</a></li>
+</ul></li>
+<li class="menu__item menu-734 menuparent  menu-path-node-6  "><a href="/police" class="menu__link">GW Police</a><ul><li class="menu__item menu-1181 menu-path-node-501 first "><a href="/meet_gw_police" title="Meet GW Police" class="menu__link">Meet Us</a></li>
+<li class="menu__item menu-736 menu-path-node-10  "><a href="/services-we-offer" class="menu__link">Services We Offer</a></li>
+<li class="menu__item menu-735  menu-path-node-7  "><a href="/crime-prevention-community-outreach" class="menu__link">Crime Prevention &amp; Community Outreach</a></li>
+<li class="menu__item menu-737 menu-path-node-11  "><a href="/event-security" class="menu__link">Event Security</a></li>
+<li class="menu__item menu-738 menu-path-node-12  "><a href="/physical-security-survey" class="menu__link">Physical Security Survey</a></li>
+<li class="menu__item menu-739 menu-path-node-13  "><a href="/employment-opportunities" class="menu__link">Employment Opportunities</a></li>
+<li class="menu__item menu-771 menu-path-node-47  "><a href="/complaints-and-commendations-0" class="menu__link">Service Feedback</a></li>
+<li class="menu__item menu-781 menu-path-node-60  last"><a href="/tips-line" class="menu__link">TIPS Line</a></li>
+</ul></li>
+<li class="menu__item menu-741 menu-path-node-15  "><a href="/training" class="menu__link">Training</a></li>
+<li class="menu__item menu-1096 menuparent  menu-path-node-67  last"><a href="/oas" class="menu__link">Office of Advocacy &amp; Support</a><ul><li class="menu__item menu-876 menu-path-node-171 first "><a href="/about-office-advocacy-support" class="menu__link">Meet Us</a></li>
+<li class="menu__item menu-795 menu-path-node-73  "><a href="/common-reactions-trauma" class="menu__link">Common Reactions to Trauma</a></li>
+<li class="menu__item menu-1056 menu-path-node-356  "><a href="/healthy-relationships" class="menu__link">Healthy Relationships</a></li>
+<li class="menu__item menu-1031  menu-path-node-326  "><a href="/covid-19-resources" class="menu__link">COVID-19 Resources</a></li>
+<li class="menu__item menu-796 menu-path-node-74  "><a href="/resources" class="menu__link">Resources</a></li>
+<li class="menu__item menu-794 menu-path-node-76  "><a href="/victims-rights" class="menu__link">Victim Rights</a></li>
+<li class="menu__item menu-1106 menu-path-node-441  "><a href="/oas-events" class="menu__link">OAS Events</a></li>
+<li class="menu__item menu-1146  menu-path-node-466  "><a href="/prevention-programming" class="menu__link">Prevention Programming</a></li>
+<li class="menu__item menu-1136 menu-path-node-461  last"><a href="/oas-statements" class="menu__link">OAS Statements</a></li>
+</ul></li>
+</ul>
+        </nav>
+      </div>
+      <div id="stickySearch">
+        <div tabindex="0" id="stickySearchButton" role="button" aria-controls="searchbar" aria-pressed="false">
+          <img id="stickySearchIconImg" src="/sites/all/themes/gwu_marketing/images/icons/search.png" alt="Search" title="Search">
+        </div>
+        <div id="searchbar" name="searchbar" aria-hidden="true">
+          <div id="block-searchblox-searchblox-block-search-form" class="block block-searchblox first odd count-1 count-1">
+        <form action="/daily-crime-and-fire-log" method="post" id="searchblox-block-form" accept-charset="UTF-8"><div>
+  <div class="form-item form-type-textfield form-item-search-keys">
+  <label class="element-invisible" for="edit-search-keys">Enter the terms you wish to search for. </label>
+ <input title="Search GW" type="text" id="edit-search-keys" name="search_keys" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div title="Submit Search" class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-j14foMgVXRKijpmGENu7L5oxYx17ImYkr9Sg1JRIFnk" />
+<input type="hidden" name="form_id" value="searchblox_block_form" />
+  
+</div></form></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+<div id="page" class="clearfix">
+    <div id="main" class="clearfix">
+        <div id="content" class="column" role="main">
+                        <div class="gw-alert" id="gwalert">
+               
+            </div>
+                        <div id="breadcrumbWrapper">
+                <nav id="breadcrumb"><a href="/">Home</a> <img width="10" height="10" alt="" src="https://safety.gwu.edu/sites/all/themes/gwu_marketing/images/breadcrumb_arrow.png"></img> <a href="/about-division">About</a> <img width="10" height="10" alt="" src="https://safety.gwu.edu/sites/all/themes/gwu_marketing/images/breadcrumb_arrow.png"></img> <a href="/reports-and-records">Reports and Records</a> <img width="10" height="10" alt="" src="https://safety.gwu.edu/sites/all/themes/gwu_marketing/images/breadcrumb_arrow.png"></img> <span aria-current="page">Daily Crime and Fire Log</span></nav>            </div>
+                        <a id="main-content"></a>
+                                    <div id="block-system-main" class="block block-system first last odd count-1 count-1">
+        
+
+<div class="panel-3col-stacked-limiter">
+  <div class="panel-display panel-3col-stacked zen-clear"  >
+        <div class="zen-clear"></div>
+          <div class="panel-panel panel-col nine-four">
+        
+
+<div class="panel-pane pane-node-content" >
+       <header class="major">
+
+
+    <h1  class="pane-title">
+            Daily Crime and Fire Log    </h1>
+
+    </header>
+      
+
+  <div class="general-content-w-sidebars">
+    <div class="general-content-primary">
+                  
+      <p>The crime and fire logs are the daily records of all crimes and fires that have been reported to the GW Police Department. They are organized chronologically and are updated on a daily basis. Paper copies of both the crime and the fire logs are available upon request. Requests can be made in person in Rome Hall, Suite 101 during normal business hours.</p>
+
+<div class="gwu-editorial" data-widget="BootstrapTab" id="collapse1631541161195" role="tabpanel">
+<div role="tabpanel">
+<ul class="nav nav-tabs" role="tablist">
+	<li class="active" role="presentation"><a aria-controls="tab1631541161195_1" data-toggle="tab" href="#tab1631541161195_1" role="tab">Crime Log</a></li>
+	<li role="presentation"><a aria-controls="tab1631541161195_2" data-toggle="tab" href="#tab1631541161195_2" role="tab">Fire Log</a></li>
+</ul>
+
+<div class="tab-content clearfix">
+<div class="tab-pane active" id="tab1631541161195_1" role="tabpanel">
+<p>&nbsp;</p>
+
+<ul>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/September%202021%20_2.pdf">September 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/August%202021%20_13.pdf">August 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/July%202021%20_11.pdf">July 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/June%202021%20_4.pdf">June 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/May%202021.pdf">May&nbsp;2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/April%202021_1.pdf">April 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/March%202021%20_13.pdf">March 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/February%202021%20_13.pdf">February 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/January%202021%20_2.pdf">January 2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/December%202020.pdf">December 2020</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/November%202020%20_12.pdf">November 2020</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/October%202020_15.pdf">October 2020</a></li>
+</ul>
+</div>
+
+<div class="tab-pane" id="tab1631541161195_2" role="tabpanel">
+<ul>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/Fire%20Log%202021_3.pdf">2021</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/Fire%20Log%202020_1.pdf">2020</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2019%20Fire%20Log_4.pdf">2019</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2018%20Fire%20Log_2.pdf">2018</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2017 Fire Log_1.pdf" target="_blank">2017</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2016-11-07 Fire Log.pdf" target="_blank">2016</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2015 Fire Log_0.pdf" target="_blank">2015</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2014 Fire Log 12-5.pdf" target="_blank">2014</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/2013-12-12 Fire Log.pdf" target="_blank">2013</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/gwpd-firelog-2012-10112.pdf" target="_blank">2012</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/gwpd-firelog-2011-10112.pdf" target="_blank">2011</a></li>
+	<li><a href="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/gwpd-firelog-2010-10112.pdf" target="_blank">2010</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div aria-multiselectable="true" class="panel-group" id="collapse1631541149781" role="tablist">
+<div class="panel panel-default">
+<div class="panel-heading" id="heading1631541149781_1" role="tab">
+<div class="panel-title"><a aria-controls="collapse1631541149781_1" aria-expanded="false" class="collapsed" data-parent="#collapse1631541149781" data-target="#collapse1631541149781_1" data-toggle="collapse" href="javascript:void(0)">Important Notes</a></div>
+</div>
+
+<div aria-labelledby="heading1631541149781_1" class="panel-collapse collapse" id="collapse1631541149781_1" role="tabpanel">
+<div class="panel-body">
+<p class="rteindent1">Entries that start with a case number of NA involve information received from university administrators that do not work for GWPD but who are defined by federal law as Campus Security Authorities. These administrators share non-identifying information with GWPD that is provided by the victim. In these incidents, the victims did not file official police reports and it is therefore not always possible to provide information regarding the five areas typically covered in the crime log (i.e. Nature/Classification, Date Reported, Date Occurred, Time, General Location, Off Campus (Y or N), Disposition). Since an official report was not filed, no disposition is listed. These incidents are reported to GWPD for statistical purposes and are posted to the Crime Log when the information is received by GWPD.</p>
+
+<p class="rteindent1">According to Federal Law, an institution may withhold any of the required fields of entry, i.e. the nature, date, time, location and/or disposition if any of the following conditions apply:</p>
+
+<ul>
+	<li class="rteindent2">The disclosure is prohibited by law</li>
+	<li class="rteindent2">If disclosure would jeopardize the confidentiality of the victim.</li>
+	<li class="rteindent2">If disclosure would jeopardize an ongoing criminal investigation or the safety of an individual</li>
+	<li class="rteindent2">If disclosure would cause a suspect to flee or evade detection</li>
+	<li class="rteindent2">If disclosure would result in the destruction of evidence</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading" id="heading1631541149781_2" role="tab">
+<div class="panel-title"><a aria-controls="collapse1631541149781_2" aria-expanded="false" class="collapsed" data-parent="#collapse1631541149781" data-target="#collapse1631541149781_2" data-toggle="collapse" href="javascript:void(0)">Crime Log Definitions</a></div>
+</div>
+
+<div aria-labelledby="heading1631541149781_2" class="panel-collapse collapse" id="collapse1631541149781_2" role="tabpanel">
+<div class="panel-body">
+<p><strong>Open Case:</strong> The case is currently being investigated by GWPD.</p>
+
+<p><strong>Unfounded:</strong> The case is determined through investigation to be false or baseless. An offense neither occurred nor was attempted.</p>
+
+<p><strong>Referred to Department:</strong> The case is referred to the appropriate supervisory employee or to the GW Human Resources Department. Those departments review the case and determine if disciplinary action will be initiated.</p>
+
+<p><strong>Referred to MPD:</strong> The case is being investigated by the Metropolitan Police Department.</p>
+
+<p><strong>Referred to Outside Agency:</strong> The case is being investigated by a law enforcement agency other than MPD. The specific agency will be identified in the disposition.</p>
+
+<p><strong>Referred to Title IX Office:</strong> The case is referred to the GWU Title IX Office for appropriate action.</p>
+
+<p><strong>Closed, Referred to DSA:</strong> The case has been forwarded to the Division of Student Affairs under the Dean of Students. DSA is responsible for reviewing the case and for determining whether or not the student(s) involved will be charged with a violation(s) of the Student Code of Conduct.</p>
+
+<p><strong>Closed. Public Space:</strong> Case occurred on public property within the campus boundaries. GWPD did not investigate the case.</p>
+
+<p><strong>Closed. Off campus incident:</strong> Case occurred off campus and is not within the GWPD's jurisdiction. GWPD did not investigate the case.</p>
+
+<p><strong>Closed. Subject barred:</strong> The subject(s) has been issued a University bar notice which restricts the subject from entering or accessing any University property. A violation of a bar notice may result in that person's arrest for trespassing.</p>
+
+<p><strong>Closed. Subject arrested:</strong> The subject(s) has been arrested by either GWPD, MPD, or another law enforcement agency</p>
+
+<p><strong>Closed. No suspects or witnesses:</strong> Case has no solvability.</p>
+
+<p><strong>Closed. No identifiable suspect:</strong> A description and/or video surveillance of the subject is available but positive identification of the subject has not been made.</p>
+
+<p><strong>Closed. Reclassified:</strong> The original incident report classification has been changed to accurately reflect the appropriate classification, based on the results of the investigation.</p>
+
+<p><strong>Closed. No further action:</strong> No further investigative action is required</p>
+</div>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+  
+  </div>
+     </div>
+              <div class="panel-panel panel-col-first three-one">
+        
+
+<div class="panel-pane pane-block pane-menu-block-1" >
+        <div class="menu-block-wrapper menu-block-1 menu-name-menu-division-menu parent-mlid-0 menu-level-2">
+  <ul class="menu"><li class="menu__item is-leaf first leaf menu-mlid-921"><a href="/meet-us" class="menu__link">Meet Us</a></li>
+<li class="menu__item is-active-trail is-expanded expanded active-trail menu-mlid-747"><a href="/reports-and-records" class="menu__link is-active-trail active-trail">Reports and Records</a><ul class="menu"><li class="menu__item is-active is-active-trail is-leaf first leaf active-trail active menu-mlid-748"><a href="/daily-crime-and-fire-log" class="menu__link is-active-trail active-trail active">Daily Crime and Fire Log</a></li>
+<li class="menu__item is-leaf leaf menu-mlid-749"><a href="/annual-security-fire-safety-report" class="menu__link">Annual Security &amp; Fire Safety Report</a></li>
+<li class="menu__item is-collapsed collapsed menu-mlid-755"><a href="/clery" class="menu__link">Clery Incident Reporting</a></li>
+<li class="menu__item is-leaf leaf menu-mlid-1186"><a href="/gwpd-annual-statistical-review" title="Complaints against Police employees" class="menu__link">GWPD Annual Statistical Review</a></li>
+<li class="menu__item is-leaf leaf menu-mlid-750"><a href="/gwpd-incident-report-request" class="menu__link">GWPD Incident Report Request</a></li>
+<li class="menu__item is-leaf last leaf menu-mlid-1171"><a href="/criminal-history-check-request" title="Criminal History Check Request" class="menu__link">Criminal History Check Request</a></li>
+</ul></li>
+<li class="menu__item is-collapsed collapsed menu-mlid-751"><a href="/compliance" class="menu__link">Compliance</a></li>
+<li class="menu__item is-leaf leaf menu-mlid-761"><a href="/emergency-communications" class="menu__link">Emergency Communications</a></li>
+<li class="menu__item is-leaf leaf menu-mlid-772"><a href="/complaints-and-commendations" class="menu__link">Complaints and Commendations</a></li>
+<li class="menu__item is-leaf last leaf menu-mlid-926"><a href="/student-advisory-board" class="menu__link">Student Advisory Board</a></li>
+</ul></div>
+  
+  </div>
+      </div>
+            <div class="zen-clear"></div>
+    
+          <div class="responsive-left-nav"></div>
+      </div>
+</div>
+  <div id="local-footer" class="pane">
+    
+
+<div class="panel-pane pane-views-panes pane-local-footer-gwtoday-footer-panel-pane" >
+        <div class="view view-local-footer view-id-local_footer view-display-id-gwtoday_footer_panel_pane view-dom-id-d5bb198941af36c448dec65f75963ea9">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+    <div id="gwtoday-local-footer">
+ <div id="gwtoday-footer">
+ 	 <div class="promotional-four-col">
+     <div class="footer-logo" id ="promo-item-1">
+       <div class="field field-name-field-gwtoday-logo field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><p class="rtecenter"><strong>Division of Safety and Security</strong></p>
+
+<p class="rtecenter" style="line-height:0.75em;"><img alt="Division of Safety &amp; Security QR Code" src="/sites/g/files/zaxdzs2386/f/downloads/medium_SafetySecurity-large%20%281%29_1.png" style="width: 120px; height: 120px;" /></p>
+</div></div></div>     </div>
+     <div class="footer-address" id ="promo-item-2">
+       <div class="field field-name-field-gwtoday-address field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><p><a href="/police">GW Police Department</a>&nbsp;&amp; <a href="http://www.gwemerg.com" target="_blank">EMeRG</a>&nbsp;<br />
+Emergency:&nbsp;(202) 994-6111&nbsp;<br />
+Non-Emergency:&nbsp;(202) 994-6110</p>
+
+<p style="line-height:1.25em;">2145 G Street, NW<br />
+Washington, DC 20037</p>
+</div></div></div>     </div>
+     <div class="footer-social-links" id ="promo-item-3">
+       <div class="field field-name-field-gwtoday-social-links field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><p><a href="/health-emergency-management-safety">Health &amp; Emergency Mgmt Safety</a><br />
+Health and Safety:&nbsp;(202) 994-4347<br />
+Emergency Mgmt:&nbsp;(202) 994-4936</p>
+
+<p style="line-height:1.25em;">2025 F St NW<br />
+Washington, DC 20052<br />
+<a href="/cdn-cgi/l/email-protection#8af9ebeceffef3caedfdffa4efeeff"><span class="__cf_email__" data-cfemail="e89b898e8d9c91a88f9f9dc68d8c9d">[email&#160;protected]</span></a></p>
+</div></div></div>     </div>
+     <div class="footer-quick-links" id ="promo-item-4">
+       <div class="field field-name-field-gwtoday-quick-links field-type-text-long field-label-hidden"><div class="field-items"><div class="field-item even"><p><a href="/about-office-advocacy-support">Office of Advocacy&nbsp;&amp; Support</a><br />
+(202) 994-0443</p>
+
+<p>520 22nd Street, NW<br />
+Washington, DC 20052<br />
+<a href="/cdn-cgi/l/email-protection#91fee7e2d1f6e6e4bff4f5e4"><span class="__cf_email__" data-cfemail="036c6270436474762d666776">[email&#160;protected]</span></a></p>
+</div></div></div>     </div>
+   </div>
+ </div>
+</div>
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  
+  </div>
+  </div>
+
+
+</div>
+        </div>
+    </div>
+</div>
+
+  <footer id="footer" class="region region-footer">
+   
+<div id="footer-wrapper">
+    <div class="footer-logof">
+        <a rel="home" href="http://www.gwu.edu?utm_medium=link&utm_campaign=editorial-footer&utm_source=gwu" target="_blank">
+        <img class="gwlogo" typeof="foaf:Image" src="/sites/all/themes/gwu_marketing/images/logos/gw_primary_2c_rev.png" alt="The George Washington University, Washington, DC" height="42" width="300">
+        </a>
+        <a rel="external"  href="https://bicentennial.gwu.edu?utm_medium=link&utm_campaign=editorial-footer&utm_source=bicentennial" target="_blank">
+        <img class="bicenlogo" typeof="foaf:Image" src="/sites/all/themes/gwu_marketing/images/logos/200logo_300x200.png" alt="GW's Bicentennial Celebration" height="42" width="300">
+        </a>
+    </div>
+    <div class="row-one">
+        <ul>
+            <li>
+                <a href="http://www.campusadvisories.gwu.edu?utm_medium=link&utm_campaign=editorial-footer&utm_source=campus-advisories" aria-label="View the latest Campus Advisories" target="_blank">Campus Advisories</a>
+            </li>
+            <li>
+                <a href="https://go.gwu.edu/covid19?utm_medium=link&utm_campaign=editorial-footer&utm_source=coronavirus-response" target="_blank">Coronavirus Response</a>
+            </li>
+            <li>
+                <a href="https://compliance.gwu.edu/equal-opportunity-nondiscrimination-anti-harassment-and-non-retaliation?utm_medium=link&utm_campaign=editorial-footer&utm_source=EEO-nondiscrimination-policy" target="_blank">EO/Nondiscrimination Policy</a>
+            </li>
+            <li>
+                <a href="https://www.gwu.edu/privacy-notice?utm_medium=link&utm_campaign=editorial-footer&utm_source=privacy-notice" target="_blank">Privacy Notice</a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="row-two">
+        <ul>
+            <li>
+                <a href="https://www.gwu.edu/contact-gw?utm_medium=link&utm_campaign=editorial-footer&utm_source=contact-gw" aria-label="Contact GW with general questions or comments" target="_blank">Contact GW</a>
+            </li>
+            <li>
+                <a href="https://accessibility.gwu.edu?utm_medium=link&utm_campaign=editorial-footer&utm_source=accessibility" aria-label="Visit GW's main accessibility website" target="_blank">Accessibility</a>
+            </li>
+            <li>
+                <a href="https://www.gwu.edu/terms-use?utm_medium=link&utm_campaign=editorial-footer&utm_source=terms-use" target="_blank">Terms of Use</a>
+            </li>
+            <li>
+                <a href="https://www.gwu.edu/copyright?utm_medium=link&utm_campaign=editorial-footer&utm_source=copyright" aria-label="Copyright information for GW websites" target="_blank">Copyright</a>
+            </li>
+            <li>
+                <a href="https://www.gwu.edu/az-index?utm_medium=link&utm_campaign=editorial-footer&utm_source=az-index" target="_blank">A-Z Index</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row-three">
+        <ul>
+            <li>GW is committed to digital accessibility. If you experience a barrier that affects your ability to access content on this page, let us know via the
+                <a href="https://accessibility.gwu.edu/accessibility-feedback-form?utm_medium=link&utm_campaign=editorial-footer&utm_source=accessibility-feedback" target="_blank">Accessibility Feedback Form</a>.
+            </li>
+        </ul>
+    </div>
+</div>
+  </footer>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_5idECjjAo-X5YdkT65CaIiodkWmZlZv-WjSkHlWhoYk.js"></script>
+<script>function euCookieComplianceLoadScripts() {}</script>
+<script>var eu_cookie_compliance_cookie_name = "";</script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_deTZgaWdQuDmAlOR6I9VUIykBSq6CtkHXt6xkMKzT9M.js"></script>
+<script src="https://safety.gwu.edu/sites/g/files/zaxdzs2386/f/js/js_Q6KsWypq15ljuLoz11ZWLNW6uRqX8INiAYDcWAfRi3M.js"></script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam-cell.nr-data.net","licenseKey":"a9d5e9ce84","applicationID":"369530932","transactionName":"ZgZWNUtRDxUAWkBbXF9MdQJNWQ4ITklVVVZuDlUPWFcEFD5XW1ZWbhVdBE5vEQcGXA==","queueTime":0,"applicationTime":541,"atts":"SkFVQwNLHBs=","errorBeacon":"bam-cell.nr-data.net","agent":""}</script></body>
+</html>
