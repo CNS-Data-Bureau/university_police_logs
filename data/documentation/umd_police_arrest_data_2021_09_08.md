@@ -57,10 +57,15 @@ General description:
 
 ---
 
-- [ ] Q: In the arrest logs, why does a case number have data across different years?
+- [ ] Q: In the arrest logs, why does a case number have entries across different years?
 
   - For example, case number 2011-00051091 has entries for 2011-09-03 and 2012-05-08
   - For example, case number 2017-00073373 has entries for 11/18/17 and 01/12/18
   - Another example: case number 2020-00088153 has entries for 12/09/20 and 08/16/21
 
-- A:
+- A: THe later date is the date of the initial incident, there were individuals charged that day
+  in the course of the investigation, additional charges applied
+  could be same perosn, or different people from additonal date
+
+- [ ] Q: For case number:
+      2011-00019672, why are there 2 white arrests/citations in 20011, and then for the same case number a black arrest in 2014
