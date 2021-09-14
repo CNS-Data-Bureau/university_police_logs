@@ -1,0 +1,146 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+
+```
+## Load and Clean Data
+
+```{r}
+
+umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_13.csv")
+
+umd_police_incident_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_incident_data_2021_09_13.csv")
+
+
+```
+
+## Clean
+
+```{r}
+
+# Change
+umd_police_arrest_data = umd_police_arrest_data %>% 
+  mutate(date = substr(arrested_date_time_charge,1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date))
+  
+umd_police_incident_data = umd_police_incident_data %>% 
+  mutate(date = substr(occured_date_time_location, 1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(occured_date_time_location, " ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date))
+
+
+```
+
+## Exploring
+```{r}
+
+
+umd_police_incident_data %>% 
+  group_by(umpd_case_number) %>% 
+  count() %>% 
+  View()
+
+umd_police_arrest_data %>% 
+  group_by(umpd_case_number) %>% 
+  count() %>% 
+  View()
+
+umd_police_arrest_data %>% 
+  group_by(year, umpd_case_number) %>% 
+  count() %>% 
+  ungroup() %>% 
+  group_by(umpd_case_number) %>% 
+  summarise(num_across_years = n()) %>% 
+  View()
+
+umd_police_arrest_data %>% 
+  group_by(arrest_number) %>% 
+  count() %>% 
+  View()
+```
+
+In the incident data there are only one of each umpd case number 
+
+In the arrest data, there could be multiple umpd case numbers
+
+## Summarize arrest data
+
+```{r}
+
+umd_police_arrest_summarized = umd_police_arrest_data %>% 
+  group_by(umpd_case_number) %>% 
+  mutate(number_arrests_or_citations = length(unique(arrest_number))) %>% 
+  mutate(number_case_number_occurences = n()) %>% 
+  pivot_wider(names_from = sex, values_from = sex)
+  
+```
+
+
+
+
+## Combine
+
+```{r}
+
+umd_police <- left_join(umd_police_incident_data, umd_police_arrest_data, by = "umpd_case_number")
+
+
+```
+
