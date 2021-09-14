@@ -59,9 +59,9 @@ output_formatted_table = function(table, text){
 
 ```{r}
 
-umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_09.csv")
+umd_police_arrest_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_arrest_data_2021_09_13.csv")
 
-umd_police_incident_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_incident_data_2021_09_08.csv")
+umd_police_incident_data <- read_csv("~/Code/university_police_logs/data/handmade/umd_police_incident_data_2021_09_13.csv")
 
 
 ```
