@@ -14,6 +14,7 @@ jupyterlab = "*"
 lxml = "*"
 fake-useragent = "*"
 pathlib = "*"
+pydrive = "*"
 
 [requires]
 python_version = "3.9"
