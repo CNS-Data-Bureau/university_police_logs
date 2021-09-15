@@ -90,6 +90,10 @@ umd_police_incident_data = umd_police_incident_data %>%
 
 ## Exploring
 ```{r}
+umd_police_arrest_data %>% 
+  group_by(description) %>% 
+  summarise(n()) %>% 
+  View()
 
 
 umd_police_incident_data %>% 
@@ -126,10 +130,26 @@ In the arrest data, there could be multiple umpd case numbers
 
 umd_police_arrest_summarized = umd_police_arrest_data %>% 
   group_by(umpd_case_number) %>% 
-  mutate(number_arrests_or_citations = length(unique(arrest_number))) %>% 
-  mutate(number_case_number_occurences = n()) %>% 
-  pivot_wider(names_from = sex, values_from = sex)
+  mutate(number_people_arrests_or_citations = length(unique(arrest_number))) %>% 
+  mutate(number_case_occurences = n())
   
+  
+race_total_by_case = umd_police_arrest_summarized %>% 
+  group_by(year, umpd_case_number, arrest_number) %>% 
+  summarise(races = unique(race)) %>% 
+  ungroup() %>% 
+  group_by(year,umpd_case_number, races) %>% 
+  summarise(num = n()) %>% 
+  pivot_wider(names_from = races, values_from = num, values_fill = 0) 
+
+
+description_total_by_case = umd_police_arrest_summarized %>% 
+  group_by(year, umpd_case_number) %>% 
+  summarise(races = list(description)) %>% 
+  ungroup() %>% 
+  group_by(year,umpd_case_number) %>% 
+  summarise(num = n()) %>% 
+  pivot_wider(names_from = races, values_from = num, values_fill = 0) 
 ```
 
 
