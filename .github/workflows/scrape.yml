@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install requirements
-        run: python -m pip install selenium requests pandas beautifulsoup4 json fnmatch tabula 
+        run: python -m pip install selenium requests pandas beautifulsoup4 fnmatch tabula 
       - name: Run Scraper
         run: python umd_scraper.py
       - name: Commit and push if it changed
