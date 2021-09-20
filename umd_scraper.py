@@ -117,7 +117,7 @@ def scrape_umd_arrest(date):
 
     data = {"arrest_number": arrest_number, "arrested_date_time_charge": arrested_date_time_charge, "umpd_case_number": umpd_case_number, "race":race, "age":age, "sex":sex, "description": description}
     df = pd.DataFrame(data)
-    df.to_csv(f"../data/handmade/umd_police_arrest_data_{date}.csv")
+    df.to_csv(f"umd_police_arrest_data_{date}.csv")
 
 
 # In[ ]:
@@ -174,7 +174,7 @@ def scrape_umd_incident(date):
 
 
     df = pd.DataFrame(data)
-    df.to_csv(f"../data/handmade/umd_police_incident_data_{date}.csv")
+    df.to_csv(f"umd_police_incident_data_{date}.csv")
     
     
     
