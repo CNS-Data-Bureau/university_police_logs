@@ -81,7 +81,7 @@ def convert_pdf_to_csv(pdf_directory, csv_directory):
 
 #MDP Arrest Data
 
-def scrape_umd_arrest(date)
+def scrape_umd_arrest(date):
 
     # Initialize arrays to save data
     arrest_number = []
