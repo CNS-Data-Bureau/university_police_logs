@@ -183,6 +183,6 @@ def scrape_umd_incident(date):
 # In[6]:
 
 
-scrape_umd_arrest("2021-09-15")
-scrape_umd_incident("2021-09-15")
+scrape_umd_arrest("2021-09-20")
+scrape_umd_incident("2021-09-20")
 
