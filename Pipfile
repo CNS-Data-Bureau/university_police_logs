@@ -10,6 +10,8 @@ pypdf2 = "*"
 pdfreader = "*"
 tabula-py = "*"
 camelot = "*"
+"tabula.py" = "*"
+tabula = "*"
 
 [requires]
 python_version = "3.9"
