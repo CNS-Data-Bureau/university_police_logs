@@ -109,12 +109,12 @@ def howard_scraper():
         counter = counter +1
     #     print(counter)
         g = requests.get(i, stream=True)
-        with open(f'/data/handmade/howard/pdfs/scraped_report_{counter}.pdf', 'wb') as sav:
+        with open(f'../../data/handmade/howard/pdfs/scraped_report_{counter}.pdf', 'wb') as sav:
             for chunk in g.iter_content(chunk_size=1000000):
                 sav.write(chunk)
 
-    directory = r'/data/handmade/howard/pdfs/'
-    directory_output = r'/data/handmade/howard/csvs/'
+    directory = r'../../data/handmade/howard/pdfs/'
+    directory_output = r'../../data/handmade/howard/csvs/'
     count = 0
     for file in os.listdir(directory):
         if file.endswith(".pdf"):
