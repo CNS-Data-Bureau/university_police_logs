@@ -29,7 +29,7 @@ import json
 import fnmatch
 import os
 import tabula
-from tabula.io import read_pdf
+# from tabula.io import read_pdf
 
 
 def requests_get_item(url, item):
