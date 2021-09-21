@@ -109,19 +109,19 @@ def howard_scraper():
         counter = counter +1
     #     print(counter)
         g = requests.get(i, stream=True)
-        with open(f'{counter}.pdf', 'wb') as sav:
+        with open(f'../../data/handmade/howard/pdfs/scraped_report_{counter}.pdf', 'wb') as sav:
             for chunk in g.iter_content(chunk_size=1000000):
                 sav.write(chunk)
 
-    directory = r'/data/handmade/howard/pdfs/'
-    directory_output = r'/data/handmade/howard/csvs/'
+    directory = r'../../data/handmade/howard/pdfs/'
+    directory_output = r'../../data/handmade/howard/csvs/'
     count = 0
     for file in os.listdir(directory):
         if file.endswith(".pdf"):
             count = count + 1
     #         print(count)
     #         print(file)
-            tabula.io.convert_into(f'{file}', f'{count}.csv', output_format="csv", pages='all')
+            tabula.io.convert_into(f'{directory}{file}', f'{directory_output}{count}.csv', output_format="csv", pages='all')
 
 howard_scraper()
 # def scrape_umd_arrest(date)
