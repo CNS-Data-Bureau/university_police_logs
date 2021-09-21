@@ -32,39 +32,39 @@ import tabula
 # from tabula.io import read_pdf
 
 
-def requests_get_item(url, item):
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
-    if item == "html":       
-        page = requests.get(url, headers = headers)
-        soup = BeautifulSoup(page.text, 'html.parser')
-        return(soup)
+# def requests_get_item(url, item):
+#     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+#     if item == "html":       
+#         page = requests.get(url, headers = headers)
+#         soup = BeautifulSoup(page.text, 'html.parser')
+#         return(soup)
     
-    elif item == "pdf":
-        page = requests.get(url, headers = headers, stream=True)
-        return(page)
-    else:
-        print("Valid Item Not Selected")
+#     elif item == "pdf":
+#         page = requests.get(url, headers = headers, stream=True)
+#         return(page)
+#     else:
+#         print("Valid Item Not Selected")
 
-def download_pdfs(ls_pdf_urls, download_path, file_name):
-    counter = 0 
-    for pdf_url in ls_pdf_urls:
-        counter = counter +1
-        g = requests_get_item(pdf_url, "pdf")
-        with open(f'{download_path}{file_name}_{counter}.pdf', 'wb') as sav:
-            for chunk in g.iter_content(chunk_size=1000000):
-                sav.write(chunk)
-        print(f"download number: {counter}")
+# def download_pdfs(ls_pdf_urls, download_path, file_name):
+#     counter = 0 
+#     for pdf_url in ls_pdf_urls:
+#         counter = counter +1
+#         g = requests_get_item(pdf_url, "pdf")
+#         with open(f'{download_path}{file_name}_{counter}.pdf', 'wb') as sav:
+#             for chunk in g.iter_content(chunk_size=1000000):
+#                 sav.write(chunk)
+#         print(f"download number: {counter}")
                 
                 
-def convert_pdf_to_csv(pdf_directory, csv_directory):
-    directory = fr'{pdf_directory}'
-    directory_output = fr'{csv_directory}'
-    count = 0
-    for file in os.listdir(directory):        
-        if file.endswith(".pdf"):
-            count = count + 1 
-            print(f'{directory}{file}: Conversion {count}')
-            tabula.convert_into(f'{directory}{file}', f'{directory_output}{count}.csv', output_format="csv", pages='all')
+# def convert_pdf_to_csv(pdf_directory, csv_directory):
+#     directory = fr'{pdf_directory}'
+#     directory_output = fr'{csv_directory}'
+#     count = 0
+#     for file in os.listdir(directory):        
+#         if file.endswith(".pdf"):
+#             count = count + 1 
+#             print(f'{directory}{file}: Conversion {count}')
+#             tabula.convert_into(f'{directory}{file}', f'{directory_output}{count}.csv', output_format="csv", pages='all')
     
     
     
