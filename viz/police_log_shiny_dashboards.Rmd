@@ -1,0 +1,153 @@
+---
+title: "police_log_shiny_dashboards"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(tidyverse)
+
+```
+
+## Import Datasets
+```{r}
+
+etl_umd_police_arrest_data = read_rds("../data/processed/etl_umd_police_arrest_data.rds")
+etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
+```
+
+
+## UI Elements
+
+### First Page
+```{r}
+first_page <- 
+      # First tab content
+      tabItem(tabName = "dashboard",
+        fluidRow(
+          box(plotOutput("plot1", height = 250)),
+
+          box(
+            title = "Controls",
+            sliderInput("slider", "Number of observations:", 1, 100, 50)
+          )
+        )
+      )
+```
+
+### Download Page
+
+```{r}
+
+download_page <- tabItem(tabName = "download",
+                         fluidRow(
+                           selectInput("dataset", "Choose a dataset:", choices = c("University of Maryland", "Other")),
+                           downloadButton("downloadData", "Download"),
+                           tableOutput("table")
+                           
+                           
+                         )
+                         
+                         )
+
+```
+
+
+```{r}
+
+header <- dashboardHeader(title = "Police Dashboard")
+  
+sidebar <- dashboardSidebar(
+    sidebarMenu(
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      
+      menuItem("Download the Data", tabName = "download", icon = icon("th"))
+      
+    )
+  )
+  
+body <- dashboardBody( 
+  tabItems(
+    # First Page
+  first_page,
+  # Second tab content
+  download_page
+    
+  )
+  
+    )
+  
+  
+ui <- dashboardPage(header, sidebar, body)
+  
+
+
+
+```
+
+## Server
+
+```{r}
+
+## app.R ##
+
+server <- function(input, output){
+  set.seed(122)
+  histdata <- rnorm(500)
+
+  output$plot1 <- renderPlot({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
+})
+  
+  # Reactive value for selected dataset -- 
+  datasetInput <- reactive({
+    switch(input$dataset,
+           "University of Maryland" = etl_umd_police_arrest_data ,
+           "Other" = etl_umd_police_incident_data
+           )
+  })
+  
+  # Table of Selected dataset --
+  output$table <- renderTable({
+    datasetInput()
+  })
+  
+  output$downloadData <- downloadHandler(
+    filename = function(){
+      paste(input$dataset, ".csv", sep = "")
+    },
+    content = function(file){
+      
+      write.csv(datasetInput(), file, row.names = FALSE)
+    }
+  )
+}
+
+```
+
+
+## Run the App
+```{r}
+shinyApp(ui, server)
+```
+## Tutorials
+```{r}
+runExample("01_hello")      # a histogram
+runExample("02_text")       # tables and data frames
+runExample("03_reactivity") # a reactive expression
+runExample("04_mpg")        # global variables
+runExample("05_sliders")    # slider bars
+runExample("06_tabsets")    # tabbed panels
+runExample("07_widgets")    # help text and submit buttons
+runExample("08_html")       # Shiny app built from HTML
+runExample("09_upload")     # file upload wizard
+runExample("10_download")   # file download wizard
+runExample("11_timer")      # an automated timer
+```
+
