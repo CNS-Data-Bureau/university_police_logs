@@ -24,7 +24,7 @@ import os
 import tabula
 # from tabula.io import read_pdf
 
-def howard_scraper():
+def howard_links():
 
     # def howard_scraper():
     # get the linnks we want
@@ -40,40 +40,54 @@ def howard_scraper():
     final = item2.find_all("a")
 
     final_links = []
-    var = 'https://publicsafety.howard.edu/'
+    var = 'https://publicsafety.howard.edu'
 
     for link in final:
         href = (link["href"])
+        # print(href)
         if href.startswith('https://publicsafety.howard.edu/'):
+            # print(href)
             final_links.append(href)
-    #         print(final_links)
-        elif href.startswith('/sites/'):
-    #         print('---')
-            final_href = var + href
-    #         print(final_href)
-    #         print('---')
-            final_links.append(final_href)
             # print(final_links)
-            counter = 0 
-            for i in final_links:
-                counter = counter +1
-            #     print(counter)
-                g = requests.get(i, stream=True)
-                with open(f'{counter}.pdf', 'wb') as sav:
-                    for chunk in g.iter_content(chunk_size=1000000):
-                        sav.write(chunk)
-                        # print('this')
-            directory = r'howard/'
-            directory_output = r'howard/'
-            count = 0
-            for file in os.listdir():
-            #     print(file)
-                if file.endswith(".pdf"):
-            #         print('done')
-                    count = count + 1
-            #         print(count)
-            #         print(file)
-                    tabula.convert_into(f'{file}', f'{count}.csv', output_format="csv", pages='all')
-                    # print('done')
+        # else:
+        #     print ('error')
+    for link in final:
+        href = (link["href"])
+        if href.startswith('/sites/'):
+            print(href)
+            final_href = var + href
+            final_links.append(final_href)
+        # else:
+        #     print ('error')
+            # print(final_links)
+            # print('---')
+    # print(final_links)
+    return final_links
 
-howard_scraper()
+            
+def howard_pdfs(final_links):
+    counter = 0 
+    for i in final_links:
+        counter = counter +1
+    #     print(counter)
+        g = requests.get(i, stream=True)
+        with open(f'data/handmade/howard/pdfs/{counter}.pdf', 'wb') as sav:
+            for chunk in g.iter_content(chunk_size=1000000):
+                sav.write(chunk)
+                # print('this')
+
+def howard_convert(pdfs):
+    directory = r'data/handmade/howard/pdfs/'
+    directory_output = r'data/handmade/howard/csvs/'
+    count = 0
+    for file in os.listdir(directory):
+    #     print(file)
+        if file.endswith(".pdf"):
+    #         print('done')
+            count = count + 1
+    #         print(count)
+    #         print(file)
+            tabula.convert_into(f'{directory}{file}', f'{directory_output}{count}.csv', output_format="csv", pages='all')
+            # print('done')
+# howard_links()
+howard_convert(howard_pdfs(howard_links()))
