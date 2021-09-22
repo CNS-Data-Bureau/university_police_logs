@@ -19,7 +19,7 @@ jobs:
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '11'
-      - run: java -cp java HelloWorldApp
+      # - run: java -cp java HelloWorldApp
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
