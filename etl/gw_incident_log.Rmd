@@ -53,6 +53,18 @@ output_formatted_table = function(table, text){
     scroll_box(width = "100%")
 }
 
+files_to_df = function(path, type){
+  # path is the string file path
+  # type is in the format of "*csv"
+  
+  merged_data <- do.call(rbind, lapply(list.files(pattern = type, path = path), function(i){
+  path = paste0(path, i)
+  read_csv(path)}))
+  
+  return(merged_data)
+}
+
+
 
 ```
 ## Load and Clean Data
@@ -60,13 +72,23 @@ output_formatted_table = function(table, text){
 ```{r}
 
 
-
+gwu_incident_log = files_to_df("../data/handmade/gwu/csvs/", "*csv")
+gwu_incident_log  = gw_incident_logs %>% 
+  # clean names
+  clean_names() %>% 
+  # make date columns a date type
+  mutate(date_reported = mdy(date_reported),
+         date_occurred = mdy(date_occurred))
+  
 
 ```
 
-## Clean
+## Export
 
 ```{r}
+
+write_rds(gwu_incident_log, "../data/processed/gwu_incident_log.rds")
+write_csv(gwu_incident_log, "../data/processed/gwu_incident_log.csv")
 
 
 
