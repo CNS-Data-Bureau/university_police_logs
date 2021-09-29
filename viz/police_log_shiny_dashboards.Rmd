@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(shiny)
 library(shinydashboard)
 library(tidyverse)
+library(DT)
 
 ```
 
@@ -29,15 +30,19 @@ etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incide
 first_page <- 
       # First tab content
       tabItem(tabName = "dashboard",
+        ## second row in first tab
         fluidRow(
-          box(plotOutput("plot1", height = 250)),
-
-          box(
-            title = "Controls",
-            sliderInput("slider", "Number of observations:", 1, 100, 50)
-          )
-        )
+          column(4, 
+                 varSelectInput("variable", "Grouping Variable", etl_umd_police_arrest_data)
+                 )
+          ), 
+        DT:: dataTableOutput("table2")
       )
+            
+            
+            
+         
+          
 ```
 
 ### Download Page
@@ -97,36 +102,16 @@ ui <- dashboardPage(header, sidebar, body)
 ## app.R ##
 
 server <- function(input, output){
-  set.seed(122)
-  histdata <- rnorm(500)
-
-  output$plot1 <- renderPlot({
-    data <- histdata[seq_len(input$slider)]
-    hist(data)
-})
+    
+  output$table2 <- DT::renderDataTable(DT::datatable({
+    
+    temp <- etl_umd_police_arrest_data %>% 
+      group_by(!!input$variable) %>% 
+      count()
+    
+    temp
+  }))
   
-  # Reactive value for selected dataset -- 
-  datasetInput <- reactive({
-    switch(input$dataset,
-           "University of Maryland" = etl_umd_police_arrest_data ,
-           "Other" = etl_umd_police_incident_data
-           )
-  })
-  
-  # Table of Selected dataset --
-  output$table <- renderTable({
-    datasetInput()
-  })
-  
-  output$downloadData <- downloadHandler(
-    filename = function(){
-      paste(input$dataset, ".csv", sep = "")
-    },
-    content = function(file){
-      
-      write.csv(datasetInput(), file, row.names = FALSE)
-    }
-  )
 }
 
 ```
