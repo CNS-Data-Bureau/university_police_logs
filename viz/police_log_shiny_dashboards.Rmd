@@ -36,6 +36,12 @@ first_page <-
                  varSelectInput("variable", "Grouping Variable", etl_umd_police_arrest_data)
                  )
           ), 
+        
+        fluidRow(
+          column(4, 
+                 selectInput("race", "raceFilter", etl_umd_police_arrest_data$race)
+                 )
+          ),
         DT:: dataTableOutput("table2")
       )
             
@@ -104,6 +110,11 @@ ui <- dashboardPage(header, sidebar, body)
 server <- function(input, output){
     
   output$table2 <- DT::renderDataTable(DT::datatable({
+    
+    etl_umd_police_arrest_data <- etl_umd_police_arrest_data[etl_umd_police_arrest_data$race == input$race, ]
+    
+    #%>% 
+     # filter(etl_umd_police_arrest_data$race == input$race)
     
     temp <- etl_umd_police_arrest_data %>% 
       group_by(!!input$variable) %>% 
