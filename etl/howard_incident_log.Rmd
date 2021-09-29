@@ -71,119 +71,28 @@ files_to_df = function(path, type){
 
 ```{r}
 
-test = lapply(list.files(pattern = "*csv", path = "../data/handmade/howard/csvs/"), function(file_name){
+ls_howard_data = lapply(list.files(pattern = "*csv", path = "../data/handmade/howard/csvs/"), function(file_name){
   path = paste0("../data/handmade/howard/csvs/", file_name)
   df = read_csv(path)
   df = df %>% 
-  clean_names()
-  
-  print(df)
+  clean_names()})
 
-  ls_columns = colnames(df)
-  
-  col_one = c("natures_of_crimes", "case_numbers", "date_time_reported", "date_time_occurred", "general_location")
-  col_three = c("natures_of_crimes", "case_numbers", "date_time_reported", "date_time_occurred")
-  
-  
-  if(identical(ls_columns, col_one) == TRUE){
-    df = df %>% 
-      mutate(general_location = tolower(general_location)) %>% 
-      mutate(disposition = case_when(
-      str_detect(general_location, "inactive") ~ "inactive",
-      str_detect(general_location, "active") ~ "active"
-      )) %>% 
-      mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
-      mutate(general_location = str_replace(general_location, "active", "")) %>% 
-      mutate(general_location = str_replace(general_location, ",", "")) %>% 
-      separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
-      separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ")
-    
-  }
-  
-  if(identical(ls_columns, col_three) == TRUE) {
-    if(str_detect(df[1, "date_time_reported"][[1]], "/") == TRUE){
-      df = df %>% 
-      separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
-      separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = "/") %>% 
-      separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
-      mutate(disposition = NA)
-      
-    }
-    
-  }
-  
-  if(identical(ls_columns, col_three) == TRUE ){
-    if (str_detect(df[1, "date_time_reported"][[1]], "am") == TRUE |str_detect(df[1, "date_time_reported"][[1]], "pm") == TRUE ){
-      df = df %>% 
-      separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>%
-      separate(date_time_occurred, c("date_time_occurred", "general_location"), sep = ",") %>% 
-      separate(date_time_occurred, c("date_occured", "time_occurred"), sep = " ") %>% 
-      mutate(disposition = NA)
-    }
-  }
-  return(df)
-})
-
-howard_incident_log = files_to_df("../data/handmade/howard/csvs/", "*csv")
-howard_incident_log  = gw_incident_logs %>% 
-  # clean names
-  clean_names() 
+```
 
 
-clean_howard = function(file_name){
-  path = paste0(path, file_name)
-  df = read_csv(path)
-  df = df %>% 
-  clean_names()
 
-  ls_columns = colnames(df)
-  
-  col_one = c("natures_of_crimes", "case_numbers", "date_time_reported", "date_time_occurred", "general_location")
-  col_three = c("natures_of_crimes", "case_numbers", "date_time_reported", "date_time_occurred")
-  
-  
-  if(identical(ls_columns, col_one) == TRUE){
-    df = df %>% 
-      mutate(general_location = tolower(general_location)) %>% 
-      mutate(disposition = case_when(
-      str_detect(general_location, "inactive") ~ "inactive",
-      str_detect(general_location, "active") ~ "active"
-      )) %>% 
-      mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
-      mutate(general_location = str_replace(general_location, "active", "")) %>% 
-      mutate(general_location = str_replace(general_location, ",", "")) %>% 
-      separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
-      separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ")
-    
-  }
-  
-  if(identical(ls_columns, col_three) == TRUE & str_detect(df[1, "date_time_reported"][[1]], "/") == TRUE){
-    df = df %>% 
-    separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
-    separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = "/") %>% 
-    separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
-    mutate(disposition = NA)
-  }
-  
-  if(identical(ls_columns, col_three) == TRUE & (str_detect(df[1, "date_time_reported"][[1]], "am") == TRUE |str_detect(df[1, "date_time_reported"][[1]], "pm") == TRUE )){
-    df = df %>% 
-    separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>%
-    separate(date_time_occurred, c("date_time_occurred", "general_location"), sep = ",") %>% 
-    separate(date_time_occurred, c("date_occured", "time_occurred"), sep = " ") %>% 
-    mutate(disposition = NA)
-  }
-  
-  return(df)
-  
-  
-}
+```{r}
+
+one = ls_howard_data[[1]] %>% 
+  slice(-c(1,2,3))
+
+colnames(one) = c("natures_of_crimes", "case_numbers","date_time_reported","date_time_occurred","general_location","disposition") 
+one = one %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
   
 
-###
-identical(colnames(test[[2]]), colnames(test[[3]]))
-identical
-
-test1 = test[[2]]  %>% 
+two = ls_howard_data[[2]] %>% 
   mutate(general_location = tolower(general_location)) %>% 
   mutate(disposition = case_when(
     str_detect(general_location, "inactive") ~ "inactive",
@@ -195,59 +104,71 @@ test1 = test[[2]]  %>%
   separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
   separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ")
 
+three = ls_howard_data[[3]] %>% 
+  mutate(general_location = tolower(general_location)) %>% 
+  mutate(disposition = case_when(
+    str_detect(general_location, "inactive") ~ "inactive",
+    str_detect(general_location, "active") ~ "active"
+  )) %>% 
+  mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
+  mutate(general_location = str_replace(general_location, "active", "")) %>% 
+  mutate(general_location = str_replace(general_location, ",", "")) %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
 
+four = ls_howard_data[[4]] %>% 
+  mutate(general_location = tolower(general_location)) %>% 
+  mutate(disposition = case_when(
+    str_detect(general_location, "inactive") ~ "inactive",
+    str_detect(general_location, "active") ~ "active"
+  )) %>% 
+  mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
+  mutate(general_location = str_replace(general_location, "active", "")) %>% 
+  mutate(general_location = str_replace(general_location, ",", "")) %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
 
-####
-identical(colnames(test[[5]]), colnames(test[[6]]))
-identical(colnames(test[[6]]), colnames(test[[7]]))
-
-test2 = test[[5]]  %>% 
+five = ls_howard_data[[5]] %>% 
   separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
   separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = "/") %>% 
   separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
-  mutate(disposition = NA) %>% 
-  View()
+  mutate(disposition = NA)
 
-#### 
-identical(colnames(test[[7]]), colnames(test[[8]]))
-
-test3 = test[[7]] %>% 
+six  = ls_howard_data[[6]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = " ") %>% 
+  separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
+  mutate(disposition = NA)
+  
+seven = ls_howard_data[[7]] %>% 
   separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>%
   separate(date_time_occurred, c("date_time_occurred", "general_location"), sep = ",") %>% 
   separate(date_time_occurred, c("date_occured", "time_occurred"), sep = " ") %>% 
-  View()
+  mutate(disposition = NA)
+
+eight = ls_howard_data[[8]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = " ") %>% 
+  separate(location, c("general_location", "disposition"), sep = ",") 
   
 
-### doing it for 2
- 
 
+df_howard_data = rbind(one, two, three, four, five, six, seven, eight)
 
-
-
-str_replace("wonder plaza lot,inactive", "inactive", " ")
-
-#%>% 
-  # make date columns a date type
- # mutate(date_reported = mdy(date_reported),
-  #       date_occurred = mdy(date_occurred))
-  
+colnames(one)
+colnames(two)
+colnames(three)
+colnames(four)
+colnames(five)
+colnames(six)
+colnames(seven)
+colnames(eight)
 
 ```
 
 
-```{r}
 
-trishas_function = function(x){
-  variable = (x*2)
-  return(variable)
-}
 
-trishas_function(6)
-  
-
-```
-
-## Export
 
 ```{r}
 
