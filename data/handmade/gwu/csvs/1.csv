@@ -1,37 +1,75 @@
 "Nature(Classification)","CaseNumber","DateReported","DateOccurred",Time,General Location,"OffCampus(Y or N)",Disposition
-Sexual Assault,NA-01-2021,02/03/2021,Unknown,Unknown,Off Campus,Y,Closed. No further action.
-Fondling,NA-02-2021,02/03/2021,Unknown,Unknown,Unknown,N,Closed. No further action.
-Stalking,NA-03-2021,02/03/2021,Unknown,Unknown,Unknown,Unknown,Closed. No further action.
-Sexual Assault,NA-04-2021,02/03/2021,Unknown,Unknown,Unknown,Unknown,Closed. No further action.
-Fondling,NA-05-2021,02/03/2021,08/02/2020,Unknown,Unknown,N,Closed. No further action.
-"Simple Assault(Dating Violence)",NA-06-2021,02/03/2021,Unknown,Unknown,Off Campus,Y,Closed. No further action.
-Fondling,NA-07-2021,02/03/2021,Unknown,Unknown,Unknown,Unknown,Closed. No further action.
-Stalking,NA-08-2021,02/03/2021,11/01/2020,Unknown,Unknown,N,Closed. No further action.
-Sexual Assault,NA-09-2021,02/03/2021,10/04/2019,Unknown,District House,N,Closed. No further action.
-Theft II/From Building,2100064,02/03/2021,02/03/2021,1135,"7-Eleven Store(912 New Hampshire Ave. N.W.)",Y,Closed. No further action.
-Sexual Assault,2100067,02/03/2021,02/03/2021,1930,Off Campus,Y,Closed. Off campus incident.
-Panhandling,2100069,02/04/2021,02/05/2021,1323,"Public Property on Campus (2300Block of G Street, N.W.)",N,Closed. No further action.
-"Destruction ofProperty/Vandalism",2100073,02/05/2021,Unknown,Unknown,Lisner Auditorium,N,Closed. No identifiable subject.
-Disorderly Conduct,2100076,02/05/2021,02/05/2021,1400,"1959 E Street N.W.(SecreTea Market)",N,Closed. No identifiable subject.
-"Destruction ofProperty/Vandalism",2100080,02/07/2021,Unknown,Unknown,Ross Hall,N,Closed. No suspects or witnesses.
-"Fondling, Simple Assault",NA-10-2021,02/08/2021,03/12/2020,Unknown,Mitchell Hall,N,Closed. No further action.
-Fondling,NA-11-2021,02/08/2021,01/25/2019,Unknown,"605 22nd Street, N.W.",N,Closed. No further action.
-Fondling,NA-12-2021,02/10/2021,02/01/2020,Unknown,Unknown,N,Closed. No further action.
-Liquor Law Violation,2100096,02/14/2021,02/14/2021,0114,Potomac House,N,Closed. Referred to DSA.
-Liquor Law Violation,2100097,02/14/2021,02/14/2021,0108,Potomac House,N,Closed. Referred to DSA.
-Liquor Law Violation,2100099,02/14/2021,02/14/2021,0053,Potomac House,N,Closed. Referred to DSA.
-Unlawful Entry,2100102,02/14/2021,02/14/2021,1450,Duques Hall,N,Closed. Subject barred.
-"Theft II/from MotorVehicle",2100105,02/16/2021,02/16/2021,1300,"Public Property On Campus(2200 Block of G Street, N.W.)",N,Closed. Referred to MPD.
-Robbery Force & Violence,2100107,02/16/2021,02/16/2021,1417,"7-Eleven Store(912 New Hampshire Ave. N.W.)",Y,Closed. Referred to MPD.
-"Fondling, Simple Assault",NA-13-2021,02/17/2021,09/07/2020,0000,Off Campus,Y,Closed. No further action.
-Unlawful Entry,2100108,02/17/2021,02/17/2021,1340,1918 F Street,N,Closed. Subject barred.
-Robbery- Armed,2100110,02/17/2021,02/17/2021,2057,"7-Eleven Store(912 New Hampshire Ave. N.W.)",N,Closed. Referred to MPD
-Harassing Telephone Calls,2100111,02/18/2021,02/17/2021,1015-1502,Various Locations,N,Open case.
-Burglary II/Non-Forcible,2100119,02/22/2021,Unknown,Unknown,"Webb Building(MVC)",N,Open case.
-"Unlawful Entry,Destruction ofProperty/Vandalism",2100122,02/23/2021,Unknown,Unknown,"Webb Building(MVC)",N,Open case.
-Unlawful Entry,2100124,02/24/2021,02/24/2021,0532,Duques Hall,N,Closed. Subject barred.
-Sexual Assault,NA-14-2021,02/26/2021,02/25/2021,1200,Unknown,Unknown,Closed. No further action.
-Harassing Telephone Calls,2100129,02/25/2021,02/25/2021,0759,Academic Center,N,Open case.
-Unlawful Entry,2100132,02/25/2021,02/25/2021,2047,Amsterdam Hall,N,Closed. Subject barred.
-Liquor Law Violation,2100135,02/28/2021,02/28/2021,0031,South Hall,N,Closed. Referred to DSA.
-Theft I/Bicycles,2100136,02/28/2021,02/28/2021,0217,Potomac House,N,Closed. Referred to DSA.
+Unlawful Entry,2100618,09/01/2021,09/01/2021,0222,2028 G Street Garage/LLC,N,Closed. Subject arrested.
+"Threats in a MenacingManner",2100624,09/03/2021,09/03/2021,0007,West Hall,N,Open case.
+Fraud 1D/Fraud,2100628,09/03/2021,Unknown,Unknown,Off Campus,N,Open case.
+Liquor Law Violation,2100631,09/04/2021,09/04/2021,0010,Mitchell Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100632,09/04/2021,09/04/2021,0032,"Public Property on Campus(2100 Block of H Street N.W.)",N,Closed. Referred to DSA.
+Liquor Law Violation,2100641,09/05/2021,09/05/2021,0009,District House,N,Closed. Referred to DSA.
+Liquor Law Violation,2100642,09/06/2021,09/06/2021,0217,Amsterdam Hall,N,Closed. Referred to DSA.
+Public Drunkeness,2100644,09/05/2021,09/05/2021,0248,"Public Property on Campus(2200 Block of H Street N.W.)",N,Closed. Referred to DSA.
+Liquor Law Violation,2100650,09/06/2021,09/06/2021,0308,MVC,N,Closed. Referred to DSA.
+Theft II/Bicycles,2100655,09/06/2021,Unknown,Unknown,"MVC(Garage)",N,Open case.
+"Harassment (Verbal orWritten)",2100659,09/07/2021,09/07/2021,1910,"Public Property on Campus(2200 Block of I Street, N.W.)",N,Open Case.
+"Harassment (Verbal orWritten)",2100660,09/07/2021,09/07/2021,1945,"Public Property on Campus(2200 Block of I Street, N.W.)",N,Closed. No identifiable suspect.
+Blackmail,2100671,09/09/2021,Multiple,Multiple,University Student Center,N,Open case.
+Simple Assault,2100672,09/09/2021,09/09/2021,1846,District House,N,Closed. No identifiable suspect.
+Liquor Law Violation,2100673,09/10/2021,09/10/2021,1058,JBKO Hall,N,Closed. Referred to DSA.
+Theft II/Bicycles,2100676,09/10/2021,Unknown,Unknown,"Public Property On Campus(2300 Block of H Street, N.W.)",N,Closed. No identifiable suspect.
+"Fraud, Harassing PhoneCalls, Stalking",2100677,09/10/2021,Multiple,Multiple,Off Campus,Y,Open case.
+Liquor Law Violation,2100678,09/10/2021,09/10/2021,2338,Shenkman Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100681,09/11/2021,09/11/2021,0524,JBKO Hall,N,Closed. Referred to DSA.
+Voyeurism,2100686,09/08/2021,09/03/2021,1210-1215,Science and Engineering Hall,N,Open case.
+"Sexual Assault, HarassingTelephone Calls",2100688,09/12/2021,09/12/2021,0355,Amsterdam Hall,N,Open case.
+Stalking,NA-24-2021,09/13/2021,Unknown,Unknown,Various Locations,N,Closed. No further action.
+"Harassing Telephone Calls,Harassment (Verbal orWritten)",2100693,09/13/2021,09/13/2021,Multiple,Stuart Hall,N,Open case.
+Theft I/Bicycles,2100695,09/13/2021,09/13/2021,0935-1400,"Public Property On Campus(600 Block of 22nd Street, N.W.)",N,Closed. No suspects or witnesses
+"Harassment (Verbal orWritten)",2100697,09/14/2021,09/14/2021,0201,Mitchell Hall,N,Open case.
+Theft II/From Building,2100699,09/14/2021,09/14/2021,1225-1320,Elliot School Of International Affairs,N,Reclassfied. Non-Crime
+Theft II/From Building,2100700,09/14/2021,Unknown,Unknown,"West Hall(Pelham Commons)",N,Open case.
+"Urinating or Defecating inPublic",2100701,09/15/2021,09/15/2021,0109,University Mall,N,Closed. Subject barred.
+Sexual Assault,2100702,09/14/2021,09/09/2021,Unknown,Mitchell Hall,N,Open case.
+Threats to do Bodily Harm,2100703,09/15/2021,09/15/2021,0730,"Public Property On Campus(2200 Block of H Street, N.W.)",N,Open case.
+Theft II/Other,2100709,09/15/2021,Unknown,Unknown,"Mount Vernon Campus(West Hall Loading Dock)",N,Open case.
+Theft II/Bicycles,2100712,09/15/2021,09/15/2021,1715-1920,"Public Property On Campus(2200 Block of Eye Street, N.W.)",N,Open case.
+"Theft II/Bicycles,Destruction of Property",2100713,09/15/2021,09/15/2021,1730-2140,University Yard,N,Open case.
+"Assault w/DangerousWeapon",2100719,09/17/2021,09/17/2021,0758,"Gelman Library(Starbucks)",N,Closed. Subject arrested.
+Theft II/Other,2100723,09/17/2021,09/17/2021,1600-0645,"Public Property on Campus(800 Block of H Street N.W.)",N,Open case.
+Stalking,2100724,09/17/2021,09/16/2021,1535,Elliot School of International Affairs,N,Open case.
+Theft II/.From Building,2100727,09/17/2021,09/17/2021,2021,"Mitchell Hall(7-Eleven Store)",N,Open case.
+Theft II/.From Building,2100728,09/17/2021,09/17/2021,2217,"Mitchell Hall(7-Eleven Store)",N,Closed. Subject arrested.
+Liquor Law Violation,2100729,09/18/2021,09/18/2021,0048,"Public Property on Campus(2200 Block of F Street N.W.)",N,Closed. Referred to DSA.
+"Liquor Law Violation,DisorderlyConduct/Intoxication",2100730,09/18/2021,09/18/2021,0018,Strong Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100731,09/18/2021,09/18/2021,0025,Mitchell Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100732,09/17/2021,09/17/2021,2342,Amsterdam l Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100736,09/19/2021,09/19/2021,0127,Mitchell Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100738,09/19/2021,09/19/2021,0034,Madison Hall,N,Closed. Referred to DSA
+Liquor Law Violation,2100739,09/19/2021,09/19/2021,0236,Shenkman Hall,N,Closed. Referred to DSA.
+Theft II/From Building,2100742,09/19/2021,09/19/2021,Unknown,University Student Center,N,Open case.
+"Sexual Assault, Fondling",NA-25-2021,09/20/2021,09/11/2021,Unknown,Mitchell Hall,N,Closed. No further action.
+Sexual Assault,NA-26-2021,09/20/2021,09/04/2021,Unknown,Francis Scott Key Hall,N,Closed. No further action.
+Theft II/From Building,2100746,09/20/2021,09/20/2021,1415,"Mitchell Hall(7-Eleven Store)",N,Open case.
+Theft II/From Building,2100751,09/20/2021,09/20/2021,1944,"Mitchell Hall(7-Eleven Store)",N,Open case.
+Theft II/From Building,2100753,09/21/2021,09/16/2021,1000-1700,Duques Hall,N,Open case.
+Theft II/From Building,2100756,09/21/2021,09/21/2021,1425,University Student Center,N,Open case.
+"Theft II/From Building,Unlawful Entry",2100760,09/21/2021,09/21/2021,1819,"Mitchell Hall(7-Eleven Store)",N,Open case.
+Unlawful Entry,2100761,09/21/2021,09/21/2021,2104,"Mitchell Hall(7-Eleven Store)",N,Closed. Subject arrested.
+"Theft II/From MotorVehicle",2100764,09/22/2021,09/22/2021,0630-1530,"2028 G Street/LLC(Garage)",N,Open case.
+Armed Carjacking,2100766,09/22/2021,09/22/2021,2143,Off Campus,Y,Closed. Referred to MPD.
+Unlawful Entry,2100767,09/22/2021,09/22/2021,2348,"Science and Engineering Hall(Garage)",N,Closed. Subject barred.
+Stalking,2100768,09/23/2021,09/13/2021,Various,Various,N,Open case.
+"Credit Card Fraud, TheftII/From Building",2100770,09/23/221,09/23/2021,2248,Milken School of Public Health,N,Open case.
+Theft II/Bicycles,2100774,09/23/221,09/23/2021,1000-1330,University Yard,N,Open case.
+Unlawful Entry,2100777,09/23/221,09/23/2021,2323,Amsterdam Hall,N,Closed. Subject barred.
+Liquor Law Violation,2100778,09/24/2021,09/24/2021,0013,"Public Property on Campus(2200 Block of H Street N.W)",N,Closed. Referred to DSA.
+Theft II/From Building,2100779,09/24/2021,09/24/2021,0154,Amsterdam Hall,N,Closed. Referred to DSA.
+Liquor Law Violation,2100780,09/24/2021,09/24/2021,0013,JBKO,N,Closed. Referred to DSA.
+Liquor Law Violation,2100781,09/24/2021,09/24/2021,0233,"Public Property on Campus(2000 Block of F Street N.W )",N,Closed. Referred to DSA.
+"Simple Assault, Threats todo Bodily Harm",2100786,09/24/2021,09/24/2021,1710,"Public Property on Campus(800 Block of 22nd Street N.W)",N,Open case.
+Stalking,2100787,09/24/2021,Multiple,Multiple,Fulbright Hall,N,Open case.
+Liquor Law Violation,2100789,09/26/2021,09/26/2021,0023,1959 E Street/Residential,N,Closed. Referred to DSA.
+Disorderly Conduct,2100803,09/28/2021,09/28/2021,2321,"Mitchell Hall(7-Eleven Store)",N,Closed. Subject barred.
+"Simple Assault(Dating Violence)",NA-27-2021,09/29/2021,02/21/2021,1400,South Hall,N,Closed. No further action.
+Theft II/From Building,2100806,09/29/2021,Unknown,Unknown,Elliot School of International Affairs,N,Open case.
+"Theft II/From Building,Credit Card Fraud",2100809,09/29/2021,09/29/2021,1740,Burns Law Library,N,Open case.
+"Simple Assault, ResistingArrest, Assault on a PoliceOfficer",2100811,09/29/2021,09/29/2021,2040,University Mall,N,Closed. Subject arrested.
+Theft II/From Building,2100812,09/29/2021,09/29/2021,2304,"Mitchell Hall(7-Eleven Store)",N,Open case.

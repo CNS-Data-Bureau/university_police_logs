@@ -1,30 +1,38 @@
 "Nature(Classification)","CaseNumber","DateReported","DateOccurred",Time,General Location,"OffCampus(Y or N)",Disposition
-"Taking Property w/outRight/Other",2002124,10/02/2020,10/02/2020,1957,"Public Property On Campus(2100 Block of Eye Street, N.W.)",N,Closed. Referred to DSA.
-"Destruction ofProperty/Vandalism, TheftII/from Motor Vehicle",2002131,10/03/2020,Unknown,Unknown,"Public Property On Campus(2200 Block of H Street, N.W.)",N,Closed. No identifiable suspect.
-"Robbery Force & Violence,Assault w/Intent to Rob",2002142,10/05/2020,10/03/2020,1428,"7- Eleven Store(912 New Hampshire Ave, N.W.)",Y,Closed. Referred to MPD.
-"Simple Assault, Threats todo Bodily Harm,Destruction of Property",2002146,10/06/2020,10/06/2020,0618,"West Hall(MVC)",N,Closed. Subject barred.
-Threats to do Bodily Harm,2002147,10/06/2020,10/04/2020,1731,Off Campus,Y,Open case.
-"Assault w/DangerousWeapon",2002148,10/06/2020,10/06/2020,1230,"Public Property On Campus(2200 Block of Virginia Ave., N.W.)",N,Closed. No identifiable suspect.
-Theft II/From Building,2002150,10/07/2020,10/07/2020,1827,"Mitchell Hall(7-Eleven Store)",N,Open case.
-"Traffic Accident: Hit andRun",2002154,10/08/2020,Unknown,Unknown,"Public Property on Campus(2100 Block of I Street N.W.)",N,Open case.
-"Urinating or Defecating inPublic",2002158,10/09/2020,10/09/2020,1711,"Parking Lot #3(2003 H Street, N.W.)",N,Closed. Subject barred.
-"Simple Assault (DomesticViolence), Threats to doBodily Harm,Destroying/DefacingStructure",2002172,10/12/2020,Multiple,Multiple,Off Campus,Y,Open case.
-Burglary II/Non-Forcible,2002177,10/14/2020,10/14/2020,2030,Tonic Restaurant,N,Open case.
-"Harassment: E-mail andelectronic media",2002179,10/15/2020,10/15/2020,1930,Off Campus,Y,Closed. Off campus incident.
-Panhandling,2002184,10/17/2020,10/17/2020,0920,"Mitchell Hall(7-Eleven Store)",N,Closed. Subject barred.
-Robbery Force & Violence,2002191,10/17/2020,10/17/2020,2140,Off Campus,Y,Closed. Referred to MPD.
-Theft II/Other,2002192,10/18/2020,10/18/2020,0338,Kogan Plaza,N,Closed. No identifiable suspect.
-Theft II/From Building,2002193,10/18/2020,10/18/2020,1116,"Mitchell Hall(7-Eleven Store)",N,Closed. No identifiable suspect.
-"Harassment (Verbal orWritten)",2002202,10/20/2020,10/20/2020,1725,"Private Property Within CampusBounds(600 Block of 23rd Street, N.W.)",N,Closed. No further action.
-Public Drunkenness,2002203,10/20/2020,10/20/2020,2047,"Public Property On Campus(2100 Block of H Street, N.W.)",N,Closed. No further action.
-Public Drunkenness,2002207,10/21/2020,10/21/2020,1802,Off Campus,Y,Closed. No further action.
-Theft I/From Building,2002212,10/22/2020,10/22/2020,0000-1100,Science and Engineering Hall,N,Unfounded.
-"Lewd, Indecent or ObsceneActs",2002216,10/22/2020,10/22/2020,2237,Off Campus,Y,Closed. Subject arrested.
-Assault w/Dangerous,2002218,10/23/2020,10/23/2020,1722,Public Property on Campus,N,Closed. No identifiable subject.
-Weapon,,,,,(900 Block of 23rd Street N.W.),,
-"Destruction ofProperty/Vandalism,Threats in a MenacingManner",2002219,10/24/2020,10/24/2020,1432,"Mitchell Hall(7-Eleven Store)",N,Closed. No identifiable suspect.
-"Theft II/from MotorVehicle",2002221,10/24/2020,10/23/2020,2017,"Public Property On Campus(800 Block of 22nd Street, N.W.)",N,Closed. No suspects or witnesses.
-Unlawful Entry,2002225,10/25/2020,10/25/2020,2341,"District House(Food Court)",N,Closed. Subject barred.
-"Simple Assault,Harassment (Verbal orWritten)",2002229,10/26/2020,10/25/2020,0230,Off Campus,Y,Closed. Referred to DSA.
-"Harassment: E-Mail andelectronic media",2002234,10/27/2020,10/26/2020,1335,Off Campus,Y,Closed. Off campus incident.
-Unlawful Entry,2002244,10/30/2020,10/30/2020,0645,Academic Center Garage,N,Closed. Subject barred.
+Stalking,2100515,08/01/2021,Multiple,Multiple,Off Campus,Y,Open case.
+Theft II/From Building,2100517,08/03/2021,08/03/2021,1535,"Mitchell Hall(7-Eleven Store)",N,Closed. No identifiable suspect.
+"Stalking, Harassment: E-Mail and electronic media,Harassing Telephone Calls",2100520,08/04/2021,Multiple,Multiple,Off Campus,Y,Open case.
+"Destruction ofProperty/Vandalism",2100522,08/04/2021,07/31/2021,Multiple,"Public Property On Campus(900 Block of 23rd Street N.W.)",N,Closed. Referred to MPD.
+Unlawful Entry,2100530,08/10/2021,08/10/2021,0210,"MVC(Pool)",N,Closed. Subjects barred.
+"Theft II/Bicycles,Destruction ofProperty/Vandalism",2100532,08/10/2021,08/10/2021,1231,"Public Property On Campus(700 Block of 21st Street, N.W.)",N,Closed. No identifiable suspect.
+Theft I/From Building,2100536,08/13/2021,08/13/2021,1230,Science and Engineering Hall,N,Open case.
+Public Drunkeness,2100539,08/15/2021,08/15/2021,0153,"Public Property On Campus(2100 Block of Eye Street, N.W.)",N,Closed. Referred to DSA.
+"Simple Assault (DatingViolence),Destroying/DefacingStructure",2100545,08/18/2021,08/18/2021,0200,Shenkman Hall,N,Closed. Subject barred.
+Attempted Fraud,2100548,08/19/2021,08/16/2021,Unknown,Off Campus,Y,Closed. Off campus incident.
+Unlawful Entry,2100549,08/19/2021,08/19/2021,1041,Shenkman Hall,N,Closed. Subject barred.
+"Destruction ofProperty/Vandalism",2100554,08/20/2021,07/08/2021,0300-0600,Off Campus,Y,Closed. No suspects or witnesses.
+Simple Assault,2100556,08/20/2021,08/20/2021,2309,"Public Property on Campus(2200 Block of Eye Street, N.W.)",N,Closed. Subject arrested.
+"Burglary II/Forcible,Destruction ofProperty/Vandalism",2100557,08/21/2021,08/21/2021,0145,"Building E(Law School)",N,Closed. Subject arrested.
+"Harassment (Verbal orWritten), Simple Assault",2100560,08/21/2021,08/21/2021,2256,"Public Property On Campus(2000 Block G Street, N.W.)",N,Closed. Subject barred.
+"Theft II/from MotorVehicle, Destruction ofProperty",2100561,08/21/2021,08/21/2021,2215-2345,"Public Property On Campus(2100 Block of Eye Street, N.W.)",N,Closed. No suspects or witnesses.
+Sexual Assault,2100563,08/22/2021,08/21/2021,Unknown,Off Campus,Y,Closed. Referred to MPD.
+"Destruction ofProperty/Vandalism",2100564,08/22/2021,Unknown,Unknown,"Public Property On Campus(2100 Block of Eye Street, N.W.)",N,Closed. No identifiable suspect.
+Theft II/Bicycles,2100573,08/24/2021,Unknown,Unknown,"Public Property On Campus(2100 Block of F Street, N.W.)",N,Closed. No suspects or witnesses.
+Liquor Law Violation,2100578,08/25/2021,08/25/2021,0019,Strong Hall,N,Closed. Referred to DSA.
+Theft II/From Building,2100571,08/23/2021,08/22/2021,1900,University Student Center,N,Open case.
+Fondling,NA-22-2021,08/25/2021,08/19/2021,1700,University Student Center,N,Closed. No further action.
+"Threats in a MenacingManner",2100580,08/25/2021,08/25/2021,1428,"Public Property On Campus (2200Block of Eye Street, N.W.)",N,Open case.
+Theft II/Other,2100583,08/25/2021,08/25/2021,1900,University Yard,N,Open case.
+Liquor Law Violation,2100586,08/26/2021,08/26/2021,0126,Mitchell Hall,N,Closed. Referred to DSA.
+Theft II/From Building,2100587,08/27/2021,08/26/2021,Unknown,Off Campus,N,Closed. Off campus incident.
+Liquor Law Violation,2100592,08/27/2021,08/27/2021,0244,Mitchell Hall,N,Closed. Referred to DSA.
+Theft II/From Building,2100593,08/27/2021,08/25/2021,Unknown,VSTC,N,Open case.
+"Destruction ofFixtures/Vandalism",2100597,08//27/2021,08/27/2021,2224,Mitchell Hall,N,Open case.
+Liquor Law Violation,2100598,08/27/2021,08/27/2021,2351,Fulbright Hall,N,Closed. Referred to DSA.
+Theft II/Bicycles,2100601,08/28/2021,08/28/2021,1340,"Public Property On Campus(2200 Block of Eye Street, N.W.)",N,Closed. No identifiable suspect.
+Public Drunkeness,2100603,08/29/2021,08/29/2021,0030,"Public Property On Campus(2100 Block of H Street, N.W.)",N,Closed. No further action.
+Liquor Law Violation,2100604,08/29/2021,08/29/2021,0118,Mitchell Hall,N,Closed. Referred to DSA.
+Theft II/Bicycles,2100606,08/29/2021,Unknown,Unknown,2028 G Street Garage/LLC,N,Open case.
+Theft I/From Building,2100610,08/30/2021,Unknown,Unknown,Ross Hall,N,Open case.
+Fondling,NA-23-2021,08/30/2021,08/27/2021,Unknown,JBKO Hall,N,Closed. No further action.
+Attempted Fraud,2100615,08/31/2021,08/08/2021,Unknown,Off Campus,Y,Closed. Off campus incident.
