@@ -1,0 +1,109 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+files_to_df = function(path, type){
+  # path is the string file path
+  # type is in the format of "*csv"
+  
+  merged_data <- do.call(bind_rows, lapply(list.files(pattern = type, path = path), function(i){
+  path = paste0(path, i)
+  read_csv(path)}))
+  
+  return(merged_data)
+}
+
+X2016_01_Crime_Log_pdf <- read_csv("~/Code/university_police_logs/data/handmade/gt/csvs/2016-01 Crime Log.pdf.csv", 
+    skip = 3)
+
+```
+## Load and Clean Data
+
+```{r}
+
+
+gt_incident_log = files_to_df("../data/handmade/gt/csvs/", "*csv")
+
+gt_incident_log = gt_incident_log %>% 
+  clean_names() %>% 
+  mutate_all(~gsub('[^ -~]', '', .)) %>% 
+  mutate_all(tolower) %>% 
+  filter(!(str_detect(x1, "report date"))) %>% 
+  filter(!(str_detect(x1, "crime log"))) 
+  
+tolower(gt_incident_log$...2)
+         
+gt_incident_log  = gt_incident_log %>% 
+  # clean names
+  clean_names() %>% 
+  # make date columns a date type
+  remove_empty(c("rows", "cols"))
+  
+
+```
+
+## Export
+
+```{r}
+
+write_rds(gwu_incident_log, "../data/processed/gwu_incident_log.rds")
+write_csv(gwu_incident_log, "../data/processed/gwu_incident_log.csv")
+
+
+
+
+```
+
+
+

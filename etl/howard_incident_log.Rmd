@@ -168,8 +168,8 @@ df_howard_data  = df_howard_data %>%
 
 ```{r}
 
-write_rds(gwu_incident_log, "../data/processed/gwu_incident_log.rds")
-write_csv(gwu_incident_log, "../data/processed/gwu_incident_log.csv")
+write_rds(df_howard_data, "../data/processed/howard_incident_log.rds")
+write_csv(df_howard_data, "../data/processed/howard_incident_log.csv")
 
 
 
