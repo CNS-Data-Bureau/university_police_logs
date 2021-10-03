@@ -143,26 +143,22 @@ six  = ls_howard_data[[6]] %>%
 seven = ls_howard_data[[7]] %>% 
   separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>%
   separate(date_time_occurred, c("date_time_occurred", "general_location"), sep = ",") %>% 
-  separate(date_time_occurred, c("date_occured", "time_occurred"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ") %>% 
   mutate(disposition = NA)
 
 eight = ls_howard_data[[8]] %>% 
   separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
-  separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ") %>% 
   separate(location, c("general_location", "disposition"), sep = ",") 
   
 
 
 df_howard_data = rbind(one, two, three, four, five, six, seven, eight)
+df_howard_data  = df_howard_data %>% 
+  mutate(date_reported = ymd(date_reported), date_occurred =  ymd(date_occurred)) %>% 
+  mutate(year_reported = year(date_reported), year_occured = year(date_occurred))
 
-colnames(one)
-colnames(two)
-colnames(three)
-colnames(four)
-colnames(five)
-colnames(six)
-colnames(seven)
-colnames(eight)
+
 
 ```
 
