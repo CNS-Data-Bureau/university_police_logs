@@ -1,0 +1,157 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+# library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+files_to_df = function(path, type){
+  # path is the string file path
+  # type is in the format of "*csv"
+  
+  merged_data <- do.call(bind_rows, lapply(list.files(pattern = type, path = path), function(i){
+  path = paste0(path, i)
+  df = read_csv(path)
+  
+  if (ncol(df) == 7){
+    df = df %>% 
+    clean_names() %>% 
+    separate(x2, c("incident", "incident_narrative"), sep = ":", remove = TRUE)
+    
+    colnames(df) <- c('x1','x2',"x3", "x4", "x5", "x6", "x7", "x8")
+    
+    return(df)
+  }
+  
+  else{
+    df = df %>% 
+    clean_names()
+    
+    return(df)
+    
+  }
+  
+  
+  }))
+  
+  return(merged_data)
+}
+
+
+csv1 <- read_csv("../data/handmade/gmu/csvs/1.csv")
+
+```
+## Load and Clean Data
+
+```{r}
+
+# 1 Get rid of the date columsn - str detect 
+# 2 filter for report date, get that row, and save that as vector
+# 3 take that vecotr and make the columns name that vecotr
+# ex: colnames(gt_incident_log) <- c('report_date','incident',"incident_narrative", "incident_number", "date_occured", "time_occured", "general_location", "disposition")
+# 4 if first column has "report date", filter it out
+  
+
+```
+
+```{r}
+# 1 Get rid of the date columsn - str detect 
+
+
+
+test = csv1 %>% 
+  row_to_names(2) %>% 
+  clean_names() %>%
+  filter(!(str_detect(report_date, "Monday") | str_detect(report_date, "Tuesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Thursday") | str_detect(report_date, "Friday") | str_detect(report_date, "Saturday")| str_detect(report_date, "Sunday"))) %>% 
+  filter(report_date != "Report Date") %>% 
+ 
+  
+
+View(csv1)
+
+  clean_names() %>% 
+  rename(`george_mason_university_department_of_police_and_public_safety_daily_crime_and_fire_log_september_2021 = col1)
+  
+
+
+```
+
+
+
+
+```{r}
+
+
+gt_incident_log = files_to_df("../data/handmade/gt/csv3/", "*csv") %>% 
+  mutate_all(~gsub('[^ -~]', '', .)) %>% 
+  mutate_all(tolower) %>% 
+  filter(!(str_detect(x1, "report date"))) %>% 
+  filter(!(str_detect(x1, "crime log"))) 
+
+colnames(gt_incident_log) <- c('report_date','incident',"incident_narrative", "incident_number", "date_occured", "time_occured", "general_location", "disposition")
+  
+
+```
+
+## Export
+
+```{r}
+
+write_rds(gt_incident_log, "../data/processed/etl_gt_incident_log.rds")
+write_csv(gt_incident_log, "../data/processed/etl_gt_incident_log.csv")
+
+
+
+
+```
+
+
+
