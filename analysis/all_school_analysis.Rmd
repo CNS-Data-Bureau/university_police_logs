@@ -56,13 +56,85 @@ output_formatted_table = function(table, text){
 
 
 ```
-## Load and Clean Data
+## Load Data
+
+```{r}
+
+# Load GT
+etl_gt = readRDS("../data/processed/etl_gt_incident_log.rds")
+
+
+# Load GWU
+etl_gwu = readRDS("../data/processed/etl_gwu_incident_log.rds")
+
+
+# Load Howard
+
+etl_howard = readRDS("../data/processed/etl_howard_incident_log.rds")
+
+
+# Load UMD
+etl_umd_incident = readRDS("../data/processed/etl_umd_police_incident_data.rds")
+
+etl_umd_arrest = readRDS("../data/processed/etl_umd_police_arrest_data.rds")
+
+
+# Load GMU
+
+
+
+
+
+
+
+```
+
+##  Category break down
+
+```{r}
+
+# GT Category Breakdown
+gt_incident_summary = etl_gt %>% 
+  group_by(incident) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+## GWU Category Breakdown
+gwu_incident_summary = etl_gwu %>% 
+  group_by(nature_classification) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+## Howard Category Breakdown
+howard_incident_summary = etl_howard %>% 
+  group_by(natures_of_crimes) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+## UMD Incident Breakdown
+umd_incident_summary = umd_incident_summary %>% 
+  group_by() %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+
+## UMD Arrest Breakdown
+
+
+  
+
+
+```
+
+
+
 
 ### Header
 
 #### Subheader
 
 ```{r warning=FALSE,error=FALSE,message=FALSE}
+
 
 
 ```
