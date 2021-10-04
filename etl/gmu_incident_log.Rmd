@@ -61,24 +61,18 @@ files_to_df = function(path, type){
   path = paste0(path, i)
   df = read_csv(path)
   
-  if (ncol(df) == 7){
-    df = df %>% 
-    clean_names() %>% 
-    separate(x2, c("incident", "incident_narrative"), sep = ":", remove = TRUE)
-    
-    colnames(df) <- c('x1','x2',"x3", "x4", "x5", "x6", "x7", "x8")
-    
-    return(df)
-  }
-  
-  else{
-    df = df %>% 
-    clean_names()
-    
-    return(df)
-    
-  }
-  
+  colnames(df) <- c("report_date","report_time", "incident_date", "incident_time",                                       "location",                                              "case_number_nature_of_case_brief_description_officer_unit_id" , "status" )  
+
+  print(colnames(df))
+  print("-----")
+  df = df %>% 
+  filter(!(str_detect(report_date, "Monday") | str_detect(report_date, "Tuesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Thursday") | str_detect(report_date, "Friday") | str_detect(report_date, "Saturday")| str_detect(report_date, "Sunday"))) %>% 
+  filter(report_date != "Report Date") %>% 
+  filter(!(str_detect(report_date, "Amendments"))) %>% 
+  filter(report_date != "No incidents to report.") %>% 
+  mutate(incident_date = str_replace_all(incident_date, x, "-")) %>% 
+  separate(incident_date, c('incident_start_date','incident_end_date'), sep = "-") %>% 
+  mutate(incident_end_date = ifelse(is.na(incident_end_date) == TRUE, incident_start_date, incident_end_date))
   
   }))
   
@@ -87,6 +81,9 @@ files_to_df = function(path, type){
 
 
 csv1 <- read_csv("../data/handmade/gmu/csvs/1.csv")
+csv2 <- read_csv("../data/handmade/gmu/csvs/2.csv")
+
+testing = files_to_df("../data/handmade/gmu/csvs/", "*csv")
 
 ```
 ## Load and Clean Data
@@ -105,6 +102,13 @@ csv1 <- read_csv("../data/handmade/gmu/csvs/1.csv")
 ```{r}
 # 1 Get rid of the date columsn - str detect 
 
+x <- "�"
+
+names = c("report_date","report_time", "incident_date", "incident_time",                                       "location",                                              "case_number_nature_of_case_brief_description_officer_unit_id" , "status" )  
+
+
+
+
 
 
 test = csv1 %>% 
@@ -112,7 +116,11 @@ test = csv1 %>%
   clean_names() %>%
   filter(!(str_detect(report_date, "Monday") | str_detect(report_date, "Tuesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Thursday") | str_detect(report_date, "Friday") | str_detect(report_date, "Saturday")| str_detect(report_date, "Sunday"))) %>% 
   filter(report_date != "Report Date") %>% 
- 
+  filter(!(str_detect(report_date, "Amendments"))) %>% 
+  filter(report_date != "No incidents to report.") %>% 
+  mutate(incident_date = str_replace_all(incident_date, x, "-")) %>% 
+  separate(incident_date, c('incident_start_date','incident_end_date'), sep = "-") %>% 
+  mutate(incident_end_date = ifelse(is.na(incident_end_date) == TRUE, incident_start_date, incident_end_date))
   
 
 View(csv1)
