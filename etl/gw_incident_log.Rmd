@@ -73,7 +73,7 @@ files_to_df = function(path, type){
 
 
 gwu_incident_log = files_to_df("../data/handmade/gwu/csvs/", "*csv")
-gwu_incident_log  = gw_incident_logs %>% 
+gwu_incident_log  = gwu_incident_log %>% 
   # clean names
   clean_names() %>% 
   # make date columns a date type
@@ -87,11 +87,8 @@ gwu_incident_log  = gw_incident_logs %>%
 
 ```{r}
 
-write_rds(gwu_incident_log, "../data/processed/gwu_incident_log.rds")
-write_csv(gwu_incident_log, "../data/processed/gwu_incident_log.csv")
-
-
-
+write_rds(gwu_incident_log, "../data/processed/etl_gwu_incident_log.rds")
+write_csv(gwu_incident_log, "../data/processed/etl_gwu_incident_log.csv")
 
 ```
 
