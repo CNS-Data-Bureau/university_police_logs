@@ -135,41 +135,22 @@ umd_incident_summary = etl_umd_incident %>%
 ```
 
 ## UMD
-- 
+- 894 Black people were arrested for CDS-related, while 756 white people were arrested
+- 968 women were arrested, compared to 511 males
+
 
 
 ```{r}
-t = etl_umd_arrest
 
---
+#---
 # incident type by year chart
-gt_incident_type_over_the_years = etl_gt %>% 
-  group_by(incident, year_occured) %>% 
-  summarise(count = n())
-ls_gt_incidents = unique(gt_incident_type_over_the_years$incident)
-for (type in ls_gt_incidents){
-  plot1 = gt_incident_type_over_the_years %>% 
-  filter(incident == type) %>% 
-  ggplot(aes(x = year_occured, y = count))+
-  geom_line()+
-  ggtitle(paste0(type, " over the years at George Town"))
-  
-  print(plot1)
-}
-
---
-
-  # incident type by year chart
-umd_arrests_type_over_the_years = etl_umd_arrest %>% 
+umd_arrests_sex_over_the_years = etl_umd_arrest %>% 
   group_by(sex, date) %>% 
   summarise(count = n())
 
 umd_sex_type = unique(etl_umd_arrest$sex)
-
-
-
 for (type in umd_sex_type){
-  plot1 = umd_arrests_type_over_the_years %>% 
+  plot1 = umd_arrests_sex_over_the_years %>% 
   filter(sex == type) %>% 
   ggplot(aes(x = date, y = count))+
   geom_line()+
@@ -177,8 +158,74 @@ for (type in umd_sex_type){
   
   print(plot1)
 }
+#---
 
-md_sex_type  
+umd_arrests_race_over_the_years = etl_umd_arrest %>% 
+  group_by(race, date) %>% 
+  summarise(count = n())
+
+umd_race_type = unique(umd_arrests_race_over_the_years$race)
+for (type in umd_race_type){
+  plot2 = umd_arrests_race_over_the_years %>% 
+  filter(race == type) %>% 
+  ggplot(aes(x = date, y = count))+
+  geom_line()+
+  ggtitle(paste0(type, " over the years at UMD"))
+  
+  print(plot2)
+}
+
+#---
+
+umd_arrests_race_over_the_years = etl_umd_arrest %>% 
+  group_by(race, date) %>% 
+  summarise(count = n())
+
+# umd_race_type = unique(umd_arrests_race_over_the_years$race)
+# for (type in umd_race_type){
+#   plot3 = umd_arrests_race_over_the_years %>% 
+#   filter(race == type) %>% 
+#   ggplot(aes(x = type, y = count))+
+#   geom_bar(stat = "identity")+
+#   ggtitle(paste0(type, " over the years at UMD"))
+#   
+#   print(plot3)
+# }
+
+umd_arrests_race_over_the_years %>% 
+  ggplot(aes(x = race, y = count, fill = race))+
+  geom_bar(stat = "identity")+
+  ggtitle(paste0("Race over the years at UMD"))
+
+#---
+
+umd_arrests_drugs_by_race = etl_umd_arrest %>% 
+  filter(str_detect(description, "CDS")) %>% 
+  mutate(drug_related = "drug_related") %>% 
+  group_by(drug_related, race) %>% 
+  summarise(count = n())
+
+# umd_race_type = unique(umd_arrests_race_over_the_years$race)
+# for (type in umd_race_type){
+#   plot3 = umd_arrests_race_over_the_years %>% 
+#   filter(race == type) %>% 
+#   ggplot(aes(x = type, y = count))+
+#   geom_bar(stat = "identity")+
+#   ggtitle(paste0(type, " over the years at UMD"))
+#   
+#   print(plot3)
+# }
+
+umd_arrests_race_over_the_years %>% 
+  ggplot(aes(x = race, y = count, fill = race))+
+  geom_bar(stat = "identity")+
+  ggtitle(paste0("Race over the years at UMD"))
+
+
+```
+
+```{r}
+
 ```
 
 ## GWU
