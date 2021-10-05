@@ -136,13 +136,61 @@ umd_incident_summary = etl_umd_incident %>%
 
 ## UMD
 - 894 Black people were arrested for CDS-related, while 756 white people were arrested
-- 968 women were arrested, compared to 511 males
+- 968 women were arrested overall, compared to 5118 males
 
 
 
 ```{r}
 
 #---
+men = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(sex == "Male") %>% 
+  nrow()
+
+women = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(sex == "Female") %>% 
+  nrow()
+
+
+black_women = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(race == "Black" & sex == "Female") %>% 
+  nrow()
+
+
+black_men = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(race == "Black" & sex == "Male") %>% 
+  nrow()
+
+
+white_women = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(race == "White" & sex == "Female") %>% 
+  nrow()
+
+
+white_men = etl_umd_arrest %>% 
+  select(race, sex, description, date) %>% 
+  filter(race == "White" & sex == "Male") %>% 
+  nrow()
+
+
+# black_women
+# [1] 450
+# > black_men
+# [1] 2512
+# > white_women
+# [1] 470
+# > white_men
+# [1] 2354
+# > men
+# [1] 5118
+# > women
+# [1] 968
+
 # incident type by year chart
 umd_arrests_sex_over_the_years = etl_umd_arrest %>% 
   group_by(sex, date) %>% 
@@ -219,7 +267,7 @@ umd_arrests_drugs_by_race = etl_umd_arrest %>%
 umd_arrests_race_over_the_years %>% 
   ggplot(aes(x = race, y = count, fill = race))+
   geom_bar(stat = "identity")+
-  ggtitle(paste0("Race over the years at UMD"))
+  ggtitle(paste0("Drug arrests over the years at UMD"))
 
 
 ```
