@@ -36,7 +36,7 @@ library(readxl)
 library(lubridate)
 
 # For U.S. Census Bureau data
-library(tigris)
+# library(tigris)
 
 # For pretty tables
 library(kableExtra)
@@ -119,10 +119,11 @@ howard_incident_summary = etl_howard %>%
   arrange(desc(count))
 
 ## UMD Incident Breakdown
-umd_incident_summary = umd_incident_summary %>% 
+umd_incident_summary = etl_umd_incident %>% 
   group_by() %>% 
   summarise(count = n()) %>% 
   arrange(desc(count))
+
 
 
 ## UMD Arrest Breakdown
@@ -133,6 +134,52 @@ umd_incident_summary = umd_incident_summary %>%
 
 ```
 
+## UMD
+- 
+
+
+```{r}
+t = etl_umd_arrest
+
+--
+# incident type by year chart
+gt_incident_type_over_the_years = etl_gt %>% 
+  group_by(incident, year_occured) %>% 
+  summarise(count = n())
+ls_gt_incidents = unique(gt_incident_type_over_the_years$incident)
+for (type in ls_gt_incidents){
+  plot1 = gt_incident_type_over_the_years %>% 
+  filter(incident == type) %>% 
+  ggplot(aes(x = year_occured, y = count))+
+  geom_line()+
+  ggtitle(paste0(type, " over the years at George Town"))
+  
+  print(plot1)
+}
+
+--
+
+  # incident type by year chart
+umd_arrests_type_over_the_years = etl_umd_arrest %>% 
+  group_by(sex, date) %>% 
+  summarise(count = n())
+
+umd_sex_type = unique(etl_umd_arrest$sex)
+
+
+
+for (type in umd_sex_type){
+  plot1 = umd_arrests_type_over_the_years %>% 
+  filter(sex == type) %>% 
+  ggplot(aes(x = date, y = count))+
+  geom_line()+
+  ggtitle(paste0(type, " over the years at UMD"))
+  
+  print(plot1)
+}
+
+md_sex_type  
+```
 
 ## GWU
 - GWU only have 2021-2021 data, we  should ask for their data
@@ -194,9 +241,7 @@ gt_lxr_summaries = etl_gt %>%
 gt_incident_type_over_the_years = etl_gt %>% 
   group_by(incident, year_occured) %>% 
   summarise(count = n())
-
 ls_gt_incidents = unique(gt_incident_type_over_the_years$incident)
-
 for (type in ls_gt_incidents){
   plot1 = gt_incident_type_over_the_years %>% 
   filter(incident == type) %>% 
@@ -206,6 +251,7 @@ for (type in ls_gt_incidents){
   
   print(plot1)
 }
+
 
 
 
