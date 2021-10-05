@@ -58,7 +58,7 @@ output_formatted_table = function(table, text){
 ```
 # Thoughts
 - The data could probably use open refine for location columns for example
-
+- These universities do no report race or gender in police reports published to the public: george town, george washington, or howard. UMD does, why is this?
 
 
 
@@ -172,8 +172,14 @@ gwu_7_eleven = etl_gwu %>%
 ## GT
 - Most police responses happen at lxr, a resident building
 - At lxr, most commons calls over the years are drug violations, then theft, then alcohol violations
-
-
+- Assault spike in 2018
+- burglary drop in 2021-2021 , probably because less people on campus
+- destruction of property spike in 2018
+- drug violation has steadily gone down over the years
+- reported sexual assault spike in 2019, has gone down since
+- stalking spike in 2019
+- theft decreased, probably because of pandemic
+- unlawful entry spike in 2019
 
 ```{r}
 
@@ -206,16 +212,19 @@ for (type in ls_gt_incidents){
   
   print(plot1)
 }
+```
 
+## Howard University
+- Howard has a lot of sick transports
 
-
-
-
+```{r}
 
 ```
 
 
 
+
+## For Facts in a story
 
 ### Header
 
