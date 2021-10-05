@@ -56,6 +56,13 @@ output_formatted_table = function(table, text){
 
 
 ```
+# Thoughts
+- The data could probably use open refine for location columns for example
+
+
+
+
+
 ## Load Data
 
 ```{r}
@@ -122,6 +129,87 @@ umd_incident_summary = umd_incident_summary %>%
 
 
   
+
+
+```
+
+
+## GWU
+- GWU only have 2021-2021 data, we  should ask for their data
+- At least 84 percent of responses happen on campus
+- 7 eleven at mitchell hall seems to be a hot location
+- At mitchel hall 7 eleven store 67 percent of cases have been related to theft there
+
+```{r}
+
+# What percent of cases were off campus?
+
+gwu_on_off_campus = etl_gwu %>% 
+  group_by(off_campus_y_or_n) %>% 
+  summarise(count = n())
+
+# What are the break down of type of cases handled off campus
+gwu_off_campus_type = etl_gwu %>% 
+  filter (off_campus_y_or_n == "N") %>% 
+  group_by(nature_classification) %>% 
+  summarise(count = n())
+
+# Where do these happen on campus?
+gwu_location_summaries = etl_gwu %>% 
+  group_by(general_location) %>% 
+  summarise(count = n())
+
+# What are police responding to at mitchell hall 7-11
+gwu_7_eleven = etl_gwu %>% 
+  mutate(general_location = str_squish(general_location)) %>% 
+  filter(general_location == "Mitchell Hall (7-Eleven Store)") %>% 
+  group_by(nature_classification) %>% 
+  summarise(count = n())
+
+```
+
+
+## GT
+- Most police responses happen at lxr, a resident building
+- At lxr, most commons calls over the years are drug violations, then theft, then alcohol violations
+
+
+
+```{r}
+
+# Where do crimes tend to happen on campus
+gt_location_summaries = etl_gt %>% 
+  group_by(general_location) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+# What type happen most at lxr, the residential building
+gt_lxr_summaries = etl_gt %>% 
+  filter(general_location == "lxr") %>% 
+  group_by(incident) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+# incident type by year chart
+gt_incident_type_over_the_years = etl_gt %>% 
+  group_by(incident, year_occured) %>% 
+  summarise(count = n())
+
+ls_gt_incidents = unique(gt_incident_type_over_the_years$incident)
+
+for (type in ls_gt_incidents){
+  plot1 = gt_incident_type_over_the_years %>% 
+  filter(incident == type) %>% 
+  ggplot(aes(x = year_occured, y = count))+
+  geom_line()+
+  ggtitle(paste0(type, " over the years at George Town"))
+  
+  print(plot1)
+}
+
+
+
+
 
 
 ```
