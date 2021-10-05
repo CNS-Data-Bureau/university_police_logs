@@ -85,8 +85,6 @@ files_to_df = function(path, type){
   return(merged_data)
 }
 
-X2016_01_Crime_Log_pdf <- read_csv("~/Code/university_police_logs/data/handmade/gt/csvs/2016-01 Crime Log.pdf.csv", 
-    skip = 3)
 
 ```
 ## Load and Clean Data
@@ -101,6 +99,12 @@ gt_incident_log = files_to_df("../data/handmade/gt/csv3/", "*csv") %>%
   filter(!(str_detect(x1, "crime log"))) 
 
 colnames(gt_incident_log) <- c('report_date','incident',"incident_narrative", "incident_number", "date_occured", "time_occured", "general_location", "disposition")
+
+gt_incident_log = gt_incident_log %>% 
+ mutate(date_occured = mdy(date_occured)) %>% 
+ mutate(year_occured = year(date_occured)) %>% 
+ mutate(report_date = mdy(report_date)) %>% 
+ mutate(year_reported = year(report_date))
   
 
 ```
