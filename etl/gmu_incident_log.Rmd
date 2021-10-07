@@ -61,11 +61,19 @@ files_to_df = function(path, type){
   path = paste0(path, i)
   df = read_csv(path)
   
-  colnames(df) <- c("report_date","report_time", "incident_date", "incident_time",                                       "location",                                              "case_number_nature_of_case_brief_description_officer_unit_id" , "status" )  
+  headers = df[df[ , 1] == "Report Date"  , ]
+  ls_headers = as.character(headers[1,])
 
-  print(colnames(df))
-  print("-----")
+  colnames(df) <- ls_headers
+  
+  print(df)
+  
+  print("----")
+  
+  x <- "�"
+  
   df = df %>% 
+  clean_names() %>% 
   filter(!(str_detect(report_date, "Monday") | str_detect(report_date, "Tuesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Wednesday") | str_detect(report_date, "Thursday") | str_detect(report_date, "Friday") | str_detect(report_date, "Saturday")| str_detect(report_date, "Sunday"))) %>% 
   filter(report_date != "Report Date") %>% 
   filter(!(str_detect(report_date, "Amendments"))) %>% 
@@ -84,6 +92,20 @@ csv1 <- read_csv("../data/handmade/gmu/csvs/1.csv")
 csv2 <- read_csv("../data/handmade/gmu/csvs/2.csv")
 
 testing = files_to_df("../data/handmade/gmu/csvs/", "*csv")
+
+
+test = lapply(list.files(pattern = "*.csv", path = "../data/handmade/gmu/csvs/"), function(i){
+  path = paste0("../data/handmade/gmu/csvs/", i)
+  df = read_csv(path)
+  print(df)
+  print(path)
+  print("---")
+  headers = df[df[ , 1] == "Report Date", ]
+  ls_headers = as.character(headers[1,])
+
+  colnames(df) <- ls_headers
+  
+  })
 
 ```
 ## Load and Clean Data
@@ -104,10 +126,11 @@ testing = files_to_df("../data/handmade/gmu/csvs/", "*csv")
 
 x <- "�"
 
-names = c("report_date","report_time", "incident_date", "incident_time",                                       "location",                                              "case_number_nature_of_case_brief_description_officer_unit_id" , "status" )  
+names = c("report_date","report_time", "incident_date", "incident_time",                                  "location","case_number_nature_of_case_brief_description_officer_unit_id" , "status" )  
 
 
-
+headers = csv1[csv1[ , 1] == "Report Date"  , ]
+ls_headers = as.character(headers[1,])
 
 
 
