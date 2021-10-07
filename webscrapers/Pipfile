@@ -17,6 +17,7 @@ pathlib = "*"
 pydrive = "*"
 tabula-py = "*"
 wget = "*"
+pdfplumber = "*"
 
 [requires]
 python_version = "3.9"
