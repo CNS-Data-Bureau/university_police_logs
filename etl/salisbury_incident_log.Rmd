@@ -40,12 +40,29 @@ library(lubridate)
 # For pretty tables
 library(kableExtra)
 library(knitr)
+library(jsonlite)
 ```
+
 
 
 
 ```{r}
 
+files = list.files("../data/handmade/salisbury/jsons/")
+counter = 0
+for (i in files){
+  path = paste0("../data/handmade/salisbury/jsons/", i)
+  counter = counter + 1
+  if (counter == 1){
+    df <- fromJSON(path)
+    df = fromJSON(df)
+  } else{
+    new_df = fromJSON(path)
+    new_df = fromJSON(new_df)
+    df = bind_rows(df,new_df)
+  }
+
+}
 
 
 
