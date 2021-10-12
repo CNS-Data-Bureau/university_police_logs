@@ -12,6 +12,7 @@ tabula-py = "*"
 camelot = "*"
 "tabula.py" = "*"
 tabula = "*"
+pdfplumber = "*"
 
 [requires]
 python_version = "3.9"
