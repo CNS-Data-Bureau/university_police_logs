@@ -12,6 +12,7 @@ library(shiny)
 library(shinydashboard)
 library(tidyverse)
 library(DT)
+options(shiny.autoreload = TRUE)
 
 ```
 
@@ -27,6 +28,7 @@ etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incide
 
 ### First Page
 ```{r}
+
 first_page <- 
       # First tab content
       tabItem(tabName = "dashboard",
@@ -83,6 +85,11 @@ sidebar <- dashboardSidebar(
   )
   
 body <- dashboardBody( 
+  
+  
+ 
+  
+  #includeCSS("styles.css"),
   tabItems(
     # First Page
   first_page,
@@ -93,8 +100,16 @@ body <- dashboardBody(
   
     )
   
-  
-ui <- dashboardPage(header, sidebar, body)
+
+ui <- fluidPage(
+   tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+  ),
+    dashboardPage(header, 
+                    sidebar, 
+                    body)
+)
+# ui <- dashboardPage(header, sidebar, body)
   
 
 
@@ -119,7 +134,7 @@ server <- function(input, output){
     temp <- etl_umd_police_arrest_data %>% 
       group_by(!!input$variable) %>% 
       count()
-    
+      
     temp
   }))
   
