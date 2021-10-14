@@ -1,7 +1,12 @@
 library(shiny)
+library(shinydashboard)
+library(tidyverse)
+library(DT)
 
 etl_umd_police_arrest_data = read_rds("../data/processed/etl_umd_police_arrest_data.rds")
 etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
+etl_gwu_police_incident_log = read_rds("../data/processed/etl_gt_incident_log.rds")
+
 
 
 # first_page <- 
@@ -33,13 +38,14 @@ ui <- fluidPage(
     dashboardHeader(disable = FALSE),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+        menuItem("Dashbard", tabName = "dashbard", icon = icon("dashboard")),
+        menuItem("gw", tabName = "gw", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th"))
       )
     ),
     dashboardBody(
       tabItems(
-        tabItem(tabName = "dashboard", 
+        tabItem(tabName = "dashbard", 
           fluidRow(
             column(4, 
                    varSelectInput("variable", "Grouping variable", etl_umd_police_arrest_data)
@@ -48,10 +54,29 @@ ui <- fluidPage(
           
           fluidRow(
             column(4, 
-                   selectInput("race", "Filter by race", etl_umd_police_arrest_data$race)
+                   selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
               )
             ),
+          fluidRow(
+            column(4, 
+                   selectInput("race", "gwu -- Filter by race", etl_gwu_police_incident_log)
+            )
+          ),
           DT:: dataTableOutput("table2")
+        ), # closes tabItem = Dashboard
+        tabItem(tabName = "gw", #gw
+                fluidRow(
+                  column(4, 
+                         varSelectInput("variable", "Grouping variable", etl_gwu_police_incident_log)
+                  )
+                ), 
+                fluidRow(
+                  column(4, 
+                         selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$incident)
+                  )
+                ),
+
+                DT:: dataTableOutput("table3")
         ), # closes tabItem = Dashboard
         tabItem(tabName = "download",
                 fluidRow(
@@ -60,7 +85,7 @@ ui <- fluidPage(
                   tableOutput("table")
                   ) # closes fluidrow
                 ) #closes tabitem
-              )#loses tab item
+              )#loses tab items
             )#closs dashboard body
     )# closes dasbhboard page
   )#closes fluiod page -- last one
@@ -81,6 +106,20 @@ server <- function(input, output){
     # filter(etl_umd_police_arrest_data$race == input$race)
     
     temp <- etl_umd_police_arrest_data %>% 
+      group_by(!!input$variable) %>% 
+      count()
+    
+    temp
+  }))
+  
+  output$table3 <- DT::renderDataTable(DT::datatable({
+    
+    etl_gwu_police_incident_log <- etl_gwu_police_incident_log[etl_gwu_police_incident_log$incident == input$incident, ]
+    
+    #%>% 
+    # filter(etl_umd_police_arrest_data$race == input$race)
+    
+    temp <- etl_gwu_police_incident_log %>% 
       group_by(!!input$variable) %>% 
       count()
     

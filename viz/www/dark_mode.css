@@ -30,6 +30,7 @@ body {
 
 }
 
+
 .content-wrapper, .right-side {
     background-color: #E9E8EA !important;
 }
@@ -96,6 +97,7 @@ font-family: 'Poppins';
 .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
     border-left-color: #FAE255 !important;
 }
+
 
 @media all and (max-width: 400px) {
   .container-fluid {
