@@ -28,7 +28,7 @@ ui <- fluidPage(
   ),
   titlePanel("tktk"),
   dashboardPage(
-    dashboardHeader(title = "Police Dashboard"),
+    dashboardHeader(),
     dashboardSidebar(
       sidebarMenu(
         menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
