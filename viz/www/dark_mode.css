@@ -30,6 +30,12 @@ body {
 
 }
 
+.container-fluid .info p{
+  
+  font-size: 20px !important;
+  border-bottom: 20px !important;
+  color: green !important;
+}
 
 .content-wrapper, .right-side {
     background-color: #E9E8EA !important;

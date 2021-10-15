@@ -34,6 +34,10 @@ ui <- fluidPage(
   ),
   titlePanel("tktk"),
   tags$hr(),
+  tags$div(  class = "info",tags$p(
+                      "info bout how it works tktktktktktktktktktktktkt"
+  ),
+  ),
   dashboardPage(
     dashboardHeader(disable = FALSE),
     dashboardSidebar(
