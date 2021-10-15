@@ -35,10 +35,10 @@ library(readxl)
 library(lubridate)
 
 # For U.S. Census Bureau data
-library(tigris)
+#library(tigris)
 
 # For pretty tables
-library(kableExtra)
+#library(kableExtra)
 library(knitr)
 
 ## Functions 
@@ -76,14 +76,15 @@ umd_police_arrest_data = umd_police_arrest_data %>%
   rowwise() %>% 
   mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
   mutate(date = mdy(date)) %>% 
-  mutate(year = year(date))
+  mutate(year = year(date)) %>% 
+  select(-`...1`)
   
 umd_police_incident_data = umd_police_incident_data %>% 
   mutate(date = substr(occured_date_time_location, 1,8)) %>% 
   rowwise() %>% 
   mutate(time = strsplit(occured_date_time_location, " ")[[1]][2]) %>% 
   mutate(date = mdy(date)) %>% 
-  mutate(year = year(date))
+  mutate(year = year(date)) 
 
 
 ```

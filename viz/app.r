@@ -4,10 +4,10 @@ library(tidyverse)
 library(DT)
 
 etl_umd_police_arrest_data = read_rds("../data/processed/etl_umd_police_arrest_data.rds")
-etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
-etl_gwu_police_incident_log = read_rds("../data/processed/etl_gt_incident_log.rds")
+#etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
+etl_gwu_police_incident_log = read_rds("../data/processed/etl_gwu_incident_log.rds")
 
-
+View(etl_gwu_police_incident_log)
 
 # first_page <- 
 #   # First tab content
@@ -61,22 +61,17 @@ ui <- fluidPage(
                    selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
               )
             ),
-          fluidRow(
-            column(4, 
-                   selectInput("race", "gwu -- Filter by race", etl_gwu_police_incident_log)
-            )
-          ),
           DT:: dataTableOutput("table2")
         ), # closes tabItem = Dashboard
         tabItem(tabName = "gw", #gw
                 fluidRow(
                   column(4, 
-                         varSelectInput("variable", "Grouping variable", etl_gwu_police_incident_log)
+                         varSelectInput("variable2", "Grouping variable", etl_gwu_police_incident_log)
                   )
                 ), 
                 fluidRow(
                   column(4, 
-                         selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$incident)
+                         selectInput("nature_classification", " GWU -- Filter by type of crime", etl_gwu_police_incident_log$nature_classification)
                   )
                 ),
 
@@ -118,13 +113,13 @@ server <- function(input, output){
   
   output$table3 <- DT::renderDataTable(DT::datatable({
     
-    etl_gwu_police_incident_log <- etl_gwu_police_incident_log[etl_gwu_police_incident_log$incident == input$incident, ]
+    etl_gwu_police_incident_log <- etl_gwu_police_incident_log[etl_gwu_police_incident_log$nature_classification == input$nature_classification, ]
     
     #%>% 
     # filter(etl_umd_police_arrest_data$race == input$race)
     
     temp <- etl_gwu_police_incident_log %>% 
-      group_by(!!input$variable) %>% 
+      group_by(!!input$variable2) %>% 
       count()
     
     temp
