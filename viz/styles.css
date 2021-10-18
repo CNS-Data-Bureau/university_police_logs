@@ -10,6 +10,8 @@ body {
 .topnav {
   overflow: hidden;
   background-color: #0a0a0a;
+  padding-left: 100px;
+    padding-right: 100px;
 }
 
 .topnav a {
@@ -37,15 +39,57 @@ body {
   display: none;
 }
 
+span{
+    color: #990000
+}
+hr{
+    border: 1px solid #0a0a0a;
+}
+
 h1{
     text-align: center;
     font-size: 72px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;
+    font-size: 36px;
+    margin-top: -20px;
+    /* margin-bottom: 20px; */
+}
+
+h5{
+    text-align:center;
+    font-size: 24px;
+    font-weight: normal;
 }
 
 .container{
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 150px;
+    padding-right: 150px;
 }
+
+#map-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    border-left: 1px solid black;
+    border-bottom: 14pt solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    box-shadow: 5px 5px 10px gainsboro;
+    min-width: 300px;
+    max-width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
