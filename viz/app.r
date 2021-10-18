@@ -15,7 +15,7 @@ View(etl_gwu_police_incident_log)
 #           ## second row in first tab
 #           fluidRow(
 #             column(4, 
-#                    varSelectInput("variable", "Grouping variable", etl_umd_police_arrest_data)
+#                    varSelectInput("variable", "Grouping variable", etl_umd_police_arrest_data)l
 #             )
 #           ), 
 #           
@@ -43,7 +43,10 @@ ui <- fluidPage(
     dashboardSidebar(
       sidebarMenu(
         menuItem("Dashbard", tabName = "dashbard", icon = icon("dashboard")),
-        menuItem("gw", tabName = "gw", icon = icon("dashboard")),
+        menuItem("George Washington University", tabName = "gw", icon = icon("dashboard")),
+        menuItem("George Town University", tabName = "gt", icon = icon("dashboard")),
+        menuItem("Howard University", tabName = "hd", icon = icon("dashboard")),
+        menuItem("University of Maryland", tabName = "umd", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th"))
       )
     ),
@@ -55,7 +58,6 @@ ui <- fluidPage(
                    varSelectInput("variable", "Grouping variable", etl_umd_police_arrest_data)
                   )
                 ), 
-          
           fluidRow(
             column(4, 
                    selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
@@ -74,9 +76,29 @@ ui <- fluidPage(
                          selectInput("nature_classification", " GWU -- Filter by type of crime", etl_gwu_police_incident_log$nature_classification)
                   )
                 ),
-
                 DT:: dataTableOutput("table3")
         ), # closes tabItem = Dashboard
+        tabItem(tabName = "gt", 
+                fluidRow(
+                  column(4, 
+                         "HI"
+                  )
+                  )
+                ),
+        tabItem(tabName = "hd", 
+                fluidRow(
+                  column(4, 
+                         "HI"
+                  )
+                )
+        ), 
+        tabItem(tabName = "umd", 
+                fluidRow(
+                  column(4, 
+                         "HI"
+                  )
+                )
+        ),
         tabItem(tabName = "download",
                 fluidRow(
                   selectInput("dataset", "Choose a dataset:", choices = c("University of Maryland", "Other")),
