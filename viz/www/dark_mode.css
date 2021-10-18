@@ -30,11 +30,11 @@ body {
 
 }
 
-.container-fluid .info p{
+.container-fluid .info h4{
   
   font-size: 20px !important;
   border-bottom: 20px !important;
-  color: green !important;
+  color: #0a0a0a !important;
 }
 
 .content-wrapper, .right-side {
@@ -102,6 +102,11 @@ font-family: 'Poppins';
 
 .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
     border-left-color: #FAE255 !important;
+}
+
+hr{
+  border: 3px solid #0a0a0a;
+  
 }
 
 
