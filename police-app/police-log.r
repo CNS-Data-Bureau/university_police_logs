@@ -2,12 +2,15 @@ library(shiny)
 library(shinydashboard)
 library(tidyverse)
 library(DT)
+library(rsconnect)
 
-etl_umd_police_arrest_data = read_rds("../data/processed/etl_umd_police_arrest_data.rds")
+etl_umd_police_arrest_data = read_rds("etl_umd_police_arrest_data.rds")
 #etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
-etl_gwu_police_incident_log = read_rds("../data/processed/etl_gwu_incident_log.rds")
+etl_gwu_police_incident_log = read_rds("etl_gwu_incident_log.rds")
 
-View(etl_gwu_police_incident_log)
+
+
+# "/home/nickmcmillan/Code/university_police_logs/viz"
 
 # first_page <- 
 #   # First tab content
