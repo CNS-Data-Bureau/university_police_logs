@@ -13,8 +13,6 @@ body {
 }
 
 .container-fluid {
-    padding-right: 180px ;
-    padding-left: 180px ;
     margin-right: auto !important;
     margin-left: auto !important;
 }

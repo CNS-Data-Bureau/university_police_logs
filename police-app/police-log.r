@@ -33,14 +33,7 @@ etl_gwu_police_incident_log = read_rds("etl_gwu_incident_log.rds")
 
 ui <- fluidPage(
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")
-  ),
-  titlePanel("tktk"),
-  tags$hr(),
-  tags$div(  class = "info",
-             tags$h4('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-
-  ),# closes div
+    tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")),
   dashboardPage(
     dashboardHeader(disable = FALSE),
     dashboardSidebar(
