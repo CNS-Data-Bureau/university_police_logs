@@ -63,6 +63,8 @@ p {
   font-weight: 800;
   text-align: center;
   font-size: 2em;
+  padding-top: 12px;
+  padding-bottom: 12px;
   }
   
   /* COUNTY HEADER */
@@ -81,13 +83,18 @@ p {
   
   h5 {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    padding-bottom: 6px;
   }
   
   ul {
     font-family: 'Poppins', sans-serif;
   }
   
+.last-updated{
+  font-style: italic;
+  font-weight: 600;
+}
   
   /*Shrink FAQ TEXT FOR BLEED*/
   .faq-text {width:90%;}
