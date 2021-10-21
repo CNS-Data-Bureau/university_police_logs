@@ -35,7 +35,7 @@ library(readxl)
 library(lubridate)
 
 # For U.S. Census Bureau data
-library(tigris)
+# library(tigris)
 
 # For pretty tables
 library(kableExtra)
@@ -163,6 +163,14 @@ df_howard_data  = df_howard_data %>%
 ```
 
 
+```{r}
+type_crime_by_year = df_howard_data %>% 
+  group_by(year_reported, natures_of_crimes) %>% 
+  summarise(number_crimes = n())
+
+ggplot(type_crime_by_year, aes(x = year_reported, y = number_crimes, fill=natures_of_crimes)) + 
+  geom_bar(stat = "identity")
+```
 
 
 
