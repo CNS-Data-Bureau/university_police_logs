@@ -3,14 +3,23 @@ var mymap = L.map('mapid', {
     // maxZoom: 5,
 }).setView([38.9, -77], 9);
 
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWFkaXR0YW1iZSIsImEiOiJja3V4NmllOHo0dHY0MnVvZnhib3BhcDZtIn0.fX-8GmIEb5jh8r_MBb8J9w', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+	attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	minZoom: 0,
+	maxZoom: 22,
+	subdomains: 'abcd',
+	accessToken: 'pk.eyJ1IjoiYWFkaXR0YW1iZSIsImEiOiJja3V4NmllOHo0dHY0MnVvZnhib3BhcDZtIn0.fX-8GmIEb5jh8r_MBb8J9w'
 }).addTo(mymap);
+    
+
+// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWFkaXR0YW1iZSIsImEiOiJja3V4NmllOHo0dHY0MnVvZnhib3BhcDZtIn0.fX-8GmIEb5jh8r_MBb8J9w', {
+//     maxZoom: 18,
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+//         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//     id: 'mapbox/streets-v11',
+//     tileSize: 512,
+//     zoomOffset: -1
+// }).addTo(mymap);
 
 
 // L.circle([38.9865102, -76.9464573], 1000, {
