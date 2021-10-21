@@ -89,6 +89,43 @@ umd_police_incident_data = umd_police_incident_data %>%
 
 ```
 
+
+```{r}
+
+type_crime_by_year = umd_police_arrest_data %>% 
+  filter(description == "CDS: Possess Paraphernalia") %>% 
+  group_by(year, description) %>% 
+  summarise(number_crimes = n())
+
+ggplot(type_crime_by_year, aes(x = year, y = number_crimes))+
+  geom_bar(stat = "identity")+
+  theme(legend.position = "none")+
+    ggtitle("testing")
+
+for (i in c(2010:2021)){
+  
+  print(year)
+  plot = type_crime_by_year %>% 
+    filter(year == i) %>% 
+  ggplot(aes(x = year, y = number_crimes, fill = description))+
+  geom_bar(stat = "identity", position = "dodge")+
+  theme(legend.position = "none")+
+    ggtitle(paste0("Crime breakdown for: ", year))
+  
+  print(plot)
+  
+}
+
+# graph crime by year
+
+# nick
+umd, george town
+
+#aadit
+howard, georgwashingotn
+
+```
+
 ## Exploring
 ```{r}
 umd_police_arrest_data %>% 
@@ -171,4 +208,12 @@ umd_police <- left_join(umd_police_incident_data, umd_police_arrest_data, by = "
 write_rds(umd_police_arrest_data, "../data/processed/etl_umd_police_arrest_data.rds")
 write_rds(umd_police_incident_data, "../data/processed/etl_umd_police_incident_data.rds")
 ```
+
+```{r}
+
+etl_umd_police_arrest_data = umd_police_arrest_data
+
+
+```
+
 

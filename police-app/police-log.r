@@ -9,6 +9,12 @@ etl_umd_police_arrest_data = read_rds("etl_umd_police_arrest_data.rds")
 etl_gwu_police_incident_log = read_rds("etl_gwu_incident_log.rds")
 
 
+# CDS:Possession Marijuana L/T 10 grams
+# Underage Possession: Alcoholic Beverage
+# 	
+# (Driving, Attempting to drive) veh. while impaired by alcohol; (Driving, Attempting to drive) veh. while under the influence of alcohol; (Driving, Attempting to drive) veh. while under the influence of alcohol per se
+
+
 
 # "/home/nickmcmillan/Code/university_police_logs/viz"
 
@@ -90,9 +96,14 @@ ui <- fluidPage(
         ), 
         tabItem(tabName = "umd", 
                 fluidRow(
-                  column(4, 
-                         "HI"
-                  )
+                  column(3, 
+                         selectInput(inputId = "select_crime",
+                                     label = "Choose description",
+                                     list("CDS:Possession Marijuana L/T 10 grams", "Underage Possession: Alcoholic Beverage"))
+                ), 
+                
+                column(9, 
+                       plotOutput("umd_plot"))
                 )
         ),
         tabItem(tabName = "download",
@@ -142,6 +153,28 @@ server <- function(input, output){
     
     temp
   }))
+  
+  ## UMD plots
+  
+  umd_type_crime_by_year <- reactive({
+    print(input$select_crime)
+    req(input$select_crime)
+    umd_graph = etl_umd_police_arrest_data[etl_umd_police_arrest_data$description == input$select_crime,]  %>% 
+      group_by(year, description) %>% 
+      summarise(number_crimes = n())
+    
+    
+  })
+  
+  
+  output$umd_plot = renderPlot({
+    g<- ggplot(umd_type_crime_by_year(), aes(x = year, y = number_crimes))+
+      geom_bar(stat = "identity")+
+      theme(legend.position = "none")+
+      ggtitle(paste0("UMD over the years: ", input$select_crime))
+    
+    g
+  })
   
 }
 
