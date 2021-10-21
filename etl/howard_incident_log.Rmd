@@ -170,6 +170,8 @@ type_crime_by_year = df_howard_data %>%
 
 ggplot(type_crime_by_year, aes(x = year_reported, y = number_crimes, fill=natures_of_crimes)) + 
   geom_bar(stat = "identity")
+geom_text(show.legend = FALSE)
+
 ```
 
 
