@@ -70,18 +70,15 @@ ui <- fluidPage(
             ),
           DT:: dataTableOutput("table2")
         ), # closes tabItem = Dashboard
-        tabItem(tabName = "gw", #gw
-                fluidRow(
-                  column(4, 
-                         varSelectInput("variable2", "Grouping variable", etl_gwu_police_incident_log)
-                  )
-                ), 
-                fluidRow(
-                  column(4, 
-                         selectInput("nature_classification", " GWU -- Filter by type of crime", etl_gwu_police_incident_log$nature_classification)
-                  )
-                ),
-                DT:: dataTableOutput("table3")
+        tabItemtabName = "gt", 
+        fluidRow(
+          column(3, 
+                 selectInput(inputId = "select_crime_gwu",
+                             label = "Choose description",
+                             list("Unlawful Entry", "Liquor Law Violation"))
+          ),
+          
+          column(9, plotOutput("gwu_graph"))
         ), # closes tabItem = Dashboard
         tabItem(tabName = "gt", 
                 fluidRow(
@@ -153,19 +150,19 @@ server <- function(input, output){
   }))
   
   # Output 2
-  output$table3 <- DT::renderDataTable(DT::datatable({
-    
-    etl_gwu_police_incident_log <- etl_gwu_police_incident_log[etl_gwu_police_incident_log$nature_classification == input$nature_classification, ]
-    
-    #%>% 
-    # filter(etl_umd_police_arrest_data$race == input$race)
-    
-    temp <- etl_gwu_police_incident_log %>% 
-      group_by(!!input$variable2) %>% 
-      count()
-    
-    temp
-  }))
+  # output$table3 <- DT::renderDataTable(DT::datatable({
+  #   
+  #   etl_gwu_police_incident_log <- etl_gwu_police_incident_log[etl_gwu_police_incident_log$nature_classification == input$nature_classification, ]
+  #   
+  #   #%>% 
+  #   # filter(etl_umd_police_arrest_data$race == input$race)
+  #   
+  #   temp <- etl_gwu_police_incident_log %>% 
+  #     group_by(!!input$variable2) %>% 
+  #     count()
+  #   
+  #   temp
+  # }))
   
   # output$table4 <- DT::renderDataTable(DT::datatable({
   #   
@@ -182,6 +179,24 @@ server <- function(input, output){
   # }))
   # etl_howard_police_arrest_data <- etl_howard_police_arrest_data[etl_howard_police_arrest_data$natures_of_crime == input$natures_of_crime]
   
+  ## GWU plots output
+  etl_gwu_police_incident_log <- reactive({
+    print(input$select_crime)
+    req(input$select_crime)
+    gwu_graph = etl_gwu_police_incident_log[etl_gwu_police_incident_log$description == input$select_crime_gwu,]  %>% 
+      group_by(date_reported, nature_classification) %>% 
+      summarise(number_crimes = n())
+  })
+  
+  # creative a plot base don the reactive dataframe
+  output$gwu_plot = renderPlot({
+    gwu_graph<- ggplot(umd_type_crime_by_year(), aes(x = date_reported, y = nature_classification))+
+      geom_bar(stat = "identity")+
+      theme(legend.position = "none")+
+      ggtitle(paste0("GWU over the years: ", input$select_crime_gwu))
+    
+    gwu_graph
+  })
   
   ## UMD plots output
   ### create ractive dataframe
