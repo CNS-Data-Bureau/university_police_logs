@@ -48,7 +48,7 @@ ui <- fluidPage(
     dashboardSidebar(
       sidebarMenu(
         menuItem("Dashbard", tabName = "dashbard", icon = icon("dashboard")),
-        menuItem("George Washington University", tabName = "gw", icon = icon("dashboard")),
+        menuItem("George Washington University", tabName = "gwu", icon = icon("dashboard")),
         menuItem("George Town University", tabName = "gt", icon = icon("dashboard")),
         menuItem("Howard University", tabName = "hd", icon = icon("dashboard")),
         menuItem("University of Maryland", tabName = "umd", icon = icon("dashboard")),
@@ -70,7 +70,7 @@ ui <- fluidPage(
             ),
           DT:: dataTableOutput("table2")
         ), # closes tabItem = Dashboard
-        tabItemtabName = "gt", 
+        tabItem(tabName = "gwu", 
         fluidRow(
           column(3, 
                  selectInput(inputId = "select_crime_gwu",
@@ -78,8 +78,8 @@ ui <- fluidPage(
                              list("Unlawful Entry", "Liquor Law Violation"))
           ),
           
-          column(9, plotOutput("gwu_graph"))
-        ), # closes tabItem = Dashboard
+          column(9, plotOutput("gwu_plot"))
+        )), # closes tabItem = Dashboard
         tabItem(tabName = "gt", 
                 fluidRow(
                   column(3, 
@@ -180,17 +180,17 @@ server <- function(input, output){
   # etl_howard_police_arrest_data <- etl_howard_police_arrest_data[etl_howard_police_arrest_data$natures_of_crime == input$natures_of_crime]
   
   ## GWU plots output
-  etl_gwu_police_incident_log <- reactive({
-    print(input$select_crime)
-    req(input$select_crime)
-    gwu_graph = etl_gwu_police_incident_log[etl_gwu_police_incident_log$description == input$select_crime_gwu,]  %>% 
+  etl_gwu_test <- reactive({
+    #print(input$select_crime_gwu) 
+    req(input$select_crime_gwu)
+    gwu_graph = etl_gwu_police_incident_log[etl_gwu_police_incident_log$nature_classification == input$select_crime_gwu,]  %>% 
       group_by(date_reported, nature_classification) %>% 
       summarise(number_crimes = n())
   })
   
   # creative a plot base don the reactive dataframe
   output$gwu_plot = renderPlot({
-    gwu_graph<- ggplot(umd_type_crime_by_year(), aes(x = date_reported, y = nature_classification))+
+    gwu_graph<- ggplot(etl_gwu_test(), aes(x = date_reported, y = nature_classification))+
       geom_bar(stat = "identity")+
       theme(legend.position = "none")+
       ggtitle(paste0("GWU over the years: ", input$select_crime_gwu))
@@ -201,7 +201,7 @@ server <- function(input, output){
   ## UMD plots output
   ### create ractive dataframe
   umd_type_crime_by_year <- reactive({
-    print(input$select_crime)
+    #print(input$select_crime)
     req(input$select_crime)
     umd_graph = etl_umd_police_arrest_data[etl_umd_police_arrest_data$description == input$select_crime,]  %>% 
       group_by(year, description) %>% 
@@ -226,7 +226,7 @@ server <- function(input, output){
   
   ### create a howard reactive df
   howard_type_crime_by_year <- reactive({
-    print(input$select_crime_hu) 
+    #print(input$select_crime_hu) 
     req(input$select_crime_hu)
     howard_graph = etl_howard_police_arrest_data[etl_howard_police_arrest_data$natures_of_crimes == input$select_crime_hu,]  %>% 
       group_by(year_reported, natures_of_crimes) %>% 
@@ -250,7 +250,7 @@ server <- function(input, output){
   
   ### create a gt reactive df
   gt_type_crime_by_year <- reactive({
-    print(input$select_crime_gt) 
+    #print(input$select_crime_gt) 
     req(input$select_crime_gt)
     howard_graph = etl_gt_police_arrest_data[etl_gt_police_arrest_data$incident == input$select_crime_gt,]  %>% 
       group_by(year_occured, incident) %>% 
