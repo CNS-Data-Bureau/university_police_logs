@@ -94,8 +94,38 @@ graph %>%
   filter(variables  == "grand_total_men_effy2020_all_students_total"  | variables == "grand_total_women_effy2020_all_students_total") %>% 
   ggplot(aes(x = institution_name, y = counts, fill = variables))+
       geom_bar(stat = "identity")+
-      guides(fill = guide_legend(title = "Title"))+
-      ggtitle(paste0("chart"))
+  labs(y="Enrollment count", x = "")+
+      guides(fill = guide_legend(title = "Legend"))+
+      scale_fill_discrete(labels = c("Men", "Women"))+
+      ggtitle(paste0("Student enrollment by gender"))+
+      theme(
+        axis.title.x = 
+          element_text(
+            # color = "blue", 
+            # size = 14, 
+            # face = "bold"
+            ),
+        axis.title.y = 
+          element_text(
+            # color = "#993333", 
+            # size = 14, 
+            # face = "bold"
+            ),
+        axis.text.x = 
+          element_text(
+            # face="bold", 
+            # color="#993333", 
+            size=10,
+            angle= 90,
+            ),
+        axis.text.y = 
+          element_text(
+            # face="bold", 
+            # color="#993333", 
+            # size=14, 
+            # angle=90
+            ),
+        )
 
 
 ```
