@@ -68,6 +68,15 @@ ui <- fluidPage(
                    selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
               )
             ),
+          fluidRow(
+            sidebarPanel(
+              table("obs",
+                          "Number of observations:",
+                          min = 0,
+                          max = 1000,
+                          value = 500)
+            ),
+          ),
           DT:: dataTableOutput("table2")
         ), # closes tabItem = Dashboard
         tabItem(tabName = "gwu", 
