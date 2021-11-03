@@ -10,7 +10,10 @@ etl_gwu_police_incident_log = read_rds("etl_gwu_incident_log.rds")
 # howard
 etl_howard_police_arrest_data = read_rds("etl_howard_incident_log.rds")
 etl_gt_police_arrest_data = read_rds("etl_gt_incident_log.rds")
+enrollment = read_rds("enrollment.rds")
 
+enrollment = enrollment %>% 
+  clean_names()
 
 # CDS:Possession Marijuana L/T 10 grams
 # Underage Possession: Alcoholic Beverage
@@ -68,6 +71,11 @@ ui <- fluidPage(
                    selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
               )
             ),
+          fluidRow(
+            column(4, 
+                   selectInput("race", " umd -- Filter by race", enrollment$race)
+            )
+          )
           fluidRow(
             sidebarPanel(
               table("obs",

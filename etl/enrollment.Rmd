@@ -64,19 +64,24 @@ enrollment
 
 ```
 ```{r}
-x = enrollment %>% 
-  clean_names() %>% 
-  select(-unit_id) %>% 
-  pivot_longer(!institution_name, names_to = "variables", values_to =  "counts") %>% 
-  pivot_wider(names_from = institution_name, values_from = counts) %>% 
-  clean_names
+saveRDS(enrollment, file = "../data/processed/enrollment.rds")
 
+```
 
-x2 = enrollment %>% 
-  clean_names() %>% 
-  select(-unit_id) %>% 
-  pivot_longer(!institution_name, names_to = "variables", values_to =  "counts") %>% 
-  pivot_wider(names_from = institution_name, values_from = counts)
+```{r}
+# x = enrollment %>% 
+#   clean_names() %>% 
+#   select(-unit_id) %>% 
+#   pivot_longer(!institution_name, names_to = "variables", values_to =  "counts") %>% 
+#   pivot_wider(names_from = institution_name, values_from = counts) %>% 
+#   clean_names
+# 
+# 
+# x2 = enrollment %>% 
+#   clean_names() %>% 
+#   select(-unit_id) %>% 
+#   pivot_longer(!institution_name, names_to = "variables", values_to =  "counts") %>% 
+#   pivot_wider(names_from = institution_name, values_from = counts)
 
 
 graph = enrollment %>% 
@@ -95,8 +100,11 @@ graph %>%
   ggplot(aes(x = institution_name, y = counts, fill = variables))+
       geom_bar(stat = "identity")+
   labs(y="Enrollment count", x = "")+
-      guides(fill = guide_legend(title = "Legend"))+
+      # guides(fill = guide_legend(title = "legen"))+
+    labs(fill = "Condition")+
+
       scale_fill_discrete(labels = c("Men", "Women"))+
+  labs(fill = "Legend")+
       ggtitle(paste0("Student enrollment by gender"))+
       theme(
         axis.title.x = 
@@ -184,10 +192,10 @@ for (i in c(2010:2021)){
 # graph crime by year
 
 # nick
-umd, george town
+# umd, george town
 
 #aadit
-howard, georgwashingotn
+# howard, georgwashingotn
 
 ```
 
