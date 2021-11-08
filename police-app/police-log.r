@@ -3,6 +3,7 @@ library(shinydashboard)
 library(tidyverse)
 library(DT)
 library(rsconnect)
+library(janitor)
 
 etl_umd_police_arrest_data = read_rds("etl_umd_police_arrest_data.rds")
 #etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
@@ -14,13 +15,6 @@ enrollment = read_rds("enrollment.rds")
 
 enrollment = enrollment %>% 
   clean_names()
-
-# CDS:Possession Marijuana L/T 10 grams
-# Underage Possession: Alcoholic Beverage
-# 	
-# (Driving, Attempting to drive) veh. while impaired by alcohol; (Driving, Attempting to drive) veh. while under the influence of alcohol; (Driving, Attempting to drive) veh. while under the influence of alcohol per se
-
-
 
 # "/home/nickmcmillan/Code/university_police_logs/viz"
 
@@ -56,7 +50,7 @@ ui <- fluidPage(
         menuItem("Howard University", tabName = "hd", icon = icon("dashboard")),
         menuItem("University of Maryland", tabName = "umd", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th"))
-      )
+      ) 
     ),
     dashboardBody(
       tabItems(
@@ -72,10 +66,8 @@ ui <- fluidPage(
               )
             ),
           fluidRow(
-            column(4, 
-                   selectInput("race", " umd -- Filter by race", enrollment$race)
-            )
-          )
+            column(9, plotOutput("enrollment_chart"))
+          ),
           fluidRow(
             sidebarPanel(
               table("obs",
@@ -104,7 +96,6 @@ ui <- fluidPage(
                                      label = "Choose description",
                                      list("theft", "drug violation"))
                   ),
-                  
                   column(9, plotOutput("gt_graph"))
                 )
         ), 
@@ -214,6 +205,55 @@ server <- function(input, output){
     
     gwu_graph
   })
+
+  # enrollment chart ---->
+  
+  output$enrollment_chart <- renderPlot({
+    enrollment_for_graph = enrollment %>% 
+      clean_names() %>% 
+      select(-unit_id) %>% 
+      pivot_longer(!institution_name, names_to = "variables", values_to =  "counts") %>% 
+    filter(variables  == "grand_total_men_effy2020_all_students_total"  | variables == "grand_total_women_effy2020_all_students_total") %>% 
+      ggplot(aes(x = institution_name, y = counts, fill = variables))+
+      geom_bar(stat = "identity")+
+      labs(y="Enrollment count", x = "")+
+      # guides(fill = guide_legend(title = "legen"))+
+      labs(fill = "Condition")+
+      
+      scale_fill_discrete(labels = c("Men", "Women"))+
+      labs(fill = "Legend")+
+      ggtitle(paste0("Student enrollment by gender"))+
+      theme(
+        axis.title.x = 
+          element_text(
+            # color = "blue", 
+            # size = 14, 
+            # face = "bold"
+          ),
+        axis.title.y = 
+          element_text(
+            # color = "#993333", 
+            # size = 14, 
+            # face = "bold"
+          ),
+        axis.text.x = 
+          element_text(
+            # face="bold", 
+            # color="#993333", 
+            size=10,
+            angle= 90,
+          ),
+        axis.text.y = 
+          element_text(
+            # face="bold", 
+            # color="#993333", 
+            # size=14, 
+            # angle=90
+          ),
+      )
+    enrollment_for_graph
+  })
+  
   
   ## UMD plots output
   ### create ractive dataframe
@@ -242,7 +282,7 @@ server <- function(input, output){
 
   
   ### create a howard reactive df
-  howard_type_crime_by_year <- reactive({
+  howard_typea_crime_by_year <- reactive({
     #print(input$select_crime_hu) 
     req(input$select_crime_hu)
     howard_graph = etl_howard_police_arrest_data[etl_howard_police_arrest_data$natures_of_crimes == input$select_crime_hu,]  %>% 
