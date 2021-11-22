@@ -36,8 +36,10 @@ jobs:
       #     timestamp=$(date -u)
       #     git commit -m "Latest data: ${timestamp}" || exit 0
       #     git push
-      - name: Run Scraper Howard Univ.
-        run: python howard_scraper.py
+      # - name: Run Scraper Howard Univ.
+      #   run: python howard_scraper.py
+      - name: run scraper gmu
+        run: python gmu_scrape_script.py
       - name: Commit and push if it changed
         run: |-
           git config user.name "Automated"
@@ -46,4 +48,5 @@ jobs:
           timestamp=$(date -u)
           git commit -m "Latest data: ${timestamp}" || exit 0
           git push
+      
 
