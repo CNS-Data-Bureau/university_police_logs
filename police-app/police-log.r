@@ -157,6 +157,8 @@ server <- function(input, output){
     temp
   }))
   
+  
+  
   # Output 2
   # output$table3 <- DT::renderDataTable(DT::datatable({
   #   
