@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install requirements
-        run: python -m pip install selenium requests pandas beautifulsoup4 tabula 
+        run: python -m pip install selenium requests pandas beautifulsoup4 tabula-py
       - name: set up chromedriver
         run: 
       - uses: actions/checkout@v2
