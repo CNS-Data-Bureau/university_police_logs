@@ -79,11 +79,11 @@ def scrape_gmu(url):
             ls_pdf_links.append(url["href"])
 
     # Download pdfs from array
-    download_pdfs(ls_pdf_links, "/data/handmade/gmu/pdfs2/", "gmu_scraped")
+    download_pdfs(ls_pdf_links, "data/handmade/gmu/pdfs2/", "gmu_scraped")
 
     # Convert downloaded pdfs to csvs
-    convert_pdf_to_csv("/data/handmade/gmu/pdfs2/",
-                       "/data/handmade/gmu/csvs2/")
+    convert_pdf_to_csv("data/handmade/gmu/pdfs2/",
+                       "data/handmade/gmu/csvs2/")
 
 
 scrape_gmu(url)

@@ -1,0 +1,165 @@
+---
+title: "police_log_shiny_dashboards"
+output: html_document
+---
+ 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(tidyverse)
+library(DT)
+options(shiny.autoreload = TRUE)
+
+```
+
+## Import Datasets
+```{r}
+
+etl_umd_police_arrest_data = read_rds("../data/processed/etl_umd_police_arrest_data.rds")
+etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
+etl_gwu_police_incident_log = read_rds("../data/processed/etl_gwu_incident_log.rds")
+```
+
+
+## UI Elements
+
+### First Page
+```{r}
+
+first_page <- 
+      # First tab content
+      tabItem(tabName = "dashboard",
+        ## second row in first tab
+        fluidRow(
+          column(4, 
+                 varSelectInput("variable", "Grouping Variable", etl_umd_police_arrest_data)
+                 )
+          ), 
+        
+        fluidRow(
+          column(4, 
+                 selectInput("race", "raceFilter", etl_umd_police_arrest_data$race)
+                 )
+          ),
+        DT:: dataTableOutput("table2")
+      )
+            
+            
+            
+         
+          
+```
+
+### Download Page
+
+```{r}
+
+download_page <- tabItem(tabName = "download",
+                         fluidRow(
+                           selectInput("dataset", "Choose a dataset:", choices = c("University of Maryland", "Other")),
+                           downloadButton("downloadData", "Download"),
+                           tableOutput("table")
+                           
+                           
+                         )
+                         
+                         )
+
+```
+
+
+```{r}
+
+header <- dashboardHeader(title = "Police Dashboard")
+  
+sidebar <- dashboardSidebar(
+    sidebarMenu(
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      
+      menuItem("Download the Data", tabName = "download", icon = icon("th"))
+      
+    )
+  )
+  
+body <- dashboardBody( 
+  
+  
+ 
+  
+  #includeCSS("styles.css"),
+  tabItems(
+    # First Page
+  first_page,
+  # Second tab content
+  download_page
+    
+  )
+  
+    )
+  
+
+ui <- fluidPage(
+   tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+  ),
+    dashboardPage(header, 
+                    sidebar, 
+                    body)
+)
+# ui <- dashboardPage(header, sidebar, body)
+  
+
+
+
+```
+
+## Server
+
+```{r}
+
+## app.R ##
+
+server <- function(input, output){
+    
+  output$table2 <- DT::renderDataTable(DT::datatable({
+    
+    etl_umd_police_arrest_data <- etl_umd_police_arrest_data[etl_umd_police_arrest_data$race == input$race, ]
+    
+    #%>% 
+     # filter(etl_umd_police_arrest_data$race == input$race)
+    
+    temp <- etl_umd_police_arrest_data %>% 
+      group_by(!!input$variable) %>% 
+      count()
+      
+    temp
+  }))
+  
+}
+
+```
+
+
+## Run the App
+```{r}
+shinyApp(ui, server)
+```
+## Tutorials
+```{r}
+runExample("01_hello")      # a histogram
+runExample("02_text")       # tables and data frames
+runExample("03_reactivity") # a reactive expression
+runExample("04_mpg")        # global variables
+runExample("05_sliders")    # slider bars
+runExample("06_tabsets")    # tabbed panels
+runExample("07_widgets")    # help text and submit buttons
+runExample("08_html")       # Shiny app built from HTML
+runExample("09_upload")     # file upload wizard
+runExample("10_download")   # file download wizard
+runExample("11_timer")      # an automated timer
+```
+

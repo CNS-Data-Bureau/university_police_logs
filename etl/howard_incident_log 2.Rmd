@@ -1,0 +1,190 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+# library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+
+## Functions 
+
+# Function for formatted table output
+
+output_formatted_table = function(table, text){
+  
+  table %>% 
+    kable(caption = text) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
+    scroll_box(width = "100%")
+}
+
+files_to_df = function(path, type){
+  # path is the string file path
+  # type is in the format of "*csv"
+  
+  merged_data <- do.call(rbind, lapply(list.files(pattern = type, path = path), function(file_name){
+  path = paste0(path, i)
+  df = read_csv(path)}))
+  
+  return(merged_data)
+}
+
+
+
+```
+## Load and Clean Data
+
+```{r}
+
+ls_howard_data = lapply(list.files(pattern = "*csv", path = "../data/handmade/howard/csvs/"), function(file_name){
+  path = paste0("../data/handmade/howard/csvs/", file_name)
+  df = read_csv(path)
+  df = df %>% 
+  clean_names()})
+
+```
+
+
+
+```{r}
+
+one = ls_howard_data[[1]] %>% 
+  slice(-c(1,2,3))
+
+colnames(one) = c("natures_of_crimes", "case_numbers","date_time_reported","date_time_occurred","general_location","disposition") 
+one = one %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
+  
+
+two = ls_howard_data[[2]] %>% 
+  mutate(general_location = tolower(general_location)) %>% 
+  mutate(disposition = case_when(
+    str_detect(general_location, "inactive") ~ "inactive",
+    str_detect(general_location, "active") ~ "active"
+  )) %>% 
+  mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
+  mutate(general_location = str_replace(general_location, "active", "")) %>% 
+  mutate(general_location = str_replace(general_location, ",", "")) %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ")
+
+three = ls_howard_data[[3]] %>% 
+  mutate(general_location = tolower(general_location)) %>% 
+  mutate(disposition = case_when(
+    str_detect(general_location, "inactive") ~ "inactive",
+    str_detect(general_location, "active") ~ "active"
+  )) %>% 
+  mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
+  mutate(general_location = str_replace(general_location, "active", "")) %>% 
+  mutate(general_location = str_replace(general_location, ",", "")) %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
+
+four = ls_howard_data[[4]] %>% 
+  mutate(general_location = tolower(general_location)) %>% 
+  mutate(disposition = case_when(
+    str_detect(general_location, "inactive") ~ "inactive",
+    str_detect(general_location, "active") ~ "active"
+  )) %>% 
+  mutate(general_location = str_replace(general_location, "inactive", "")) %>% 
+  mutate(general_location = str_replace(general_location, "active", "")) %>% 
+  mutate(general_location = str_replace(general_location, ",", "")) %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = "/")
+
+five = ls_howard_data[[5]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = "/") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = "/") %>% 
+  separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
+  mutate(disposition = NA)
+
+six  = ls_howard_data[[6]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_location_occurred"), sep = " ") %>% 
+  separate(time_location_occurred, c("time_occurred", "general_location"), sep = ",") %>% 
+  mutate(disposition = NA)
+  
+seven = ls_howard_data[[7]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>%
+  separate(date_time_occurred, c("date_time_occurred", "general_location"), sep = ",") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ") %>% 
+  mutate(disposition = NA)
+
+eight = ls_howard_data[[8]] %>% 
+  separate(date_time_reported, c("date_reported", "time_reported"), sep = " ") %>% 
+  separate(date_time_occurred, c("date_occurred", "time_occurred"), sep = " ") %>% 
+  separate(location, c("general_location", "disposition"), sep = ",") 
+  
+
+
+df_howard_data = rbind(one, two, three, four, five, six, seven, eight)
+df_howard_data  = df_howard_data %>% 
+  mutate(date_reported = ymd(date_reported), date_occurred =  ymd(date_occurred)) %>% 
+  mutate(year_reported = year(date_reported), year_occured = year(date_occurred))
+
+
+
+```
+
+
+```{r}
+type_crime_by_year = df_howard_data %>% 
+  group_by(year_reported, natures_of_crimes) %>% 
+  summarise(number_crimes = n())
+
+ggplot(type_crime_by_year, aes(x = year_reported, y = number_crimes, fill=natures_of_crimes)) + 
+  geom_bar(stat = "identity") +
+  theme(legend.position = "none")
+
+```
+
+
+
+```{r}
+
+write_rds(df_howard_data, "../data/processed/etl_howard_incident_log.rds")
+write_csv(df_howard_data, "../data/processed/etl_howard_incident_log.csv")
+
+
+
+
+```
+
+
+
