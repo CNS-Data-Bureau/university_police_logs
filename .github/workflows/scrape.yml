@@ -35,8 +35,8 @@ jobs:
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-      - name: Run Scraper
-        run: python umd_scraper.py
+      # - name: Run Scraper
+      #   run: python umd_scraper.py
       - name: Commit and push if it changed
         run: |-
           git config user.name "Automated"
