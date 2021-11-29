@@ -1,0 +1,97 @@
+---
+title: "Title Goes Here"
+author: "Names Go Here" 
+output:
+  html_document:
+    theme: cerulean
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    df_print: paged
+  md_document:
+    variant: markdown_github
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+## Load Libraries, Settings and Global Functions
+```{r warning=FALSE,error=FALSE,message=FALSE}
+# For general data science
+library(tidyverse)
+
+# For data cleaning
+library(janitor)
+
+# For loading Excel files
+library(readxl)
+
+# For working with datetime
+library(lubridate)
+
+# For U.S. Census Bureau data
+# library(tigris)
+
+# For pretty tables
+library(kableExtra)
+library(knitr)
+library(jsonlite)
+```
+
+
+```{r}
+
+
+create_df_from_json_files = function(directory){
+  files = list.files(directory)
+  counter = 0
+  for (i in files){
+    path = paste0(directory, i)
+    counter = counter + 1
+    if (counter == 1){
+      df <- fromJSON(path)
+      df = fromJSON(df)
+    } else{
+      new_df = fromJSON(path)
+      new_df = fromJSON(new_df)
+      df = bind_rows(df,new_df)
+    }
+  
+  }
+  
+  df = df %>% 
+    clean_names()
+  
+  return(df)
+  
+  
+}
+
+directory = "../data/handmade/salisbury/jsons_final/"
+
+salisbury = create_df_from_json_files(directory)
+
+```
+
+## Clean Salisbury
+
+
+```{r}
+salisbury_clean = salisbury %>% 
+  mutate(incident_type = tolower(str_squish(incident_type))) %>% 
+  mutate(report_date = mdy(report_date)) %>% 
+  mutate(year = year(report_date)) %>% 
+  mutate(extra_column = case_when(
+    str_detect(incident_type, "sex") ~ "sex"
+  ))
+  
+
+
+  
+```
+## Interesting groupings
