@@ -155,7 +155,6 @@ p <- ggplot(data=umd_arrest_time, aes(x=time_hour, y=n, group= 1, text = paste("
 fig <- ggplotly(p, tooltip = "text")
 
 fig
-<<<<<<< Updated upstream
 
 ```
 
