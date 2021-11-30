@@ -41,6 +41,21 @@ library(lubridate)
 library(kableExtra)
 library(knitr)
 library(jsonlite)
+
+
+
+
+
+library(bbplot)
+
+
+if(!require(pacman))install.packages("pacman")
+
+pacman::p_load('dplyr', 'tidyr', 'gapminder',
+               'ggplot2',  'ggalt',
+               'forcats', 'R.utils', 'png', 
+               'grid', 'ggpubr', 'scales',
+               'bbplot')
 ```
 
 
@@ -90,8 +105,28 @@ salisbury_clean = salisbury %>%
     str_detect(incident_type, "sex") ~ "sex"
   ))
   
+salisbury_plot_1_data = salisbury_clean %>% 
+  group_by(year, case_no) %>% 
+  summarise(num_cases = n()) %>% 
+  ungroup() %>% 
+  group_by(year) %>% 
+  summarise(num_cases = n())
 
+salisbury_plot_1 = salisbury_plot_1_data %>% 
+  ggplot(aes(x = year, y = num_cases)) +
+  geom_line()+
+  labs(title="Number of Police Cases at Salisbury University")+
+  ylab("Number of Cases")+
+  xlab("Year")
+
+salisbury_plot_1
 
   
 ```
 ## Interesting groupings
+```{r}
+
+
+unique(salisbury_clean$incident_type)
+```
+

@@ -1,18 +1,21 @@
 ---
 title: "Title Goes Here"
-author: "Names Go Here" 
+author: "Names Go Here"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  md_document:
+    variant: markdown_github
+    toc: yes
+    toc_depth: 3
   html_document:
     theme: cerulean
     code_folding: hide
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
     toc_depth: 3
     df_print: paged
-  md_document:
-    variant: markdown_github
-    toc: true
-    toc_depth: 3
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
