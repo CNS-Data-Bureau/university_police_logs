@@ -93,7 +93,40 @@ umd_police_incident_data_clean = umd_police_incident_data %>%
 
 
 ```
+```{r}
+# time of day -- for arrest
+umd_arrest_time = umd_police_arrest_data %>% 
+  mutate(date = substr(arrested_date_time_charge,1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date)) %>% 
+  select(-c(1)) %>% 
+  mutate(time_list = (str_split(time,":"))) %>% 
+  mutate(time_hour = time_list[[1]]) %>% 
+  group_by(time_hour) %>% 
+  count()
 
+# time of day -- for incident
+umd_incident_time = umd_police_incident_data %>% 
+  mutate(date = substr(occured_date_time_location, 1,8)) %>% 
+  rowwise() %>% 
+  mutate(time = strsplit(occured_date_time_location, " ")[[1]][2]) %>% 
+  mutate(date = mdy(date)) %>% 
+  mutate(year = year(date)) %>% 
+  select(-c(1)) %>% 
+  mutate(time_list = (str_split(time,":"))) %>% 
+  mutate(time_hour = time_list[[1]]) %>% 
+  group_by(time_hour) %>% 
+  count()
+
+```
+
+
+```{r}
+
+
+```
 
 ```{r}
 
