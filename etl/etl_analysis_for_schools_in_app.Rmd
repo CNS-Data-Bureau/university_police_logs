@@ -65,35 +65,7 @@ umd_police_arrest_data <- read_csv("../data/handmade/umd/umd_police_arrest_data_
 umd_police_incident_data <- read_csv("../data/handmade/umd/umd_police_incident_data_2021_09_13.csv")
 
 
-# Salibury
-create_df_from_json_files = function(directory){
-  files = list.files(directory)
-  counter = 0
-  for (i in files){
-    path = paste0(directory, i)
-    counter = counter + 1
-    if (counter == 1){
-      df <- fromJSON(path)
-      df = fromJSON(df)
-    } else{
-      new_df = fromJSON(path)
-      new_df = fromJSON(new_df)
-      df = bind_rows(df,new_df)
-    }
-  
-  }
-  
-  df = df %>% 
-    clean_names()
-  
-  return(df)
-  
-  
-}
 
-directory = "../data/handmade/salisbury/jsons_final/"
-
-salisbury = create_df_from_json_files(directory)
 
 ```
 
@@ -117,18 +89,32 @@ umd_police_incident_data_clean = umd_police_incident_data %>%
   mutate(date = mdy(date)) %>% 
   mutate(year = year(date)) 
   
-# Clean Salisbury
 
-salisbury_clean = salisbury %>% 
-  mutate(incident_type = tolower(str_squish(incident_type))) %>% 
-  mutate(report_date = mdy(report_date)) %>% 
-  mutate(year = year(report_date)) %>% 
-  mutate(extra_column = case_when(
-    str_detect(incident_type, "sex") ~ "sex"
-  ))
 
 
 ```
+
+
+```{r}
+
+
+incident_by_years = umd_police_incident_data_clean %>% 
+  group_by(year) %>% 
+  filter(year>=2014) %>% 
+  summarise(number_incidents = n())
+
+incident_by_years %>%  ggplot(aes(x = year, y = number_incidents))+
+  geom_bar(stat = "identity")
+
+
+
+```
+
+
+
+
+
+
 
 
 ## Key observations for UMD Page

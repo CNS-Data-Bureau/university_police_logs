@@ -1,18 +1,12 @@
 library(shiny)
-
 library(shinydashboard)
 library(tidyverse)
 library(DT)
 library(rsconnect)
 library(janitor)
 
-etl_umd_police_arrest_data = read_rds("etl_umd_police_arrest_data.rds")
-#etl_umd_police_incident_data = read_rds("../data/processed/etl_umd_police_incident_data.rds")
-etl_gwu_police_incident_log = read_rds("etl_gwu_incident_log.rds")
-# howard
-etl_howard_police_arrest_data = read_rds("etl_howard_incident_log.rds")
-etl_gt_police_arrest_data = read_rds("etl_gt_incident_log.rds")
-enrollment = read_rds("enrollment.rds")
+umd_arrest = read_rds("etl_umd_police_arrest_data.rds")
+umd_incident = 
 
 enrollment = enrollment %>% 
   clean_names()
@@ -45,84 +39,21 @@ ui <- fluidPage(
     dashboardHeader(disable = FALSE),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("Dashbard", tabName = "dashbard", icon = icon("dashboard")),
-        menuItem("George Washington University", tabName = "gwu", icon = icon("dashboard")),
-        menuItem("George Town University", tabName = "gt", icon = icon("dashboard")),
-        menuItem("Howard University", tabName = "hd", icon = icon("dashboard")),
-        menuItem("University of Maryland", tabName = "umd", icon = icon("dashboard")),
+        menuItem("Dashbard", tabName = "umd", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th"))
       ) 
     ),
     dashboardBody(
       tabItems(
-        tabItem(tabName = "dashbard", 
-          fluidRow(
-            column(4, 
-                   varSelectInput("variable", "Grouping variable", etl_umd_police_arrest_data)
-                  )
-                ), 
-          fluidRow(
-            column(4, 
-                   selectInput("race", " umd -- Filter by race", etl_umd_police_arrest_data$race)
-              )
-            ),
-          fluidRow(
-            column(9, plotOutput("enrollment_chart"))
-          ),
-          fluidRow(
-            sidebarPanel(
-              table("obs",
-                          "Number of observations:",
-                          min = 0,
-                          max = 1000,
-                          value = 500)
-            ),
-          ),
-          DT:: dataTableOutput("table2")
-        ), # closes tabItem = Dashboard
-        tabItem(tabName = "gwu", 
-        fluidRow(
-          column(3, 
-                 selectInput(inputId = "select_crime_gwu",
-                             label = "Choose description",
-                             list("Unlawful Entry", "Liquor Law Violation"))
-          ),
-          
-          column(9, plotOutput("gwu_plot"))
-        )), # closes tabItem = Dashboard
-        tabItem(tabName = "gt", 
-                fluidRow(
-                  column(3, 
-                         selectInput(inputId = "select_crime_gt",
-                                     label = "Choose description",
-                                     list("theft", "drug violation"))
-                  ),
-                  column(9, plotOutput("gt_graph"))
-                )
-        ), 
-        tabItem(tabName = "hd", 
-                fluidRow(
-                  column(3, 
-                         selectInput(inputId = "select_crime_hu",
-                                     label = "Choose description",
-                                     list("Student Misconduct", "Stalking"))
-                  ),
-                  
-                  column(9, plotOutput("howard_graph"))
-                )
-        ), 
         tabItem(tabName = "umd", 
-                fluidRow(
-                  column(3, 
-                         selectInput(inputId = "select_crime",
-                                     label = "Choose description",
-                                     list("CDS:Possession Marijuana L/T 10 grams", "Underage Possession: Alcoholic Beverage"))
+                column(3, 
+                       selectInput(inputId = "select_incident",
+                                   label = "Choose description",
+                                   list("CDS:Possession Marijuana L/T 10 grams", "Underage Possession: Alcoholic Beverage"))
                 ), 
                 
                 column(9, 
-                       plotOutput("umd_plot"))
-                )
-        ),
+                       plotOutput("umd_plot")), # closes tabItem = Dashboard
         tabItem(tabName = "download",
                 fluidRow(
                   selectInput("dataset", "Choose a dataset:", choices = c("University of Maryland", "Other")),
