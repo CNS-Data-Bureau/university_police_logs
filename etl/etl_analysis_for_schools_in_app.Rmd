@@ -132,7 +132,29 @@ umd_incident_time = umd_police_incident_data %>%
 
 
 ```{r}
+library(plotly)
 
+p <- ggplot(data=umd_incident_time, aes(x=time_hour, y=n, group= 1, text = paste("Time of day: ", time_hour,"00 hours","<br>Total incidents reported: ", n))) +
+    geom_bar(stat="identity") +
+  ggtitle("Incidents reported by time of day")+
+  xlab("Time of day")+
+  ylab("Total number of incidents reported")
+  
+
+fig <- ggplotly(p, tooltip = "text")
+
+fig
+
+p <- ggplot(data=umd_arrest_time, aes(x=time_hour, y=n, group= 1, text = paste("Time of day: ", time_hour,"00 hours","<br>Total arrests/citations: ", n))) +
+    geom_bar(stat="identity") +
+  ggtitle("Arrests and citations by time of day")+
+  xlab("Time of day")+
+  ylab("Total number of arrests/citations")
+  
+
+fig <- ggplotly(p, tooltip = "text")
+
+fig
 
 ```
 
@@ -147,6 +169,8 @@ incident_by_years = umd_police_incident_data_clean %>%
 incident_by_years %>%  ggplot(aes(x = year, y = number_incidents))+
   geom_bar(stat = "identity")
 
+=======
+>>>>>>> Stashed changes
 
 
 ```
