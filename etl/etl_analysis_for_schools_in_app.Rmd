@@ -62,7 +62,7 @@ output_formatted_table = function(table, text){
 ```{r}
 # UMD
 umd_police_arrest_data <- read_csv("../data/handmade/umd/umd_police_arrest_data_2021-11-28.csv")
-umd_police_incident_data <- read_csv("../data/handmade/umd_police_incident_data_2021_09_13.csv")
+umd_police_incident_data <- read_csv("../data/handmade/umd/umd_police_incident_data_2021_09_13.csv")
 
 
 # Salibury
@@ -108,7 +108,7 @@ umd_police_arrest_data_clean = umd_police_arrest_data %>%
   mutate(time = strsplit(arrested_date_time_charge," ")[[1]][2]) %>% 
   mutate(date = mdy(date)) %>% 
   mutate(year = year(date)) %>% 
-  select(-`...1`)
+  select(-c(1))
 
 umd_police_incident_data_clean = umd_police_incident_data %>% 
   mutate(date = substr(occured_date_time_location, 1,8)) %>% 
