@@ -173,7 +173,16 @@ server <- function(input, output){
   })
   
   
-  #####  Race ################
+  ##############  Race ################
+  
+  race_grouping <- reactive({
+    if(input$checkbox_race == FALSE){
+      
+    }
+    
+    
+    
+  })
   
   df_umd_arrest_race_year <- reactive({
     #print(input$select_crime_hu) 
@@ -247,8 +256,6 @@ server <- function(input, output){
       ggplot(df_umd_arrest_race_year(), aes(x = race, y = num_people, fill = race))+
         geom_bar(stat = "identity", position = "dodge")+
         ggtitle(paste0("UMD ", input$select_incident, " People Arrested or Cited by Race"))  
-      
-      
     }
     
     
