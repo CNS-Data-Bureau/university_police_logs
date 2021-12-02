@@ -8,9 +8,9 @@ library(plotly)
 library(DT)
 
 umd_arrest = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_arrest.rds")
-umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
-umd_incident_list = unique(umd_incident$type)
-umd_incident_list = c("All Incidents", umd_incident_list)
+#umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
+umd_arrest_list = unique(umd_arrest$type)
+umd_arrest_list = c("All Incidents", umd_arrest_list)
 
 
 ui <- fluidPage(
@@ -20,36 +20,43 @@ ui <- fluidPage(
     dashboardHeader(disable = FALSE),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("UMD Incident Reports", tabName = "umd_incident", icon = icon("dashboard")),
+        menuItem("UMD Arrest Reports", tabName = "umd_arrest", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th")),
         conditionalPanel(
-          'input.sidebarid' == "umd_incident",
+          'input.sidebarid' == "umd_arrest",
           selectInput(inputId = "select_incident",
                       label = "Choose incident",
-                      umd_incident_list)
+                      umd_arrest_list)
         )
       ) 
     ),
     dashboardBody(
       tabItems(
-        tabItem(tabName = "umd_incident",
+        tabItem(tabName = "umd_arrest",
                 tabsetPanel(
                   tabPanel(title = "Plots",
                            br(),    
                      fluidRow(
-                       column(12, plotOutput("umd_incident_year_graph"))
+                       column(12, plotOutput("umd_arrest_year_graph"))
                      ),
                      br(),
                      fluidRow(
-                       column(12, plotlyOutput("umd_incident_time_graph"))
+                       column(12, plotlyOutput("umd_arrest_time_graph"))
+                     ),
+                     br(),
+                     
+                     fluidRow(
+                       column(2, checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE)),
+                       column(10, plotOutput("umd_arrest_race_graph"))
                      )
                      ),
                   
                   
                   tabPanel(title = "Data Table",
                            br(),
+                           selectInput("vars", "Variables", names(umd_arrest), multiple = TRUE),
                            fluidRow(
-                             column(12, DTOutput("umd_incident_table"))
+                             column(12, DTOutput("umd_arrest_table2"))
                              
                            )
                   )
@@ -72,23 +79,25 @@ ui <- fluidPage(
   
 
 server <- function(input, output){
-  ########################################## INCIDENT ##########################################
-  # UMD Incident ------------------------
- df_umd_incident_year <- reactive({
+  ########################################## arrest ##########################################
+  # UMD arrest ------------------------
+ df_umd_arrest_year <- reactive({
     #print(input$select_crime_hu) 
     req(input$select_incident)
     
     if(input$select_incident == "All Incidents"){
-      result_umd_incident = umd_incident  %>% 
+      result_umd_arrest = umd_arrest  %>% 
+        distinct(year, umpd_case_number) %>% 
         group_by(year) %>% 
-        summarise(number_incidents = n())
+        summarise(number_arrests = n())
       
     }
    
     else{
-      result_umd_incident = umd_incident[umd_incident$type == input$select_incident,]  %>% 
+      result_umd_arrest = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
+        distinct(year, umpd_case_number) %>% 
         group_by(year) %>% 
-        summarise(number_incidents = n())
+        summarise(number_arrests = n())
       
       
     }
@@ -98,27 +107,28 @@ server <- function(input, output){
 
   
   
-  # UMD Incident Graph
-  output$umd_incident_year_graph = renderPlot({
+  # UMD arrest Graph
+  output$umd_arrest_year_graph = renderPlot({
     
-    ggplot(df_umd_incident_year(), aes(x = year, y = number_incidents))+
+    ggplot(df_umd_arrest_year(), aes(x = year, y = number_arrests))+
       #geom_bar(stat = "identity")+
       geom_line()+
       geom_point()+
       theme(legend.position = "none")+
-      ggtitle(paste0("UMD ", input$select_incident, " Incidents"))
+      ggtitle(paste0("UMD ", input$select_incident, " Arrests"))
   
 })
   
-  # UMD Time Incident ---------------------------------
+  # UMD Time arrest ---------------------------------
   
   
-  df_umd_incident_time = reactive({
+  df_umd_arrest_time = reactive({
     
     req(input$select_incident)
     if(input$select_incident == "All Incidents"){
       
-      result_umd_incident_time = umd_incident %>% 
+      result_umd_arrest_time = umd_arrest %>% 
+        distinct(year, umpd_case_number, .keep_all = TRUE) %>% 
         group_by(time_hour) %>% 
         count()
       
@@ -127,7 +137,7 @@ server <- function(input, output){
     
     else{
       
-      result_umd_incident_time = umd_incident[umd_incident$type == input$select_incident,]  %>% 
+      result_umd_arrest_time = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
         group_by(time_hour) %>% 
         count()
       
@@ -143,13 +153,13 @@ server <- function(input, output){
     
     })
   
-  output$umd_incident_time_graph = renderPlotly({
-    p <- ggplot(data=df_umd_incident_time(), aes(x=time_hour, y=n, group= 1, text = paste("Time of day: ", time_hour,"00 hours","<br>Total incidents reported: ", n))) +
+  output$umd_arrest_time_graph = renderPlotly({
+    p <- ggplot(data=df_umd_arrest_time(), aes(x=time_hour, y=n, group= 1, text = paste("Time of day: ", time_hour,"00 hours","<br>Total arrests reported: ", n))) +
       geom_bar(stat="identity") +
       
-      ggtitle("Incidents reported by time of day")+
+      ggtitle("Arrest Cases by Time of Day")+
       xlab("Time of day")+
-      ylab("Total number of incidents reported")
+      ylab("Total number of arrests reported")
     
     
     fig <- ggplotly(p, tooltip = "text")
@@ -161,17 +171,58 @@ server <- function(input, output){
   })
   
   
-  df_incident_table = reactive({
-    
+  #####  Race ################
+  
+  df_umd_arrest_race_year <- reactive({
+    #print(input$select_crime_hu) 
     req(input$select_incident)
+    
     if(input$select_incident == "All Incidents"){
       
-      result_umd_incident_table = umd_incident
+      if(input$checkbox_race == FALSE){
+        result_umd_arrest_race_year = umd_arrest  %>% 
+          distinct(year, umpd_case_number, arrest_number, race, type) %>% 
+          group_by(year, race) %>% 
+          summarise(num_people = n())
+        
+      }
+      
+      else{
+        
+        result_umd_arrest_race_year = umd_arrest  %>% 
+          distinct(year, umpd_case_number, arrest_number, race, type) %>% 
+          group_by(race) %>% 
+          summarise(num_people = n())
+        
+        
+      }
+      
+      
+        
+      
     }
     
     else{
+      if(input$checkbox_race == FALSE){
+        
+        result_umd_arrest_race_year = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
+          distinct(year, umpd_case_number, arrest_number, race, type) %>% 
+          group_by(year, race) %>% 
+          summarise(num_people = n())
+        
+        
+      }
       
-      result_umd_incident_table = umd_incident[umd_incident$type == input$select_incident,]
+      else{
+        result_umd_arrest_race_year = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
+          distinct(year, umpd_case_number, arrest_number, race, type) %>% 
+          group_by(race) %>% 
+          summarise(num_people = n())
+        
+        
+      }
+      
+      
       
       
     }
@@ -179,12 +230,72 @@ server <- function(input, output){
     
   })
   
-  output$umd_incident_table <- renderDT(df_incident_table(), 
+  
+  
+  output$umd_arrest_race_graph = renderPlot({
+    
+    if(input$checkbox_race == FALSE){
+    
+    ggplot(df_umd_arrest_race_year(), aes(x = year, y = num_people, fill = race))+
+      geom_bar(stat = "identity", position = "dodge")+
+      ggtitle(paste0("UMD ", input$select_incident, " People Arrested or Cited by Race"))
+    }
+    
+    else{
+      ggplot(df_umd_arrest_race_year(), aes(x = race, y = num_people, fill = race))+
+        geom_bar(stat = "identity", position = "dodge")+
+        ggtitle(paste0("UMD ", input$select_incident, " People Arrested or Cited by Race"))  
+      
+      
+    }
+    
+    
+  })
+  
+  
+  ###############Table######################
+  
+  
+  df_arrest_table = reactive({
+    
+    req(input$select_incident)
+    if(input$select_incident == "All Incidents"){
+      
+      result_umd_arrest_table = umd_arrest
+    }
+    
+    else{
+      
+      result_umd_arrest_table = umd_arrest[umd_arrest$type == input$select_incident,]
+      
+      
+    }
+    
+    
+  })
+  
+  df_arrest_table_2 = 3
+  
+  output$umd_arrest_table <- renderDT(df_arrest_table(), 
                                         filter = "top",
                                         options = list(
                                           pageLength = 25
                                         )
     
+  )
+  
+  output$umd_arrest_table2 <- renderDT(
+    
+     umd_arrest %>% 
+      group_by(across(all_of(input$vars))) %>% 
+      summarise(count = n(), .groups = "drop"),
+    
+    
+                                      filter = "top",
+                                      options = list(
+                                        pageLength = 25
+                                      )
+                                      
   )
   
   
