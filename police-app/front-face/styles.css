@@ -10,6 +10,8 @@ span{
 }
 hr{
     border: 1px solid #0a0a0a;
+    margin-top: 50px; 
+    margin-bottom: 50px;
 }
 
 #map-container {
