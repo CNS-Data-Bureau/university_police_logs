@@ -42,6 +42,7 @@ library(jsonlite)
 # For pretty tables
 #library(kableExtra)
 library(knitr)
+library(plotly)
 
 ## Functions 
 
@@ -54,7 +55,6 @@ output_formatted_table = function(table, text){
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), font_size = 14, fixed_thead = T) %>%
     scroll_box(width = "100%")
 }
-
 
 ```
 ## Load and Clean Data
@@ -132,6 +132,10 @@ umd_incident_time = umd_police_incident_data %>%
 
 
 ```{r}
+umd_incident_time = umd_police_incident_data_clean %>% 
+   group_by(time_hour) %>% 
+  count()
+
 library(plotly)
 
 p <- ggplot(data=umd_incident_time, aes(x=time_hour, y=n, group= 1, text = paste("Time of day: ", time_hour,"00 hours","<br>Total incidents reported: ", n))) +
@@ -241,6 +245,13 @@ salisbury_plot_1
 
 unique(umd_police_arrest_data_clean$description)
 unique(salisbury_clean$incident_type)
+
+
+```
+
+```{r}
+library(rpivotTable)
+rpivotTable(umd_incident)
 
 
 ```
