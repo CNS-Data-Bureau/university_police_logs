@@ -92,7 +92,8 @@ umd_police_incident_data_clean = umd_police_incident_data %>%
   mutate(year = year(date)) %>%
   mutate(time_list = (str_split(time,":"))) %>% 
   mutate(time_hour = time_list[[1]]) %>% 
-  rename(type = "_type")
+  rename(type = "_type") %>% 
+  filter(year >= 2014)
   
 
 write_rds(umd_police_arrest_data_clean, "../police-app/umd_arrest.rds")
