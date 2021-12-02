@@ -18,7 +18,7 @@ ui <- fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")),
   dashboardPage(
     dashboardHeader(disable = FALSE),
-    dashboardSidebar(
+    dashboardSidebar(disable = TRUE,
       sidebarMenu(
         menuItem("UMD Arrest Reports", tabName = "umd_arrest", icon = icon("dashboard")),
         menuItem("Download the Data", tabName = "download", icon = icon("th")),
@@ -28,14 +28,17 @@ ui <- fluidPage(
                       label = "Choose incident",
                       umd_arrest_list)
         )
-      ) 
+      )
     ),
     dashboardBody(
       tabItems(
         tabItem(tabName = "umd_arrest",
                 tabsetPanel(
                   tabPanel(title = "Plots",
-                           br(),    
+                           br(),  
+                           selectInput(inputId = "select_incident",
+                                       label = "Choose incident",
+                                       umd_arrest_list),
                      fluidRow(
                        column(12, plotOutput("umd_arrest_year_graph"))
                      ),
