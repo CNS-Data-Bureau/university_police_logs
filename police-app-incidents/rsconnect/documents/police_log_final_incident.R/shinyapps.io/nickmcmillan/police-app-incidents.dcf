@@ -1,0 +1,13 @@
+name: police-app-incidents
+title: police-app-incidents
+username:
+account: nickmcmillan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5252669
+bundleId: 5319665
+url: https://nickmcmillan.shinyapps.io/police-app-incidents/
+when: 1638459950.82585
+lastSyncTime: 1638459950.82585
+asMultiple: FALSE
+asStatic: FALSE

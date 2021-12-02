@@ -7,7 +7,7 @@ library(janitor)
 library(plotly)
 library(DT)
 
-umd_arrest = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_arrest.rds")
+umd_arrest = readRDS("./umd_arrest.rds")
 #umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
 umd_arrest_list = unique(umd_arrest$type)
 umd_arrest_list = c("All Incidents", umd_arrest_list)
@@ -55,6 +55,8 @@ ui <- fluidPage(
                   tabPanel(title = "Data Table",
                            br(),
                            selectInput("vars", "Variables", names(umd_arrest), multiple = TRUE),
+                           textOutput("text1"),
+                           
                            fluidRow(
                              column(12, DTOutput("umd_arrest_table2"))
                              
@@ -274,7 +276,7 @@ server <- function(input, output){
     
   })
   
-  df_arrest_table_2 = 3
+  
   
   output$umd_arrest_table <- renderDT(df_arrest_table(), 
                                         filter = "top",
@@ -284,9 +286,20 @@ server <- function(input, output){
     
   )
   
+  
+  x <- reactive(length(list(input$vars)))
+  
+  
+  output$text1 <- renderText({
+    paste("Captured text:", x())
+  }) 
+  
   output$umd_arrest_table2 <- renderDT(
     
+    
+    
      umd_arrest %>% 
+      distinct(arrest_number, .keep_all = TRUE) %>% 
       group_by(across(all_of(input$vars))) %>% 
       summarise(count = n(), .groups = "drop"),
     

@@ -7,8 +7,8 @@ library(janitor)
 library(plotly)
 library(DT)
 
-umd_arrest = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_arrest.rds")
-umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
+#umd_arrest = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_arrest.rds")
+umd_incident = readRDS("./umd_incident.rds")
 umd_incident_list = unique(umd_incident$type)
 umd_incident_list = c("All Incidents", umd_incident_list)
 
