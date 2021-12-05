@@ -8,6 +8,7 @@ library(plotly)
 library(DT)
 
 umd_arrest = readRDS("./umd_arrest.rds")
+umd_arrest_combined = readRDS("./arrest_combined.rds")
 #umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
 umd_arrest_list = unique(umd_arrest$type)
 umd_arrest_list = c("All Incidents", umd_arrest_list)
@@ -21,13 +22,13 @@ ui <- fluidPage(
     dashboardSidebar(disable = TRUE,
       sidebarMenu(
         menuItem("UMD Arrest Reports", tabName = "umd_arrest", icon = icon("dashboard")),
-        menuItem("Download the Data", tabName = "download", icon = icon("th")),
-        conditionalPanel(
-          'input.sidebarid' == "umd_arrest",
-          selectInput(inputId = "select_incident",
-                      label = "Choose incident",
-                      umd_arrest_list)
-        )
+        menuItem("Download the Data", tabName = "download", icon = icon("th"))
+        # conditionalPanel(
+        #   'input.sidebarid' == "umd_arrest",
+        #   selectInput(inputId = "select_incident",
+        #               label = "Choose incident",
+        #               umd_arrest_list)
+        # )
       )
     ),
     dashboardBody(
@@ -35,23 +36,25 @@ ui <- fluidPage(
         tabItem(tabName = "umd_arrest",
                 tabsetPanel(
                   tabPanel(title = "Plots",
-                           br(),  
-                           selectInput(inputId = "select_incident",
-                                       label = "Choose incident",
-                                       umd_arrest_list),
+                           br(),
+                           fluidRow(
+                             column(6, selectInput(inputId = "select_incident",
+                                                   label = "Choose incident",
+                                                   umd_arrest_list) ),
+                             column(6,checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE) )
+                             
+                           )
+                           ,
                      fluidRow(
-                       column(12, plotOutput("umd_arrest_year_graph"))
+                       column(6, plotOutput("umd_arrest_year_graph")),
+                       column(6, plotOutput("umd_arrest_race_graph")), 
+                       
                      ),
                      br(),
                      fluidRow(
                        column(12, plotlyOutput("umd_arrest_time_graph"))
                      ),
-                     br(),
-                     
-                     fluidRow(
-                       column(2, checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE)),
-                       column(10, plotOutput("umd_arrest_race_graph"))
-                     )
+                     br()
                      ),
                   
                   
@@ -86,23 +89,22 @@ ui <- fluidPage(
 server <- function(input, output){
   ########################################## arrest ##########################################
   # UMD arrest ------------------------
+
+  
+  
+  
+  
  df_umd_arrest_year <- reactive({
     #print(input$select_crime_hu) 
     req(input$select_incident)
     
     if(input$select_incident == "All Incidents"){
-      result_umd_arrest = umd_arrest  %>% 
-        distinct(year, umpd_case_number) %>% 
-        group_by(year) %>% 
-        summarise(number_arrests = n())
+      umd_arrest_combined
       
     }
    
     else{
-      result_umd_arrest = umd_arrest[umd_arrest$type == input$select_incident,]  %>% 
-        distinct(year, umpd_case_number) %>% 
-        group_by(year) %>% 
-        summarise(number_arrests = n())
+      result_umd_arrest = umd_arrest_combined[umd_arrest_combined$type == input$select_incident,]
       
       
     }
@@ -115,12 +117,22 @@ server <- function(input, output){
   # UMD arrest Graph
   output$umd_arrest_year_graph = renderPlot({
     
-    ggplot(df_umd_arrest_year(), aes(x = year, y = number_arrests))+
-      #geom_bar(stat = "identity")+
-      geom_line()+
-      geom_point()+
-      theme(legend.position = "none")+
-      ggtitle(paste0("UMD ", input$select_incident, " Arrests"))
+    if(input$select_incident == "All Incidents"){
+      ggplot(df_umd_arrest_year(), aes(x = year, y = number, fill = final_type))+
+        geom_bar(stat = "identity")+
+        ggtitle(paste0("UMD ", input$select_incident, " Arrests"))
+      
+    }
+    
+    else{
+      ggplot(df_umd_arrest_year(), aes(x = year, y = number))+
+        geom_bar(stat = "identity")+
+        ggtitle(paste0("UMD ", input$select_incident, " Arrests"))
+      
+      
+    }
+    
+    
   
 })
   
