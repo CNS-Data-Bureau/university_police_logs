@@ -10,6 +10,7 @@ library(gcookbook)
 library(hrbrthemes)
 library(RColorBrewer)
 
+
 umd_arrest = readRDS("./umd_arrest.rds")
 umd_arrest_combined = readRDS("./arrest_combined.rds")
 #umd_incident = readRDS("C:/Users/nicho/Documents/GitHub/university_police_logs/police-app/umd_incident.rds")
@@ -19,88 +20,71 @@ umd_arrest_list = c(all_incident, umd_arrest_list)
 ls_years = unique(umd_arrest$year)
 min_year = min(ls_years)
 max_year = max(ls_years)
+cns_palette = c("#DE5826", "#FAA916", "#2EC4B6", "#8FD694", "#80217F", "#1979B9")
 
-color_scheme = "Dark2"
-single_color = "#1b9e77"
+#color_scheme = "Dark2"
+single_color = "#990000"
 
 
 ui <- fluidPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "dark_mode.css")),
-  dashboardPage(
-    dashboardHeader(disable = FALSE),
-    dashboardSidebar(disable = TRUE,
-      sidebarMenu(
-        menuItem("UMD Arrest Reports", tabName = "umd_arrest", icon = icon("dashboard")),
-        menuItem("Download the Data", tabName = "download", icon = icon("th"))
-        # conditionalPanel(
-        #   'input.sidebarid' == "umd_arrest",
-        #   selectInput(inputId = "select_incident",
-        #               label = "Choose incident",
-        #               umd_arrest_list)
-        # )
-      )
-    ),
-    dashboardBody(
-      tabItems(
-        tabItem(tabName = "umd_arrest",
-                tabsetPanel(
-                  tabPanel(title = "Plots",
-                           br(),
-                           fluidRow(
-                             column(6, selectInput(inputId = "select_incident",
-                                                   label = "Choose incident",
-                                                   umd_arrest_list) ),
-                             column(6,checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE) )
-                             
-                           )
-                           ,
-                     fluidRow(
-                       column(6, plotOutput("umd_arrest_year_graph")),
-                       column(6, plotOutput("umd_arrest_race_graph")), 
-                       
-                     ),
-                     br(),
-                     fluidRow(
-                       column(12, plotlyOutput("umd_arrest_time_graph"))
-                     ),
-                     br()
-                     ),
-                  
-                  
-                  tabPanel(title = "Data Table",
-                           br(),
-                           selectInput("vars", "Variables", names(umd_arrest), multiple = TRUE),
-                           textOutput("text1"),
-                           
-                           fluidRow(
-                             column(12, DTOutput("umd_arrest_table2"))
-                             
-                           )
-                  )
-                  
-                  )
-                ) 
-        
-        ,
-        tabItem(tabName = "download",
-                fluidRow(
-                  selectInput("dataset", "Choose a dataset:", choices = c("University of Maryland", "Other")),
-                  downloadButton("downloadData", "Download"),
-                  tableOutput("table")
-                  ) # closes fluidrow
-                ) #closes tabitem
-              )#loses tab items
-            )#closs dashboard body
-    )# closes dasbhboard page
-  )
   
+  ##########
+  ## Page 1
+  ##########
+  navbarPage("University of Maryland Police Log Explorer", 
+             tabPanel("UMD Arrest/Citations",
+                      tabsetPanel(
+                        tabPanel(title = "Plots",
+                                 uiOutput("url_allow_popout_UI"),
+                                 
+                                 fluidRow(
+                                   column(6, selectInput(inputId = "select_incident",
+                                                         label = "Choose incident",
+                                                         umd_arrest_list) ),
+                                   column(6,checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE) )
+                                   
+                                 )
+                                 ,
+                                 fluidRow(
+                                   column(6, plotOutput("umd_arrest_year_graph")),
+                                   column(6, plotOutput("umd_arrest_race_graph")), 
+                                   
+                                 ),
+                                 br(),
+                                 fluidRow(
+                                   column(12, plotlyOutput("umd_arrest_time_graph"))
+                                 ),
+                                 br()
+                        ),
+                        
+                        
+                        tabPanel(title = "Data Table",
+                                 br(),
+                                 selectInput("vars", "Variables", names(umd_arrest), multiple = TRUE),
+                                 textOutput("text1"),
+                                 
+                                 fluidRow(
+                                   column(12, DTOutput("umd_arrest_table2"))
+                                   
+                                 )
+                        )
+                        
+                      )
+                      
+                      
+                      
+                      )
+  )
+)
+    
 
-server <- function(input, output){
+server <- function(input, output, session){
   ########################################## arrest ##########################################
   # UMD arrest ------------------------
 
-  
+  source("./url_allowPopout.R", local = TRUE)
   
   
   
@@ -134,8 +118,9 @@ server <- function(input, output){
              title = paste0("UMD Arrests/Citations:  ", input$select_incident),
              subtitle = "Broken Down By Top 3 Incidents Per Year",
               fill ="Top 3 Incident Types")+
-        scale_fill_brewer(palette = color_scheme) +
-        theme_ipsum(grid="Y")+
+        #scale_fill_brewer(palette = color_scheme) +
+        scale_fill_manual(values = cns_palette)+
+        theme_ipsum_rc(grid="Y")+
         scale_x_continuous( breaks = ls_years)
       
     }
@@ -145,8 +130,7 @@ server <- function(input, output){
         geom_bar(stat = "identity")+
         labs(x = "Years", y = "Number of UMPD Cases",
              title = paste0("UMD Arrests/Citations:  ", input$select_incident))+
-        scale_fill_brewer(palette = color_scheme) +
-        theme_ipsum(grid="Y")+
+        theme_ipsum_rc(grid="Y")+
         scale_x_continuous( breaks = ls_years)+
         theme(legend.position = "none")
       
@@ -191,8 +175,8 @@ server <- function(input, output){
       labs(x = "Time", y = "Number of Arrest/Citations",
            title = paste0("UMD Arrests/Citations:  ", input$select_incident),
            subtitle = paste0("By Hour, Aggregated from ", toString(min_year), "-", toString(max_year)))+
-      scale_fill_brewer(palette = color_scheme) +
-      theme_ipsum(grid="Y")+
+      
+      theme_ipsum_rc(grid="Y")+
       scale_x_discrete( labels = c("12 a.m.", "1 a.m.", "2 a.m.", "3 a.m.", "4 a.m.", "5 a.m.", "6 a.m.", "7 a.m.","8 a.m.", "9 a.m.", "10 a.m.", "11 a.m.",
                                    "12 p.m.", "1 p.m.", "2 p.m.", "3 p.m.", "4 p.m.", "5 p.m.", "6 p.m.", "7 p.m.","8 p.m.", "9 p.m.", "10 p.m.", "11 p.m."))+
       theme(legend.position = "none")
@@ -283,8 +267,9 @@ server <- function(input, output){
            title = paste0("UMD Arrests/Citations:  ", input$select_incident),
            subtitle = "Broken Down By Race",
            fill ="Race")+
-      scale_fill_brewer(palette = color_scheme) +
-      theme_ipsum(grid="Y")+
+      #scale_fill_brewer(palette = color_scheme) +
+        scale_fill_manual(values = cns_palette)+
+        theme_ipsum_rc(grid="Y")+
       scale_x_continuous( breaks = ls_years)
     }
     
@@ -295,8 +280,9 @@ server <- function(input, output){
              title = paste0("UMD Arrests/Citations:  ", input$select_incident),
              subtitle = "Broken Down By Race",
              fill ="Race")+
-        scale_fill_brewer(palette = color_scheme) +
-        theme_ipsum(grid="Y")
+        #scale_fill_brewer(palette = color_scheme) +
+        scale_fill_manual(values = cns_palette)+
+        theme_ipsum_rc(grid="Y")
         
       
       
@@ -365,6 +351,8 @@ server <- function(input, output){
   
   
 }
+
+
 
 
 
