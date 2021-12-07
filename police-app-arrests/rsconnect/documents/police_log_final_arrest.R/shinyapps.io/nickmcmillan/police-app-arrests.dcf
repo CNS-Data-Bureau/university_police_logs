@@ -5,9 +5,9 @@ account: nickmcmillan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5252605
-bundleId: 5331638
+bundleId: 5337887
 url: https://nickmcmillan.shinyapps.io/police-app-arrests/
-when: 1638758688.90389
-lastSyncTime: 1638758688.90389
+when: 1638855224.27576
+lastSyncTime: 1638855224.27676
 asMultiple: FALSE
 asStatic: FALSE
