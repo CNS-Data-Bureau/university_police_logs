@@ -43,14 +43,14 @@ ui <- fluidPage(
                                  fluidRow(
                                    column(6, selectInput(inputId = "select_incident",
                                                          label = "Choose incident",
-                                                         umd_arrest_list) ),
+                                                         tableOutput(grouping_list)) ),
                                    column(6,checkboxInput("checkbox_race", "Aggregrate Years", value = FALSE) )
                                    
                                  )
                                  ,
                                  fluidRow(
                                    column(6, plotOutput("umd_arrest_year_graph")),
-                                   column(6, plotOutput("umd_arrest_race_graph")), 
+                                   column(6, plotOutput("umd_arrest_race_graph")) 
                                    
                                  ),
                                  br(),
@@ -65,7 +65,7 @@ ui <- fluidPage(
                                  br(),
                                  fluidRow(
                                    column(3,selectInput("vars", "Group On: ", names(umd_arrest), multiple = TRUE)),
-                                   column(3,selectInput("groups", "Distinct On: ", list("umpd_case_number", "race", "nothing")))
+                                   column(3,selectInput("group", "One Entry Per: ", list("Arrest/Citation Case", "Person", "nothing")))
                                  ),
                                  fluidRow(
                                    column(6, DTOutput("umd_arrest_table2"))
@@ -87,6 +87,23 @@ server <- function(input, output, session){
   # UMD arrest ------------------------
 
   source("./url_allowPopout.R", local = TRUE)
+  
+  number_grouping_vars <- reactive(input$vars)
+  grouping_var <- reactive(input$group)
+  
+  output$grouping_list = reactive(
+    
+    if(grouping_var == "Person"){
+      
+      grouping_list_person = c("type","umpd_case_number","race","age","sex","description","date","time","year","month","time_hour" )
+    }
+    
+    else{
+      grouping_list_case = c("type","umpd_case_number","date","time","year","month","time_hour" )
+    }
+  )
+  
+  
   
   
   
@@ -308,29 +325,98 @@ server <- function(input, output, session){
   ###############Table######################
   
   
-  number_grouping_vars <- reactive(input$vars)
   
-  interactive_table = function(df, num_variables){
+  
+  
+  interactive_table = function(df, num_variables, grouping_variable){
     
-    df = df %>% 
-      select(-arrested_date_time_charge)
-    
-    if(num_variables < 1){
+    if(grouping_variable == "nothing"){
       
-      result = df
-      return (result)
+      df = df %>% 
+        select(-arrested_date_time_charge)
+      
+      if(num_variables < 1){
+        
+        result = df
+        return (result)
+        
+      }
+      
+      else{
+        result = df %>% 
+          group_by(across(all_of(input$vars))) %>% 
+          summarise(count = n(), .groups = "drop")
+        
+        return (result)
+        
+        
+      } 
+      
+      
+      
+      
+      
+    }
+    
+    else if(grouping_variable == "Person"){
+      
+      df = df %>% 
+        select(-arrested_date_time_charge)
+      
+      if(num_variables < 1){
+        
+        result = df %>% 
+          distinct(race, .keep_all = TRUE)
+        return (result)
+        
+      }
+      
+      else{
+        result = df %>% 
+          distinct(arrest_number, .keep_all = TRUE) %>% 
+          group_by(across(all_of(input$vars))) %>% 
+          summarise(count = n(), .groups = "drop")
+        
+        return (result)
+        
+        
+      } 
+      
+      
+      
       
     }
     
     else{
-      result = df %>% 
-        group_by(across(all_of(input$vars))) %>% 
-        summarise(count = n(), .groups = "drop")
       
-      return (result)
+      df = df %>% 
+        select(-arrested_date_time_charge)
+      
+      if(num_variables < 1){
+        
+        result = df %>% 
+          distinct(umpd_case_number, .keep_all = TRUE)
+        return (result)
+        
+      }
+      
+      else{
+        result = df %>% 
+          distinct(umpd_case_number, .keep_all = TRUE) %>% 
+          group_by(across(all_of(input$vars))) %>% 
+          summarise(count = n(), .groups = "drop")
+        
+        return (result)
+        
+      } 
       
       
-    }    
+      
+    }
+    
+    
+    
+       
     
   }
   
@@ -338,7 +424,7 @@ server <- function(input, output, session){
         
         
         
-       interactive_table(umd_arrest, length(number_grouping_vars())),
+       interactive_table(umd_arrest, length(number_grouping_vars()), grouping_var()),
         
         
         filter = "top",
