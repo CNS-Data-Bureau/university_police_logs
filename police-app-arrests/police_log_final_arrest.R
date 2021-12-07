@@ -63,8 +63,6 @@ ui <- fluidPage(
                         tabPanel(title = "Data Table",
                                  br(),
                                  selectInput("vars", "Variables", names(umd_arrest), multiple = TRUE),
-                                 textOutput("text1"),
-                                 
                                  fluidRow(
                                    column(12, DTOutput("umd_arrest_table2"))
                                    
@@ -303,59 +301,45 @@ server <- function(input, output, session){
   ###############Table######################
   
   
-  df_arrest_table = reactive({
+  number_grouping_vars <- reactive(input$vars)
+  
+  interactive_table = function(df, num_variables){
     
-    req(input$select_incident)
-    if(input$select_incident == "All Incidents"){
+    if(num_variables < 1){
       
-      result_umd_arrest_table = umd_arrest
+      result = df %>% 
+        distinct(arrest_number, .keep_all = TRUE)
+         return (result)
+      
     }
     
     else{
+      result = df %>% 
+        distinct(arrest_number, .keep_all = TRUE) %>% 
+        group_by(across(all_of(input$vars))) %>% 
+        summarise(count = n(), .groups = "drop")
       
-      result_umd_arrest_table = umd_arrest[umd_arrest$type == input$select_incident,] %>%  drop_na(type) 
+      return (result)
       
-    }
+      
+    }    
     
-    
-  })
-  
-  
-  
-  output$umd_arrest_table <- renderDT(df_arrest_table(), 
-                                        filter = "top",
-                                        options = list(
-                                          pageLength = 25
-                                        )
-    
-  )
-  
-  
-  x <- reactive(length(list(input$vars)))
-  
-  
-  output$text1 <- renderText({
-    paste("Captured text:", x())
-  }) 
+  }
   
   output$umd_arrest_table2 <- renderDT(
-    
-    
-    
-     umd_arrest %>% 
-      distinct(arrest_number, .keep_all = TRUE) %>% 
-      group_by(across(all_of(input$vars))) %>% 
-      summarise(count = n(), .groups = "drop"),
-    
-    
-                                      filter = "top",
-                                      options = list(
-                                        pageLength = 25
-                                      )
-                                      
-  )
-  
-  
+        
+        
+        
+       interactive_table(umd_arrest, length(number_grouping_vars())),
+        
+        
+        filter = "top",
+        options = list(
+          pageLength = 25
+        )
+        
+      )
+      
 }
 
 
